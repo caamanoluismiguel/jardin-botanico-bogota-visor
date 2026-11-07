@@ -11,8 +11,8 @@ La página principal es el visor 3D. El plano del jardín en 2D está en [`visor
 La pregunta que guía el visor es esta: de cada planta del Jardín, ¿qué se sabe con certeza, desde cuándo y qué falta por saber? Cada cifra lleva su fuente, su fecha y una marca que dice si es medida, dicha por la fuente, inferida al cruzar fuentes o supuesta.
 
 <p>
-<img src="capturas/movil-3d-inicio.png" width="240" alt="Visor 3D en teléfono: los árboles del censo coloreados según tengan o no especie">
-<img src="capturas/movil-3d-sol.png" width="240" alt="Visor 3D con la lente Sol: horas de sol posibles por zona en noviembre">
+<img src="capturas/movil-3d-lugar.png" width="240" alt="Visor 3D en teléfono, vista Lugar: la entrada de la Calle 63 con su plazoleta, la escultura de Mutis, el Tropicario y los árboles del censo">
+<img src="capturas/movil-3d-sol.png" width="240" alt="Visor 3D con la lente Sol en noviembre a las 13:00: horas de sol directo posibles por zona y la sombra de los árboles">
 <img src="capturas/movil-01-inicio.png" width="240" alt="Plano 2D en teléfono: mapa del jardín con las zonas de la colección">
 <img src="capturas/movil-09-accesion.png" width="240" alt="Ficha de una accesión de la colección viva en el plano 2D">
 </p>
