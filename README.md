@@ -25,6 +25,8 @@ En el visor 3D:
 - Cuatro lentes: Certeza, Colección, Conservación y Sol, con mes y hora para ver la sombra.
 - Fichas por zona, accesión y árbol, que también se abren por URL.
 - Algunos árboles no se dibujan para proteger especies sensibles.
+- Desde la v2: las dos entradas (Calle 63 con su plazoleta y Carrera 70), las cúpulas del Tropicario, curvas de nivel, la sombra aclarada según el cielo típico de cada mes (ERA5), el reloj de la lluvia por hora en El Dorado y una capa aparte de OpenStreetMap, apagada por defecto. Los archivos nuevos son `datos/lugar.json`, `datos/tropicario.json`, `datos/curvas.json`, `datos/cielo.json`, `datos/lluvia_hora.json` y la carpeta `datos/osm/`; el detalle está en [DATOS.md](DATOS.md).
+- El contorno del Tropicario y los puntos de las entradas se calcaron sobre la Ortoimagen 2025 de Bogotá, pero la foto no se muestra ni viene en este repo.
 
 En el plano 2D:
 
@@ -85,11 +87,15 @@ Cada fuente conserva su licencia. El detalle, con enlaces, está en [DATOS.md](D
 - «Lotes, Catastro Bogotá (UAECD), CC BY 4.0»
 - «Construcciones, Catastro Bogotá (UAECD), CC BY 4.0»
 - «Parques de Bogotá, IDRD, Datos Abiertos Bogotá, CC BY 4.0»
-- «Mapa de Referencia IDECA (calzadas), Catastro Bogotá, CC BY 4.0»
+- «Mapa de Referencia IDECA (calzadas), Catastro Bogotá, CC BY 4.0»; en el 3D: «Mapa de Referencia de Bogotá, versión 06.26. IDECA, con datos de SDP, SDM, IDU, EAAB, 4-72, TransMilenio S.A. y UAECD. Datos Abiertos Bogotá, CC BY 4.0»
 - «Modelo Digital de Terreno 2025, IDECA, CC BY 4.0»
+- «Ortoimagen urbana de Bogotá 2025, 5 cm. Propietaria: Secretaría Distrital de Planeación. Producida por SIGLA S.A.S. (contrato 1047 de 2024). Publicada por IDECA, Unidad Administrativa Especial de Catastro Distrital. Datos Abiertos Bogotá, CC BY 4.0». Solo se publica lo calcado sobre ella; la foto no se muestra.
+- «Planos de diseño JBB-CTO-582-2014 (DARP, 2015) y licencia 15-5-0338, publicados en SECOP I, proceso 15-1-134214»: documentos públicos (Ley 1712 de 2014), se citan solo cifras.
 - «METAR SKBO (El Dorado) vía Iowa Environmental Mesonet, Iowa State University»
 - «CHIRPS v3, Climate Hazards Center, UC Santa Barbara, CC BY 4.0»
-- «Datos obtenidos del proyecto POWER del NASA Langley Research Center, financiado por el programa NASA Earth Science/Applied Science»
+- «Contiene información modificada del Servicio de Cambio Climático de Copernicus, 2026. Ni la Comisión Europea ni el ECMWF son responsables del uso que se haga de la información de Copernicus ni de los datos que contiene» (ERA5, CC BY 4.0, en el 3D)
+- «Datos obtenidos del proyecto POWER del NASA Langley Research Center, financiado por el programa NASA Earth Science/Applied Science» (plano 2D)
+- «© Colaboradores de OpenStreetMap, ODbL»: solo la capa `datos/osm/` del 3D, bajo ODbL 1.0.
 - «Imágenes de NASA Global Imagery Browse Services (GIBS), parte de ESDIS»
 - iNaturalist: solo se cuentan las observaciones del lugar 170214 por licencia; no se copia ninguna observación ni foto.
 - Algoritmo solar de la NOAA, dominio público.

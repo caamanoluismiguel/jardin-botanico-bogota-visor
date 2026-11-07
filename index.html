@@ -7,14 +7,18 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#f7f6f2">
 <title>Jardín Botánico en 3D · demo con datos abiertos</title>
-  <script type="module" crossorigin src="./assets/index-BECq-r9O.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-0e5392Cy.css">
+  <script type="module" crossorigin src="./assets/index-COW3OMch.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/rolldown-runtime-DK3Fl9T5.js">
+  <link rel="stylesheet" crossorigin href="./assets/index-B9mfLM0G.css">
 </head>
 <body>
 <a class="saltar" href="#lentes">Ir a los controles</a>
 <header class="cabecera">
   <p class="titulo"><span class="aviso-demo">Demo independiente</span> Jardín Botánico<span class="ciudad"> de Bogotá</span></p>
-  <button id="abrir-mas" class="boton-barra" aria-haspopup="dialog">Más</button>
+  <div class="cabecera-acciones">
+    <button id="btn-recorrido" class="boton-barra" aria-controls="recorrido">Recorrido</button>
+    <button id="abrir-mas" class="boton-barra" aria-haspopup="dialog">Más</button>
+  </div>
 </header>
 
 <main class="app">
@@ -24,26 +28,40 @@
       <ul id="conteos" class="cifras compactas"><li class="cargando">Cargando los conteos…</li></ul>
     </div>
     <div id="leyenda" class="leyenda" aria-live="polite" hidden></div>
+    <button id="btn-leyenda" class="boton-leyenda" aria-controls="leyenda" aria-expanded="false" hidden>Leyenda</button>
     <p id="aviso" class="aviso" role="status" hidden></p>
-    <p id="aviso-relieve" class="aviso-fijo" hidden>Relieve exagerado ×2. El sol se calcula sobre el terreno real.</p>
-    <div class="botones-lienzo">
+    <section id="recorrido" class="recorrido" aria-label="Recorrido guiado" aria-live="polite" hidden>
+      <p class="recorrido-cuenta"></p>
+      <p class="recorrido-texto"></p>
+      <div class="recorrido-botones">
+        <button class="boton-barra" data-anterior>Anterior</button>
+        <button class="boton-barra principal" data-siguiente>Siguiente</button>
+        <button class="boton-barra" data-salir>Salir</button>
+      </div>
+    </section>
+    <p id="chip-sombra" class="chip-sombra" hidden></p>
+    <div id="escala" class="escala-mapa" aria-hidden="true"><span class="barra-escala"></span><span class="texto-escala"></span></div>
+    <div id="botones-lienzo" class="botones-lienzo">
+      <button id="btn-general" class="boton-redondo" title="Vista general" aria-label="Vista general"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 7 V2 H7 M13 2 H18 V7 M18 13 V18 H13 M7 18 H2 V13" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
       <button id="btn-planta" class="boton-redondo" aria-pressed="false" title="Ver en planta">Planta</button>
       <button id="btn-norte" class="boton-redondo" title="Poner el norte arriba" aria-label="Norte arriba"><svg width="18" height="22" viewBox="0 0 18 22" aria-hidden="true"><path d="M9 1 L16 20 L9 15 L2 20 Z" fill="currentColor"/></svg></button>
     </div>
-    <p id="credito" class="credito"><button id="btn-creditos" class="enlace-credito" aria-label="Fuentes y créditos: datos abiertos con licencia CC BY 4.0">CC BY 4.0</button></p>
+    <p id="aviso-osm" class="aviso-osm" hidden>© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">Colaboradores de OpenStreetMap</a>, ODbL</p>
+    <p id="credito" class="credito"><span class="credito-orto">Calcado y medido sobre la Ortoimagen 2025 de la Secretaría Distrital de Planeación, publicada por IDECA en Datos Abiertos Bogotá, CC BY 4.0. La foto no se muestra.</span> <button id="btn-creditos" class="enlace-credito" aria-label="Fuentes y créditos: datos abiertos con licencia CC BY 4.0">CC BY 4.0</button></p>
   </section>
 
   <div id="sol-controles" class="sol-controles" hidden>
     <label>Mes <select id="sol-mes"></select></label>
-    <label class="hora">Hora <input type="range" id="sol-hora" min="5.5" max="18.5" step="0.25" value="10"> <output id="sol-hora-txt">10:00</output></label>
+    <label class="hora">Hora <input type="range" id="sol-hora" min="5.5" max="18.5" step="0.25" value="16"> <output id="sol-hora-txt">16:00</output></label>
   </div>
 
   <nav class="barra" aria-label="Controles del visor">
     <div id="lentes" class="lentes" role="radiogroup" aria-label="Lente">
-      <label><input type="radio" name="lente" value="certeza" checked><span>Certeza</span></label>
-      <label><input type="radio" name="lente" value="coleccion"><span>Colección</span></label>
-      <label><input type="radio" name="lente" value="conservacion"><span>Conservación</span></label>
+      <label><input type="radio" name="lente" value="lugar" checked><span>Lugar</span></label>
       <label><input type="radio" name="lente" value="sol"><span>Sol</span></label>
+      <label><input type="radio" name="lente" value="lluvia"><span>Lluvia</span></label>
+      <label><input type="radio" name="lente" value="coleccion"><span>Colección</span></label>
+      <label><input type="radio" name="lente" value="certeza"><span>Certeza</span></label>
     </div>
     <div class="acciones">
       <button id="abrir-capas" class="boton-barra" aria-haspopup="dialog">Capas</button>
@@ -58,8 +76,13 @@
   <label class="interruptor"><input type="checkbox" id="solo-fuente"> <span>Solo lo de fuente: quita las copas supuestas y deja la altura del censo</span></label>
   <label class="interruptor"><input type="checkbox" id="ver-zonas" checked> <span>Zonas de la colección viva</span></label>
   <label class="interruptor"><input type="checkbox" id="ver-edificios" checked> <span>Edificios</span></label>
-  <label class="interruptor"><input type="checkbox" id="ver-calzadas"> <span>Calzadas alrededor</span></label>
-  <label class="interruptor"><input type="checkbox" id="relieve-x2"> <span>Relieve ×2</span></label>
+  <label class="interruptor"><input type="checkbox" id="ver-calzadas" checked> <span>Calzadas alrededor</span></label>
+  <label class="interruptor"><input type="checkbox" id="ver-curvas"> <span>Curvas cada 1 m</span></label>
+  <p class="detalle"><span id="curvas-detalle">Del Modelo Digital de Terreno 2025 de IDECA.</span> <button id="ir-monticulo" class="enlace-credito">Ir al montículo</button></p>
+  <label class="interruptor"><input type="checkbox" id="realce"> <span>Realce: cielo despejado</span></label>
+  <p id="realce-detalle" class="detalle">Sin realce, la sombra usa la luz de un día medio del mes (ERA5). Con realce, sol de cielo despejado: se ve más, pero no es el día típico.</p>
+  <label class="interruptor"><input type="checkbox" id="ver-osm"> <span>Senderos, agua y puntos de OpenStreetMap</span></label>
+  <p id="osm-detalle" class="detalle">Capa aparte, ODbL. Solo se dibuja; no se cruza con nada del visor.</p>
   <fieldset class="grupo">
     <legend>Borde del jardín</legend>
     <div class="segmentado" role="radiogroup" aria-label="Qué borde usar">

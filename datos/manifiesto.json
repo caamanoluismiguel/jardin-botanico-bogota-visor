@@ -1,5 +1,5 @@
 {
- "generado": "2026-11-06",
+ "generado": "2026-11-07",
  "archivos": {
   "accesiones.json": {
    "fuente": [
@@ -18,20 +18,20 @@
     "arquetipos.csv (botánico del equipo, borrador sin revisión humana)"
    ],
    "guion": "visor3d/build/columnas.py",
-   "version": "1.0.0+4df59f87102e",
-   "sha256": "76f9d2bfefa6a9f825dd449b42973d4d2c3699b094e7f318153a3975f27a9da7",
-   "bytes": 44623,
-   "bytes_gzip": 44623
+   "version": "1.0.0+0546e7a61b87",
+   "sha256": "eb726b25d3aacb798625c22278db0261a74db4f393623770abf1013797762973",
+   "bytes": 50632,
+   "bytes_gzip": 50632
   },
   "arquetipos-tabla.json": {
    "fuente": [
     "arquetipos.csv (botánico del equipo)"
    ],
    "guion": "visor3d/build/columnas.py",
-   "version": "1.0.0+4df59f87102e",
-   "sha256": "879da12bd654938d7360099908de8f5974c8683d8a94353b1f1c5ed3efb0ba18",
-   "bytes": 11575,
-   "bytes_gzip": 3962
+   "version": "1.0.0+0546e7a61b87",
+   "sha256": "98dfb3c5ba407ac87a2e043e3a6b9981416f3db28258a2476c4f912de33246a8",
+   "bytes": 12603,
+   "bytes_gzip": 4247
   },
   "arquetipos.glb.gz": {
    "fuente": [
@@ -49,40 +49,65 @@
     "Modelo Digital de Terreno 2025, IDECA, CC BY 4.0"
    ],
    "guion": "visor3d/build/columnas.py",
-   "version": "1.0.0+4df59f87102e",
+   "version": "1.0.0+0546e7a61b87",
    "sha256": "99b5f07d698e349e6a800cb1635f73168e2b736003db5203092e7a4224f001e6",
    "bytes": 45489,
    "bytes_gzip": 13561
   },
   "censo.json": {
    "fuente": [
-    "Censo del arbolado urbano, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0"
+    "Censo del arbolado urbano, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 (tal como se publica, regla C)"
    ],
-   "guion": "visor3d/build/copia de visor/datos (columnas.py)",
-   "version": "1.0.0",
-   "sha256": "7f4fd714b7261de19d680ad53e42826dec060acb54a68d6020745226e8bc179f",
-   "bytes": 400581,
-   "bytes_gzip": 79201
+   "guion": "visor3d/build/columnas.py",
+   "version": "1.0.0+0546e7a61b87",
+   "sha256": "1f170243b1ab9ebae5fa88a43f0089b6ab65e1977ebc84ea65a837071961e8f2",
+   "bytes": 455925,
+   "bytes_gzip": 91261
+  },
+  "cielo.json": {
+   "fuente": [
+    "ERA5 mensual 1991 a 2020, Copernicus C3S, CC BY 4.0, DOI 10.24381/cds.f17050d7",
+    "Meinel y Meinel 1976, Erbs 1982, Collares-Pereira y Rabl 1979, Liu y Jordan 1960"
+   ],
+   "guion": "visor3d/build/cielo.py",
+   "version": "1.0.0+f89a9beb9c3d",
+   "sha256": "92eab7f4f54a63d63e0c7e3d8611e5705aba30a503d5c85a917fd2bd06f5aeda",
+   "bytes": 3978,
+   "bytes_gzip": 1093
   },
   "cifras.json": {
    "fuente": [
-    "visor/datos/cifras.json del v0"
+    "visor/datos/cifras.json del v0",
+    "Censo del arbolado urbano, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0",
+    "ERA5 mensual 1991 a 2020, Copernicus C3S, CC BY 4.0, DOI 10.24381/cds.f17050d7"
    ],
-   "guion": "visor3d/build/copia de visor/datos (columnas.py)",
-   "version": "1.0.0",
-   "sha256": "07c14b20861e927ee7ebb891d9a72c23aea42d12ce86d6af31305807fe6747cf",
-   "bytes": 9462,
-   "bytes_gzip": 1961
+   "guion": "visor3d/build/columnas.py",
+   "version": "1.0.0+0546e7a61b87",
+   "sha256": "401049a6c66b0f312b271455d4eebc4f7a48b16c82502d37374e206c69fd0096",
+   "bytes": 9441,
+   "bytes_gzip": 1941
   },
   "clima.json": {
    "fuente": [
-    "visor/datos/clima.json del v0"
+    "visor/datos/clima.json del v0 (METAR, CHIRPS, GIBS)",
+    "ERA5 mensual 1991 a 2020, Copernicus C3S, CC BY 4.0, DOI 10.24381/cds.f17050d7"
    ],
-   "guion": "visor3d/build/copia de visor/datos (columnas.py)",
-   "version": "1.0.0",
-   "sha256": "ac3b2007ea654665f4eff7059da6ffc10fdd3d71a42bb769a373090d2c406718",
-   "bytes": 1503,
-   "bytes_gzip": 933
+   "guion": "visor3d/build/columnas.py",
+   "version": "1.0.0+0546e7a61b87",
+   "sha256": "877e25330cd8421ef4a5e291ab4d75f1329ae108d256149eeaebe2591f3b7df6",
+   "bytes": 1710,
+   "bytes_gzip": 1039
+  },
+  "curvas.json": {
+   "fuente": [
+    "Modelo Digital de Terreno 2025, IDECA, CC BY 4.0",
+    "Construcciones y Lotes, Catastro Bogotá (UAECD), CC BY 4.0 (borde del lote, recorte)"
+   ],
+   "guion": "visor3d/build/curvas.mjs",
+   "version": "1.0.0+8b989ba7afb3",
+   "sha256": "2abc6bbb10c020867cb64546474c57bfa46c2950e7effdce1b1dd380fcc42221",
+   "bytes": 14212,
+   "bytes_gzip": 5706
   },
   "escena.json": {
    "fuente": [
@@ -93,10 +118,10 @@
     "resumen de visor/datos/base.json"
    ],
    "guion": "visor3d/build/columnas.py",
-   "version": "1.0.0+4df59f87102e",
-   "sha256": "24ed08555a2dd8d16e05ae6de79096ef46fb017a6b907bc88885245b7d906667",
-   "bytes": 43556,
-   "bytes_gzip": 14807
+   "version": "1.0.0+0546e7a61b87",
+   "sha256": "a49463fc371e72ace92cd650cf854f53d240dbf52237f40b8e44ef3d9c326229",
+   "bytes": 43557,
+   "bytes_gzip": 14806
   },
   "gibs.jpg": {
    "fuente": [
@@ -118,9 +143,9 @@
    ],
    "guion": "visor3d/build/horas_sol.py",
    "version": "1.0.0+342bef3c15ab",
-   "sha256": "18b9ec6d5fbc583f694e2ee4bb2e7a5ecad26a909780a7698a502ad77c7e83c2",
-   "bytes": 3172,
-   "bytes_gzip": 1230
+   "sha256": "f2df4b63cf63686a8ef8093d9a337aa72d27d1ebb6c8687b96cae02135009d45",
+   "bytes": 3169,
+   "bytes_gzip": 1235
   },
   "huellas.bin.gz": {
    "fuente": [
@@ -129,7 +154,7 @@
     "Tropicario: base.json del v0"
    ],
    "guion": "visor3d/build/columnas.py",
-   "version": "1.0.0+4df59f87102e",
+   "version": "1.0.0+0546e7a61b87",
    "sha256": "0dfef08923c0c5b7e3a3753e25e3d82ddfd0b53106a55f69625acbfe7e51b573",
    "bytes": 41441,
    "bytes_gzip": 41441
@@ -139,10 +164,70 @@
     "visor3d/licencias.json (fuentes, licencias y atribuciones)"
    ],
    "guion": "visor3d/build/licencias.mjs",
-   "version": "1.0.0+1ef44df9f426",
-   "sha256": "0254267f84746e7120c139899d90d1546278669f7d173b50d98bba1508d278dc",
-   "bytes": 9056,
-   "bytes_gzip": 2648
+   "version": "1.0.0+7116a789e869",
+   "sha256": "29c15a3c7cd61983ee7804bd6d17a690a50898179028b4c2abcb54eed2007205",
+   "bytes": 14031,
+   "bytes_gzip": 4195
+  },
+  "lluvia_hora.json": {
+   "fuente": [
+    "METAR SKBO (El Dorado) vía Iowa Environmental Mesonet, 2016 a 2025"
+   ],
+   "guion": "visor3d/build/lluvia_hora.py",
+   "version": "1.0.0+6af9ccedd0d4",
+   "sha256": "8ed0f54aa192400d94ec66c3f00e23b355ce80680a015a2ac39eb9b700d9dadc",
+   "bytes": 1573,
+   "bytes_gzip": 668
+  },
+  "lugar.json": {
+   "fuente": [
+    "Mapa de Referencia, IDECA, CC BY 4.0 (placas domiciliarias y nombres geográficos)"
+   ],
+   "guion": "visor3d/build/lugar.py",
+   "version": "1.0.0+b8edd19753c9",
+   "sha256": "86b1cbf078220d178372e80737efe8fe7f5da0bc5ab770731aeff8c4e57903d7",
+   "bytes": 1614,
+   "bytes_gzip": 728
+  },
+  "osm/LEEME.txt": {
+   "fuente": [
+    "© Colaboradores de OpenStreetMap, ODbL 1.0 (capa aparte, solo en datos/osm/) (aviso y licencia de la carpeta)"
+   ],
+   "guion": "visor3d/build/osm.py",
+   "version": "1.0.0+fad5864f7809",
+   "sha256": "b610f5dedf303556fdecb1b91ed21d47a19477de78e132a9ed807321591f3fec",
+   "bytes": 1139,
+   "bytes_gzip": 676
+  },
+  "osm/agua.geojson": {
+   "fuente": [
+    "© Colaboradores de OpenStreetMap, ODbL 1.0 (capa aparte, solo en datos/osm/)"
+   ],
+   "guion": "visor3d/build/osm.py",
+   "version": "1.0.0+fad5864f7809",
+   "sha256": "5472a8b38ddba81cbcbb27968414378cdb38a9d42de0b6ae09eabd7f808d5eea",
+   "bytes": 3478,
+   "bytes_gzip": 1183
+  },
+  "osm/puntos.geojson": {
+   "fuente": [
+    "© Colaboradores de OpenStreetMap, ODbL 1.0 (capa aparte, solo en datos/osm/)"
+   ],
+   "guion": "visor3d/build/osm.py",
+   "version": "1.0.0+fad5864f7809",
+   "sha256": "2d94e2f0faf5636d4b499549ac9825ef42bae70113cd256d3996824d361bb6c5",
+   "bytes": 5377,
+   "bytes_gzip": 1477
+  },
+  "osm/senderos.geojson": {
+   "fuente": [
+    "© Colaboradores de OpenStreetMap, ODbL 1.0 (capa aparte, solo en datos/osm/)"
+   ],
+   "guion": "visor3d/build/osm.py",
+   "version": "1.0.0+fad5864f7809",
+   "sha256": "44b866c26fcb0ba4c79214fe707a2b714568fe70b976da8c983658cbe0f4d5ee",
+   "bytes": 14642,
+   "bytes_gzip": 2405
   },
   "terreno.glb.gz": {
    "fuente": [
@@ -153,6 +238,18 @@
    "sha256": "281e475bffd92a435f4541d68d4b3724073b71a079b439f65052c7c34e928af8",
    "bytes": 32228,
    "bytes_gzip": 32228
+  },
+  "tropicario.json": {
+   "fuente": [
+    "Contorno calcado sobre la Ortoimagen urbana de Bogotá 2025 (SDP, SIGLA S.A.S., IDECA; CC BY 4.0); la foto no se sirve",
+    "Planos de diseño 2015 en SECOP I, proceso 15-1-134214 (solo cifras)",
+    "Modelo Digital de Terreno 2025, IDECA, CC BY 4.0"
+   ],
+   "guion": "visor3d/build/tropicario.py",
+   "version": "1.0.0+568f838dd80a",
+   "sha256": "7fe4cf9f822f0d0da1b77d552ea42d1dae6afe7c81c3258db1aed0944c891ae7",
+   "bytes": 8927,
+   "bytes_gzip": 3159
   }
  }
 }

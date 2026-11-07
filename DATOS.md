@@ -24,9 +24,28 @@ Las licencias se revisaron una por una el 6 de noviembre de 2026 en la ficha de 
 
 El visor 3D usa las mismas fuentes; sus archivos están en `datos/` en la raíz del repo y `datos/licencias.json` dice, para cada uno, de qué fuente sale. La tabla de tipos de árbol por nombre común (`visor/build/arquetipos.csv`, y en el 3D `datos/arquetipos-tabla.json` y `datos/arquetipos.glb.gz`) es elaboración del equipo, sin revisión de un botánico todavía, y queda cubierta por [LICENSE](LICENSE).
 
+## Visor 3D v2: archivos nuevos
+
+La v2 del 3D (7 de noviembre de 2026) suma estos archivos en `datos/`. Las licencias de las fuentes nuevas se revisaron ese día.
+
+| Archivo | Qué es | Fuente | Licencia | Atribución |
+|---|---|---|---|---|
+| `datos/lugar.json` | Las dos entradas (placas AC 63 68 95 y AK 70 55 84), la plazoleta de la Calle 63 y la escultura de José Celestino Mutis | [Mapa de Referencia de Bogotá](https://datosabiertos.bogota.gov.co/dataset/mapa-de-referencia), versión 06.26, IDECA; puntos medidos sobre la Ortoimagen 2025 | CC BY 4.0 | «Mapa de Referencia de Bogotá, versión 06.26. IDECA, con datos de SDP, SDM, IDU, EAAB, 4-72, TransMilenio S.A. y UAECD. Datos Abiertos Bogotá, CC BY 4.0» |
+| `datos/tropicario.json` | Contorno de las seis cúpulas del Tropicario, suelo bajo cada una y su nivel de cubierta, como cifras | Calcado sobre la [Ortoimagen urbana de Bogotá 2025](https://datosabiertos.bogota.gov.co/dataset/servicio-web-geografico-ortoimagen-para-la-zona-urbana-de-la-ciudad-de-bogota-d-c-2025); niveles de los [planos de diseño y la licencia 15-5-0338](https://www.contratos.gov.co/consultas/detalleProceso.do?numConstancia=15-1-134214) en SECOP I; suelo del Modelo Digital de Terreno 2025 | Ortoimagen y terreno CC BY 4.0; planos: documentos públicos (Ley 1712 de 2014), se citan solo cifras | Ver las atribuciones de la ortoimagen y de los planos abajo |
+| `datos/curvas.json` | Curvas de nivel cada 1 m dentro del lote | Modelo Digital de Terreno 2025 y lote de Catastro | CC BY 4.0 | «Modelo Digital de Terreno de Bogotá 2025. Propietaria: Secretaría Distrital de Planeación. Producido por SIGLA S.A.S. (contrato 1047 de 2024). Publicado por IDECA, Unidad Administrativa Especial de Catastro Distrital. Datos Abiertos Bogotá, CC BY 4.0. Curvas y relieve calculados por el equipo del visor» |
+| `datos/cielo.json` | Radiación y nubosidad mensuales de 1991 a 2020 en la celda 4,75 N 74,0 O, para aclarar la sombra según el sol que suele haber cada mes y hora. Es un modelo, no una medida. DOI 10.24381/cds.f17050d7 | [ERA5](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels-monthly-means), ECMWF, Servicio de Cambio Climático de Copernicus | CC BY 4.0 | «Contiene información modificada del Servicio de Cambio Climático de Copernicus, 2026. Ni la Comisión Europea ni el ECMWF son responsables del uso que se haga de la información de Copernicus ni de los datos que contiene» |
+| `datos/lluvia_hora.json` | Reloj de la lluvia por hora con los partes de 2016 a 2025, medido en El Dorado, a 6,4 km, no en el Jardín | METAR SKBO vía Iowa Environmental Mesonet | Dominio público; IEM pide crédito | «METAR SKBO (El Dorado) vía Iowa Environmental Mesonet, Iowa State University» |
+| `datos/osm/senderos.geojson`, `datos/osm/agua.geojson`, `datos/osm/puntos.geojson`, `datos/osm/LEEME.txt` | Capa «OpenStreetMap» aparte, apagada por defecto: senderos, agua y puntos de servicio. No se mezcla con ninguna otra geometría ni se usa para ubicar nada | [OpenStreetMap](https://www.openstreetmap.org/copyright) | [ODbL 1.0](https://opendatacommons.org/licenses/odbl/1-0/) | «© Colaboradores de OpenStreetMap, ODbL» |
+
+Ortoimagen 2025: «Ortoimagen urbana de Bogotá 2025, 5 cm. Propietaria: Secretaría Distrital de Planeación. Producida por SIGLA S.A.S. (contrato 1047 de 2024). Publicada por IDECA, Unidad Administrativa Especial de Catastro Distrital. Datos Abiertos Bogotá, CC BY 4.0». **La foto no se muestra en el visor** ni se publica en este repo: ni recortes, ni teselas, ni capturas que la contengan. Solo se publica lo calcado o medido sobre ella (el contorno del Tropicario y los puntos de las entradas y la plazoleta).
+
+Planos del Tropicario: «Planos de diseño JBB-CTO-582-2014 (DARP, 2015) y licencia 15-5-0338, publicados en SECOP I, proceso 15-1-134214». Son de diseño, de 2015, y lo construido puede ser distinto. Los planos, sus hojas y sus trazos no se publican; solo se citan cifras y nombres.
+
+En la v2, ERA5 reemplaza a NASA POWER para la radiación y la nubosidad del 3D. El plano 2D sigue con NASA POWER.
+
 ## Lo que no se usa
 
-Se dejan fuera los datos con licencia no comercial o con obligación de compartir igual, las fuentes sin licencia publicada y las geometrías de OpenStreetMap. La pestaña «Fuentes y método» del visor lo resume.
+Se dejan fuera los datos con licencia no comercial o con obligación de compartir igual y las fuentes sin licencia publicada. OpenStreetMap solo entra en su propia capa del 3D (`datos/osm/`, ODbL 1.0); ninguna geometría de OSM entra en los cálculos, los árboles ni los edificios. La foto de la Ortoimagen 2025 y el Modelo Digital de Superficie tampoco se usan. La pestaña «Fuentes y método» del visor lo resume.
 
 ## Librerías
 

@@ -1,0 +1,17 @@
+Senderos, agua y puntos del Jardín Botánico de Bogotá tomados de OpenStreetMap.
+
+© Colaboradores de OpenStreetMap, ODbL.
+Datos de OpenStreetMap, disponibles bajo la Open Database License (ODbL) 1.0:
+https://opendatacommons.org/licenses/odbl/1-0/
+Créditos y condiciones: https://www.openstreetmap.org/copyright
+
+Consulta: 2026-11-07, API 0.6 de OpenStreetMap (recuadro -74.1036,4.6650,-74.0971,4.6708).
+Qué se hizo: se tomaron los elementos con al menos un nodo dentro del polígono del jardín en OSM
+(vía 24587421). Las coordenadas son las de OSM, sin modificar. Estos archivos son la base derivada
+que usa el visor; se ofrecen completos aquí, bajo la misma licencia ODbL 1.0.
+
+Lo demás del visor no sale de OpenStreetMap ni se cruza con estos archivos: árboles, edificios,
+terreno, zonas y bordes vienen de otras fuentes con su propia licencia (ver licencias.json).
+El agua está incompleta: el lago grande no se edita en OSM desde 2013.
+No van las puertas y talanqueras de la punta este: junto a las entradas propias del visor se leían como
+dos entradas a pocos metros. Las puertas del Tropicario (Entrada y Salida) sí van.

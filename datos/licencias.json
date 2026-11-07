@@ -1,6 +1,8 @@
 {
  "version": 1,
  "nota": "Una entrada por fuente. 'archivos' son los archivos servidos en datos/ que salen de esa fuente; la build falla si un archivo servido no aparece en ninguna entrada o si una entrada nombra un archivo que no existe. No es asesoría legal.",
+ "pie": "Los datos se usan bajo sus licencias. Donde dice «calcado» o «calculado», el equipo del visor los modificó. Las entidades citadas no respaldan este visor.",
+ "pie_orto": "Calcado y medido sobre la Ortoimagen 2025 de la Secretaría Distrital de Planeación, publicada por IDECA en Datos Abiertos Bogotá, CC BY 4.0. La foto no se muestra.",
  "fuentes": [
   {
    "id": "censo",
@@ -9,8 +11,13 @@
    "licencia": "CC BY 4.0",
    "licencia_texto": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
    "atribucion": "Censo del arbolado urbano, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0",
-   "uso": "Árboles del censo, altura registrada y fecha del registro.",
-   "archivos": ["censo.json", "arboles.bin.gz", "horas_sol.json", "cifras.json"],
+   "uso": "Árboles del censo, altura registrada y fecha del registro. Regla C: se dibuja tal como lo publica la ciudad y nunca se cruza con la colección.",
+   "archivos": [
+    "censo.json",
+    "arboles.bin.gz",
+    "horas_sol.json",
+    "cifras.json"
+   ],
    "fecha_consulta": "2026-11-06"
   },
   {
@@ -21,7 +28,12 @@
    "licencia_texto": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
    "atribucion": "Colecciones vivas, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0",
    "uso": "Accesiones, zonas y categorías de amenaza. Las amenazadas van solo agregadas por zona.",
-   "archivos": ["accesiones.json", "escena.json", "horas_sol.json", "cifras.json"],
+   "archivos": [
+    "accesiones.json",
+    "escena.json",
+    "horas_sol.json",
+    "cifras.json"
+   ],
    "fecha_consulta": "2026-11-06"
   },
   {
@@ -32,7 +44,11 @@
    "licencia_texto": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
    "atribucion": "Lotes, Catastro Bogotá (UAECD), CC BY 4.0",
    "uso": "Borde oficial: lote 005506001044.",
-   "archivos": ["escena.json", "cifras.json"],
+   "archivos": [
+    "escena.json",
+    "cifras.json",
+    "curvas.json"
+   ],
    "fecha_consulta": "2026-11-06"
   },
   {
@@ -43,7 +59,12 @@
    "licencia_texto": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
    "atribucion": "Construcciones, Catastro Bogotá (UAECD), CC BY 4.0",
    "uso": "Huellas y pisos de los edificios, sombra en 3D y huella del Tropicario.",
-   "archivos": ["huellas.bin.gz", "escena.json", "horas_sol.json", "cifras.json"],
+   "archivos": [
+    "huellas.bin.gz",
+    "escena.json",
+    "horas_sol.json",
+    "cifras.json"
+   ],
    "fecha_consulta": "2026-11-06"
   },
   {
@@ -54,30 +75,72 @@
    "licencia_texto": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
    "atribucion": "Parques de Bogotá, IDRD, Datos Abiertos Bogotá, CC BY 4.0",
    "uso": "Borde alterno (parque 10-291) y los 19 sectores del Simón Bolívar.",
-   "archivos": ["escena.json", "cifras.json"],
+   "archivos": [
+    "escena.json",
+    "cifras.json"
+   ],
    "fecha_consulta": "2026-11-06"
   },
   {
    "id": "mapa-referencia",
-   "fuente": "Mapa de Referencia IDECA, Catastro Bogotá",
+   "fuente": "Mapa de Referencia de Bogotá, versión 06.26, IDECA",
    "enlace": "https://datosabiertos.bogota.gov.co/dataset/mapa-de-referencia",
    "licencia": "CC BY 4.0",
    "licencia_texto": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
-   "atribucion": "Mapa de Referencia IDECA (calzadas), Catastro Bogotá, CC BY 4.0",
-   "uso": "Calzadas alrededor del jardín, como contexto.",
-   "archivos": ["calzadas.json"],
-   "fecha_consulta": "2026-11-06"
+   "atribucion": "Mapa de Referencia de Bogotá, versión 06.26. IDECA, con datos de SDP, SDM, IDU, EAAB, 4-72, TransMilenio S.A. y UAECD. Datos Abiertos Bogotá, CC BY 4.0",
+   "uso": "Calzadas alrededor del jardín, como contexto. Placas domiciliarias de las dos entradas (AC 63 68 95 y AK 70 55 84) y el nombre geográfico «Escultura José Celestino Mutis», en lugar.json.",
+   "archivos": [
+    "calzadas.json",
+    "lugar.json"
+   ],
+   "fecha_consulta": "2026-11-07"
   },
   {
    "id": "dtm-2025",
-   "fuente": "Modelo Digital de Terreno 2025, IDECA",
+   "fuente": "Modelo Digital de Terreno de Bogotá 2025, Secretaría Distrital de Planeación, publicado por IDECA",
    "enlace": "https://serviciosgis.catastrobogota.gov.co/image/rest/services/Imagenes/modelodigitalterreno2025funcion/ImageServer",
    "licencia": "CC BY 4.0",
    "licencia_texto": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
-   "atribucion": "Modelo Digital de Terreno 2025, IDECA, CC BY 4.0",
-   "uso": "Relieve del terreno en 3D, a 4 m, y altura del suelo bajo árboles, zonas, edificios y calzadas.",
-   "archivos": ["terreno.glb.gz", "arboles.bin.gz", "huellas.bin.gz", "escena.json", "calzadas.json", "horas_sol.json"],
-   "fecha_consulta": "2026-11-06"
+   "atribucion": "Modelo Digital de Terreno de Bogotá 2025. Propietaria: Secretaría Distrital de Planeación. Producido por SIGLA S.A.S. (contrato 1047 de 2024). Publicado por IDECA, Unidad Administrativa Especial de Catastro Distrital. Datos Abiertos Bogotá, CC BY 4.0. Curvas y relieve calculados por el equipo del visor",
+   "uso": "Relieve del terreno en 3D, a 4 m, y altura del suelo bajo árboles, zonas, edificios y calzadas; curvas de nivel cada 1 m dentro del lote (curvas.json). Suelo bajo cada cúpula del Tropicario (tropicario.json).",
+   "archivos": [
+    "terreno.glb.gz",
+    "arboles.bin.gz",
+    "huellas.bin.gz",
+    "escena.json",
+    "calzadas.json",
+    "horas_sol.json",
+    "curvas.json",
+    "tropicario.json"
+   ],
+   "fecha_consulta": "2026-11-07"
+  },
+  {
+   "id": "ortho-2025",
+   "fuente": "Ortoimagen urbana de Bogotá 2025, 5 cm, Secretaría Distrital de Planeación, publicada por IDECA",
+   "enlace": "https://datosabiertos.bogota.gov.co/dataset/servicio-web-geografico-ortoimagen-para-la-zona-urbana-de-la-ciudad-de-bogota-d-c-2025",
+   "licencia": "CC BY 4.0",
+   "licencia_texto": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+   "atribucion": "Ortoimagen urbana de Bogotá 2025, 5 cm. Propietaria: Secretaría Distrital de Planeación. Producida por SIGLA S.A.S. (contrato 1047 de 2024). Publicada por IDECA, Unidad Administrativa Especial de Catastro Distrital. Datos Abiertos Bogotá, CC BY 4.0. Contorno del Tropicario calcado y puntos de las dos entradas y de la plazoleta medidos sobre ella por el equipo del visor",
+   "uso": "Base del calco del contorno de las seis cúpulas del Tropicario (tropicario.json) y de la medida de los puntos de las dos entradas y de la plazoleta de la Calle 63 (lugar.json). La foto no se muestra en el visor: ni recortes, ni teselas, ni capturas que la contengan. Solo se publica lo calcado o medido.",
+   "archivos": [
+    "tropicario.json",
+    "lugar.json"
+   ],
+   "fecha_consulta": "2026-11-07"
+  },
+  {
+   "id": "tropicario-secop",
+   "fuente": "Planos de diseño del Tropicario (DARP, 2015) y licencia de construcción 15-5-0338, SECOP I",
+   "enlace": "https://www.contratos.gov.co/consultas/detalleProceso.do?numConstancia=15-1-134214",
+   "licencia": "Documentos públicos (Ley 1712 de 2014); se citan solo cifras",
+   "licencia_texto": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=56882",
+   "atribucion": "Planos de diseño JBB-CTO-582-2014 (DARP, 2015) y licencia 15-5-0338, publicados en SECOP I, proceso 15-1-134214",
+   "uso": "Niveles de cubierta de cada cúpula del Tropicario y qué cúpula es cuál, como cifras y nombres. Son de diseño, de 2015: lo construido puede ser distinto. Donde los planos dan dos cifras se toma la más baja y se marca por verificar. Los planos, sus hojas y sus trazos no se publican: son obra protegida de sus autores.",
+   "archivos": [
+    "tropicario.json"
+   ],
+   "fecha_consulta": "2026-11-07"
   },
   {
    "id": "metar-iem",
@@ -86,10 +149,14 @@
    "licencia": "Dominio público, con crédito pedido",
    "licencia_texto": "https://mesonet.agron.iastate.edu/disclaimer.php",
    "atribucion": "METAR SKBO (El Dorado) vía Iowa Environmental Mesonet, Iowa State University",
-   "uso": "Último parte de El Dorado, consultado en vivo; la copia guardada sirve si no hay conexión.",
-   "archivos": ["clima.json", "cifras.json"],
+   "uso": "Último parte de El Dorado, consultado en vivo; la copia guardada sirve si no hay conexión. Partes de 2016 a 2025 para el reloj de la lluvia por hora (lluvia_hora.json), medido en El Dorado, a 6,4 km, no en el Jardín.",
+   "archivos": [
+    "clima.json",
+    "cifras.json",
+    "lluvia_hora.json"
+   ],
    "en_vivo": "https://mesonet.agron.iastate.edu/json/current.py?station=SKBO&network=CO__ASOS",
-   "fecha_consulta": "2026-11-06"
+   "fecha_consulta": "2026-11-07"
   },
   {
    "id": "chirps",
@@ -99,19 +166,25 @@
    "licencia_texto": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
    "atribucion": "CHIRPS v3, Climate Hazards Center, UC Santa Barbara, CC BY 4.0",
    "uso": "Lluvia mensual estimada. DOI 10.15780/G2JQ0P.",
-   "archivos": ["clima.json"],
+   "archivos": [
+    "clima.json"
+   ],
    "fecha_consulta": "2026-11-06"
   },
   {
-   "id": "nasa-power",
-   "fuente": "NASA POWER, NASA Langley Research Center",
-   "enlace": "https://power.larc.nasa.gov/",
-   "licencia": "Datos abiertos de la NASA, crédito exigido",
-   "licencia_texto": "https://power.larc.nasa.gov/docs/referencing/",
-   "atribucion": "Datos obtenidos del proyecto POWER del NASA Langley Research Center, financiado por el programa NASA Earth Science/Applied Science",
-   "uso": "Radiación y nubosidad modeladas.",
-   "archivos": ["clima.json", "cifras.json"],
-   "fecha_consulta": "2026-11-06"
+   "id": "era5",
+   "fuente": "ERA5, reanálisis del ECMWF, Servicio de Cambio Climático de Copernicus (C3S)",
+   "enlace": "https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels-monthly-means",
+   "licencia": "CC BY 4.0",
+   "licencia_texto": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+   "atribucion": "Contiene información modificada del Servicio de Cambio Climático de Copernicus, 2026. Ni la Comisión Europea ni el ECMWF son responsables del uso que se haga de la información de Copernicus ni de los datos que contiene",
+   "uso": "Radiación y nubosidad mensuales de 1991 a 2020 en la celda 4,75 N 74,0 O; con la radiación se aclara la sombra según el sol que suele haber cada mes y hora (cielo.json). Es un modelo, no una medida, y no está validado en Bogotá. DOI 10.24381/cds.f17050d7.",
+   "archivos": [
+    "clima.json",
+    "cifras.json",
+    "cielo.json"
+   ],
+   "fecha_consulta": "2026-11-07"
   },
   {
    "id": "nasa-gibs",
@@ -121,7 +194,10 @@
    "licencia_texto": "https://nasa-gibs.github.io/gibs-api-docs/",
    "atribucion": "Imágenes de NASA Global Imagery Browse Services (GIBS), parte de ESDIS",
    "uso": "Imagen de nubes del día de la construcción.",
-   "archivos": ["gibs.jpg", "clima.json"],
+   "archivos": [
+    "gibs.jpg",
+    "clima.json"
+   ],
    "fecha_consulta": "2026-11-06"
   },
   {
@@ -132,7 +208,9 @@
    "licencia_texto": "https://www.inaturalist.org/pages/terms",
    "atribucion": "iNaturalist",
    "uso": "Cuántas observaciones tienen licencia apta.",
-   "archivos": ["cifras.json"],
+   "archivos": [
+    "cifras.json"
+   ],
    "fecha_consulta": "2026-11-06"
   },
   {
@@ -143,7 +221,10 @@
    "licencia_texto": "https://gml.noaa.gov/grad/solcalc/calcdetails.html",
    "atribucion": "Algoritmo solar de la NOAA",
    "uso": "Posición del sol para el 3D, las horas de sol y los días de sol cenital.",
-   "archivos": ["horas_sol.json", "cifras.json"],
+   "archivos": [
+    "horas_sol.json",
+    "cifras.json"
+   ],
    "fecha_consulta": "2026-11-06"
   },
   {
@@ -154,16 +235,58 @@
    "licencia_texto": "LICENSE",
    "atribucion": "Tabla de tipos de árbol y formas por guion, visor 3D del jardín (borrador sin revisión humana)",
    "uso": "Tipo de árbol por nombre común (arquetipos.csv, borrador sin revisión humana) y las formas geométricas de cada tipo.",
-   "archivos": ["arquetipos-tabla.json", "arquetipos.glb.gz", "arboles.bin.gz"],
+   "archivos": [
+    "arquetipos-tabla.json",
+    "arquetipos.glb.gz",
+    "arboles.bin.gz"
+   ],
    "fecha_consulta": "2026-11-06"
+  },
+  {
+   "id": "osm",
+   "fuente": "OpenStreetMap (capa aparte: senderos, agua y puntos de servicio)",
+   "enlace": "https://www.openstreetmap.org/copyright",
+   "licencia": "ODbL 1.0",
+   "licencia_texto": "https://opendatacommons.org/licenses/odbl/1-0/",
+   "atribucion": "© Colaboradores de OpenStreetMap, ODbL",
+   "uso": "Capa «OpenStreetMap», apagada por defecto, en su propia carpeta datos/osm/ y descargable con su licencia. No se mezcla con ninguna otra geometría ni se usa para ubicar nada. Sin árboles ni edificios de OSM. El agua de OSM está incompleta: el lago grande no se edita desde 2013.",
+   "archivos": [
+    "osm/senderos.geojson",
+    "osm/agua.geojson",
+    "osm/puntos.geojson",
+    "osm/LEEME.txt"
+   ],
+   "fecha_consulta": "2026-11-07"
   }
  ],
  "no_usadas": [
-  { "fuente": "ERA5 y Open-Meteo", "motivo": "Fuera de esta demo por decisión de alcance y de licencia de uso." },
-  { "fuente": "Conjuntos del Jardín en GBIF con licencia no comercial", "motivo": "Esta demo deja fuera todo dato con licencia no comercial." },
-  { "fuente": "Observaciones de iNaturalist sin licencia", "motivo": "Se cuentan y se enlazan, no se copian." },
-  { "fuente": "OpenStreetMap", "motivo": "Ninguna geometría de OSM entra en los cálculos ni en el mapa." },
-  { "fuente": "Ortoimagen urbana 2025 de IDECA (CC BY 4.0)", "motivo": "No entra en esta versión: el 3D va sin fondo de imagen. Queda para calibrar las copas más adelante." },
-  { "fuente": "Modelo Digital de Superficie de IDECA", "motivo": "Fuera de esta versión. El relieve sale solo del modelo de terreno, sin árboles ni techos." }
+  {
+   "fuente": "NASA POWER",
+   "motivo": "Se usó en la v1 para radiación y nubes. En la v2 lo reemplaza ERA5, que trae la serie 1991 a 2020 y la licencia CC BY 4.0."
+  },
+  {
+   "fuente": "Open-Meteo",
+   "motivo": "No se usa: ERA5 se baja directo de Copernicus, con su licencia y su crédito."
+  },
+  {
+   "fuente": "Conjuntos del Jardín en GBIF con licencia no comercial",
+   "motivo": "Esta demo deja fuera todo dato con licencia no comercial."
+  },
+  {
+   "fuente": "Observaciones de iNaturalist sin licencia",
+   "motivo": "Se cuentan y se enlazan, no se copian."
+  },
+  {
+   "fuente": "OpenStreetMap fuera de su capa",
+   "motivo": "Ninguna geometría de OSM entra en los cálculos, en los árboles ni en los edificios. OSM solo se ve en su propia capa, apagada por defecto."
+  },
+  {
+   "fuente": "La foto de la ortoimagen urbana de Bogotá 2025",
+   "motivo": "La foto no se muestra en el visor, ni recortes ni teselas. Solo se publica lo que se calca o se mide sobre ella, como el contorno del Tropicario."
+  },
+  {
+   "fuente": "Modelo Digital de Superficie de IDECA",
+   "motivo": "Fuera de esta versión. El relieve sale solo del modelo de terreno, sin árboles ni techos."
+  }
  ]
 }
