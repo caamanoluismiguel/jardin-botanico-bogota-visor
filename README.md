@@ -26,7 +26,8 @@ En el visor 3D:
 - Fichas por zona, accesión y árbol, que también se abren por URL.
 - Algunos árboles no se dibujan para proteger especies sensibles.
 - Desde la v2: las dos entradas (Calle 63 con su plazoleta y Carrera 70), las cúpulas del Tropicario, curvas de nivel, la sombra aclarada según el cielo típico de cada mes (ERA5), el reloj de la lluvia por hora en El Dorado y una capa aparte de OpenStreetMap, apagada por defecto. Los archivos nuevos son `datos/lugar.json`, `datos/tropicario.json`, `datos/curvas.json`, `datos/cielo.json`, `datos/lluvia_hora.json` y la carpeta `datos/osm/`; el detalle está en [DATOS.md](DATOS.md).
-- El contorno del Tropicario y los puntos de las entradas se calcaron sobre la Ortoimagen 2025 de Bogotá, pero la foto no se muestra ni viene en este repo.
+- Desde la v2.1: las orillas de los dos lagos y los dos estanques calcadas a mano (sin el agua de OpenStreetMap), 16 techos que Catastro no tiene, el piso duro, el borde de la plazoleta y una ficha del lote visto desde arriba (copa, pasto, agua, piso, techos, sellado y escorrentía). Los archivos nuevos son `datos/calcos.json` y `datos/superficie.json`.
+- El contorno del Tropicario, los puntos de las entradas y todo lo de `datos/calcos.json` y `datos/superficie.json` se calcaron o midieron sobre la Ortoimagen 2025 de Bogotá, pero la foto no se muestra ni viene en este repo.
 
 En el plano 2D:
 

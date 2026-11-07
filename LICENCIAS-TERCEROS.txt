@@ -61,7 +61,7 @@ y el detalle en DATOS.md. Aquí van las fuentes que suma la v2.
 
 ----
 
-OpenStreetMap: datos/osm/ (senderos.geojson, agua.geojson, puntos.geojson, LEEME.txt)
+OpenStreetMap: datos/osm/ (senderos.geojson, puntos.geojson, LEEME.txt)
 
 © Colaboradores de OpenStreetMap, ODbL
 Datos disponibles bajo la Open Database License (ODbL) 1.0:
@@ -72,13 +72,16 @@ misma licencia ODbL 1.0. No se mezcla con ninguna otra geometría del visor.
 
 ----
 
-Ortoimagen urbana de Bogotá 2025, 5 cm (base de calco de tropicario.json y lugar.json)
+Ortoimagen urbana de Bogotá 2025, 5 cm (base de calco de tropicario.json,
+lugar.json, calcos.json y superficie.json)
 
 Ortoimagen urbana de Bogotá 2025, 5 cm. Propietaria: Secretaría Distrital de
 Planeación. Producida por SIGLA S.A.S. (contrato 1047 de 2024). Publicada por
 IDECA, Unidad Administrativa Especial de Catastro Distrital. Datos Abiertos
-Bogotá, CC BY 4.0. Contorno del Tropicario calcado y puntos de las dos entradas
-y de la plazoleta medidos sobre ella por el equipo del visor.
+Bogotá, CC BY 4.0. Contorno del Tropicario, orillas de los cuatro cuerpos de
+agua, 16 techos que faltan en Catastro, borde de la plazoleta y eje de la
+Calle 63 calcados, puntos de las dos entradas y de la plazoleta medidos y
+superficie del lote clasificada sobre ella por el equipo del visor
 https://datosabiertos.bogota.gov.co/dataset/servicio-web-geografico-ortoimagen-para-la-zona-urbana-de-la-ciudad-de-bogota-d-c-2025
 https://creativecommons.org/licenses/by/4.0/legalcode.es
 La foto no se muestra en el visor ni se publica en este repo: ni recortes, ni

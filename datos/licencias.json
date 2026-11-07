@@ -47,7 +47,8 @@
    "archivos": [
     "escena.json",
     "cifras.json",
-    "curvas.json"
+    "curvas.json",
+    "superficie.json"
    ],
    "fecha_consulta": "2026-11-06"
   },
@@ -63,7 +64,8 @@
     "huellas.bin.gz",
     "escena.json",
     "horas_sol.json",
-    "cifras.json"
+    "cifras.json",
+    "superficie.json"
    ],
    "fecha_consulta": "2026-11-06"
   },
@@ -121,11 +123,13 @@
    "enlace": "https://datosabiertos.bogota.gov.co/dataset/servicio-web-geografico-ortoimagen-para-la-zona-urbana-de-la-ciudad-de-bogota-d-c-2025",
    "licencia": "CC BY 4.0",
    "licencia_texto": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
-   "atribucion": "Ortoimagen urbana de Bogotá 2025, 5 cm. Propietaria: Secretaría Distrital de Planeación. Producida por SIGLA S.A.S. (contrato 1047 de 2024). Publicada por IDECA, Unidad Administrativa Especial de Catastro Distrital. Datos Abiertos Bogotá, CC BY 4.0. Contorno del Tropicario calcado y puntos de las dos entradas y de la plazoleta medidos sobre ella por el equipo del visor",
-   "uso": "Base del calco del contorno de las seis cúpulas del Tropicario (tropicario.json) y de la medida de los puntos de las dos entradas y de la plazoleta de la Calle 63 (lugar.json). La foto no se muestra en el visor: ni recortes, ni teselas, ni capturas que la contengan. Solo se publica lo calcado o medido.",
+   "atribucion": "Ortoimagen urbana de Bogotá 2025, 5 cm. Propietaria: Secretaría Distrital de Planeación. Producida por SIGLA S.A.S. (contrato 1047 de 2024). Publicada por IDECA, Unidad Administrativa Especial de Catastro Distrital. Datos Abiertos Bogotá, CC BY 4.0. Contorno del Tropicario, orillas de los cuatro cuerpos de agua, 16 techos que faltan en Catastro, borde de la plazoleta y eje de la Calle 63 calcados, puntos de las dos entradas y de la plazoleta medidos y superficie del lote clasificada sobre ella por el equipo del visor",
+   "uso": "Base del calco del contorno de las seis cúpulas del Tropicario (tropicario.json) y de la medida de los puntos de las dos entradas y de la plazoleta de la Calle 63 (lugar.json). En calcos.json: orillas calcadas a mano de los dos lagos y los dos estanques (los tramos bajo copa van como inferidos), 16 techos vistos en la foto que no están en Catastro, el borde de la plazoleta, el eje de la Calle 63 para su rótulo y el piso duro clasificado y simplificado para dibujar. En superficie.json: el área de cada clase del lote (copa vista desde arriba, pasto, tierra o recebo, agua, piso duro, techos, sin acuerdo), medida píxel a píxel sobre la foto a 20 cm, el agua libre vista en cada lago y el rango de sellado visible. La foto no se muestra en el visor: ni recortes, ni teselas, ni capturas que la contengan. Solo se publica lo calcado o medido.",
    "archivos": [
     "tropicario.json",
-    "lugar.json"
+    "lugar.json",
+    "calcos.json",
+    "superficie.json"
    ],
    "fecha_consulta": "2026-11-07"
   },
@@ -167,7 +171,8 @@
    "atribucion": "CHIRPS v3, Climate Hazards Center, UC Santa Barbara, CC BY 4.0",
    "uso": "Lluvia mensual estimada. DOI 10.15780/G2JQ0P.",
    "archivos": [
-    "clima.json"
+    "clima.json",
+    "superficie.json"
    ],
    "fecha_consulta": "2026-11-06"
   },
@@ -244,15 +249,14 @@
   },
   {
    "id": "osm",
-   "fuente": "OpenStreetMap (capa aparte: senderos, agua y puntos de servicio)",
+   "fuente": "OpenStreetMap (capa aparte: senderos y puntos de servicio)",
    "enlace": "https://www.openstreetmap.org/copyright",
    "licencia": "ODbL 1.0",
    "licencia_texto": "https://opendatacommons.org/licenses/odbl/1-0/",
    "atribucion": "© Colaboradores de OpenStreetMap, ODbL",
-   "uso": "Capa «OpenStreetMap», apagada por defecto, en su propia carpeta datos/osm/ y descargable con su licencia. No se mezcla con ninguna otra geometría ni se usa para ubicar nada. Sin árboles ni edificios de OSM. El agua de OSM está incompleta: el lago grande no se edita desde 2013.",
+   "uso": "Capa «OpenStreetMap», apagada por defecto, en su propia carpeta datos/osm/ y descargable con su licencia. No se mezcla con ninguna otra geometría ni se usa para ubicar nada. Sin árboles, edificios ni agua de OSM: el agua se calca sobre la Ortoimagen 2025.",
    "archivos": [
     "osm/senderos.geojson",
-    "osm/agua.geojson",
     "osm/puntos.geojson",
     "osm/LEEME.txt"
    ],

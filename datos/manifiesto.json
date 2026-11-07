@@ -43,6 +43,16 @@
    "bytes": 5457,
    "bytes_gzip": 5457
   },
+  "calcos.json": {
+   "fuente": [
+    "Orillas, techos, piso duro, plazoleta y eje de la Calle 63 calcados y medidos sobre la Ortoimagen urbana de Bogotá 2025 (SDP, IDECA; CC BY 4.0); la foto no se sirve"
+   ],
+   "guion": "visor3d/build/calcos.py",
+   "version": "1.0.0+d39bc047e72a",
+   "sha256": "ef5ef8fccc7547b6e1b0541b862bf083eb51c4e5b31ce4b6c9c00530c683c3e6",
+   "bytes": 23778,
+   "bytes_gzip": 8254
+  },
   "calzadas.json": {
    "fuente": [
     "calzadas de visor/datos/base.json (ver calzadas_fuente)",
@@ -165,9 +175,9 @@
    ],
    "guion": "visor3d/build/licencias.mjs",
    "version": "1.0.0+7116a789e869",
-   "sha256": "29c15a3c7cd61983ee7804bd6d17a690a50898179028b4c2abcb54eed2007205",
-   "bytes": 14031,
-   "bytes_gzip": 4195
+   "sha256": "a8ac86bc3abf73c024405008680f1e12ddbcd21cdb563acf5ea51ff2986c74ce",
+   "bytes": 14782,
+   "bytes_gzip": 4461
   },
   "lluvia_hora.json": {
    "fuente": [
@@ -184,37 +194,27 @@
     "Mapa de Referencia, IDECA, CC BY 4.0 (placas domiciliarias y nombres geográficos)"
    ],
    "guion": "visor3d/build/lugar.py",
-   "version": "1.0.0+b8edd19753c9",
-   "sha256": "86b1cbf078220d178372e80737efe8fe7f5da0bc5ab770731aeff8c4e57903d7",
-   "bytes": 1614,
-   "bytes_gzip": 728
+   "version": "1.0.0+486411af77af",
+   "sha256": "388ed9a92a70999e07f07adb23ed42c4b1ffe88e9a100ae7ae58ed930a7f33a8",
+   "bytes": 2163,
+   "bytes_gzip": 852
   },
   "osm/LEEME.txt": {
    "fuente": [
     "© Colaboradores de OpenStreetMap, ODbL 1.0 (capa aparte, solo en datos/osm/) (aviso y licencia de la carpeta)"
    ],
    "guion": "visor3d/build/osm.py",
-   "version": "1.0.0+fad5864f7809",
-   "sha256": "b610f5dedf303556fdecb1b91ed21d47a19477de78e132a9ed807321591f3fec",
-   "bytes": 1139,
-   "bytes_gzip": 676
-  },
-  "osm/agua.geojson": {
-   "fuente": [
-    "© Colaboradores de OpenStreetMap, ODbL 1.0 (capa aparte, solo en datos/osm/)"
-   ],
-   "guion": "visor3d/build/osm.py",
-   "version": "1.0.0+fad5864f7809",
-   "sha256": "5472a8b38ddba81cbcbb27968414378cdb38a9d42de0b6ae09eabd7f808d5eea",
-   "bytes": 3478,
-   "bytes_gzip": 1183
+   "version": "1.0.0+610fd4b1e7ab",
+   "sha256": "04972ab1315106f6b40db34a38b7d1c1c99218e0c1614048ecf66a5c728b006d",
+   "bytes": 1144,
+   "bytes_gzip": 675
   },
   "osm/puntos.geojson": {
    "fuente": [
     "© Colaboradores de OpenStreetMap, ODbL 1.0 (capa aparte, solo en datos/osm/)"
    ],
    "guion": "visor3d/build/osm.py",
-   "version": "1.0.0+fad5864f7809",
+   "version": "1.0.0+610fd4b1e7ab",
    "sha256": "2d94e2f0faf5636d4b499549ac9825ef42bae70113cd256d3996824d361bb6c5",
    "bytes": 5377,
    "bytes_gzip": 1477
@@ -224,10 +224,22 @@
     "© Colaboradores de OpenStreetMap, ODbL 1.0 (capa aparte, solo en datos/osm/)"
    ],
    "guion": "visor3d/build/osm.py",
-   "version": "1.0.0+fad5864f7809",
+   "version": "1.0.0+610fd4b1e7ab",
    "sha256": "44b866c26fcb0ba4c79214fe707a2b714568fe70b976da8c983658cbe0f4d5ee",
    "bytes": 14642,
    "bytes_gzip": 2405
+  },
+  "superficie.json": {
+   "fuente": [
+    "Superficie del lote medida sobre la Ortoimagen urbana de Bogotá 2025 (SDP, IDECA; CC BY 4.0)",
+    "Lote y construcciones de Catastro Bogotá (IDECA)",
+    "CHIRPS v3 (CC BY 4.0)"
+   ],
+   "guion": "visor3d/build/calcos.py",
+   "version": "1.0.0+d39bc047e72a",
+   "sha256": "042e5749c72279847318702bff97b7bb9b0734e9fee31c43967d3a0cbd685eb6",
+   "bytes": 2442,
+   "bytes_gzip": 1093
   },
   "terreno.glb.gz": {
    "fuente": [
@@ -246,10 +258,10 @@
     "Modelo Digital de Terreno 2025, IDECA, CC BY 4.0"
    ],
    "guion": "visor3d/build/tropicario.py",
-   "version": "1.0.0+568f838dd80a",
-   "sha256": "7fe4cf9f822f0d0da1b77d552ea42d1dae6afe7c81c3258db1aed0944c891ae7",
-   "bytes": 8927,
-   "bytes_gzip": 3159
+   "version": "1.0.0+f2ce55ba3a03",
+   "sha256": "4f462dd69c14a42bba513105f75d2983e46a16f22bab02992171993c0a1a0f82",
+   "bytes": 8925,
+   "bytes_gzip": 3171
   }
  }
 }
