@@ -2,7 +2,7 @@
 No baja los archivos globales (unos 30 MB cada uno).
 
 Uso, desde la raíz del repo:  python3 -I analisis/clima/chirps_mensual.py [anio_ini] [anio_fin]   (por defecto 2017 a 2026)
-Salida: datos-crudos/clima/chirps_v3_mensual.csv (mes, mm en la celda, media 3x3 de contexto), que lee visor/build/construir.py.
+Salida: datos-crudos/clima/chirps_v3_mensual.csv (mes, mm en la celda, media 3x3 de contexto), que lee la preparación de datos del visor (guion fuera de este repo).
 Necesita rasterio (ver requirements.txt). CHIRPS v3, Climate Hazards Center, UC Santa Barbara, CC BY 4.0.
 """
 import csv, os, sys

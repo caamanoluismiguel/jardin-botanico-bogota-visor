@@ -54,7 +54,7 @@ export async function pintarFuentes(el, estado) {
     <div class="envoltura-tabla"><table class="tabla-cifras">
       <thead><tr><th scope="col">Cifra</th><th scope="col">Valor</th><th scope="col">Marca</th></tr></thead>
       <tbody>${filas}</tbody></table></div>
-    <p class="detalle">Datos preparados el ${fecha(d.generado)} con los guiones de <code>visor/build/</code>; se pueden repetir.</p>
+    <p class="detalle">Datos preparados el ${fecha(d.generado)} con guiones del equipo que no se publican con el visor.</p>
   </fieldset>
 
   <fieldset class="grupo"><legend>Fuentes usadas</legend>

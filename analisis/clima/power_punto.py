@@ -1,7 +1,7 @@
 """Serie diaria de NASA POWER (radiación y nubosidad, modelo) en el punto de trabajo del jardín.
 
 Uso, desde la raíz del repo:  python3 -I analisis/clima/power_punto.py 2025
-Salida: datos-crudos/clima/power_<anio>.json (fuera de git), que lee visor/build/construir.py.
+Salida: datos-crudos/clima/power_<anio>.json (fuera de git), que lee la preparación de datos del visor (guion fuera de este repo).
 Solo biblioteca estándar. NASA POWER es dato abierto de la NASA y pide esta frase de crédito:
 «Datos obtenidos del proyecto POWER del NASA Langley Research Center, financiado por el programa NASA Earth Science/Applied Science».
 """

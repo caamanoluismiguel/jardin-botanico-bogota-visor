@@ -60,12 +60,10 @@ Todo se corre desde la raíz del repo. Lo descargado queda en `datos-crudos/`, q
 2. `python3 -I analisis/clima/power_punto.py 2025` baja la radiación y la nubosidad de NASA POWER.
 3. `python3 -I analisis/clima/chirps_mensual.py` lee la lluvia mensual de CHIRPS v3. Este es el único paso que necesita una librería externa: `pip install -r analisis/clima/requirements.txt` (rasterio).
 4. `python3 -I visor/build/bajar.py` baja la colección viva, el censo, las construcciones, los sectores del parque, las calzadas, el METAR, la imagen de GIBS y los conteos de iNaturalist. Con `--todo` vuelve a bajar todo.
-5. `python3 -I visor/build/construir.py` escribe `visor/datos/` e imprime cada cifra junto al valor esperado.
-6. `python3 -I visor/build/comprobar_sensibles.py` revisa que nada de lo servido caiga en el punto de una planta amenazada y que se cumpla la regla de protección. Si encuentra algo, sale con código 1. Con `--prueba-negativa` planta tres árboles prohibidos en copias temporales y sale con 3 solo si los encuentra todos.
 
-Los pasos 1, 2, 4, 5 y 6 usan solo la biblioteca estándar. Ningún paso pide cuenta, clave ni token.
+Los pasos 1, 2 y 4 usan solo la biblioteca estándar. Ningún paso pide cuenta, clave ni token.
 
-Estos pasos rehacen los datos del plano 2D. Los del 3D (los `.json`, `.bin.gz` y `.glb.gz` de `datos/`) se arman con guiones que no están en este repo; cada archivo trae su fuente, su versión y su sha256 en `datos/manifiesto.json`.
+Con eso tienes los mismos datos crudos que usa el visor. Los guiones que los convierten en los archivos servidos (`visor/datos/` del plano y `datos/` del 3D) y la comprobación de plantas amenazadas no están en este repo. Cada archivo del 3D trae su fuente, el nombre de su guion, su versión y su sha256 en `datos/manifiesto.json`.
 
 Las fuentes cambian: la colección y el censo se actualizan cada año, el METAR cada hora y la imagen de nubes cada día. Si rehaces los datos otro día, algunas cifras pueden cambiar.
 
@@ -74,9 +72,9 @@ Las fuentes cambian: la colección y el censo se actualizan cada año, el METAR 
 La colección publica la categoría de amenaza de cada accesión. Para no señalar dónde está una planta amenazada:
 
 - Las accesiones CR, EN, VU y EW salen sin coordenada y solo se cuentan por zona.
-- Algunos árboles del censo no se dibujan y algunas accesiones salen sin punto, para proteger especies sensibles. La regla está en `visor/build/regla_sensibles.py`; el visor solo dice cuántos árboles dibuja de los que trae el censo.
+- Algunos árboles del censo no se dibujan y algunas accesiones salen sin punto, para proteger especies sensibles. El visor solo dice cuántos árboles dibuja de los que trae el censo.
 - Cada zona se dibuja como un círculo de ubicación aproximada, nunca encima de una planta reconocible.
-- `visor/build/comprobar_sensibles.py` recorre todo lo que sirve el visor, aplica esa regla y debe dar 0 coincidencias.
+- Antes de publicar, una comprobación recorre todo lo que sirve el visor y debe dar 0 coincidencias.
 
 ## Fuentes
 
