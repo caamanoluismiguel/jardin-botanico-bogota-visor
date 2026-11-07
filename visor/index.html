@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Demo independiente con datos abiertos: qué se sabe de cada planta del Jardín Botánico de Bogotá, desde cuándo y qué falta por saber.">
+<meta name="robots" content="noindex, nofollow">
+<title>Qué se sabe de cada planta · demo con datos abiertos</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="css/visor.css">
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js",
+               "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/" } }
+</script>
+</head>
+<body>
+<a class="saltar" href="#panel">Ir al panel</a>
+<header class="cabecera">
+  <div class="cabecera-texto">
+    <p class="aviso-demo">Demo independiente con datos abiertos. No es un sitio del Jardín Botánico.</p>
+    <h1>Jardín Botánico de Bogotá: qué se sabe de cada planta</h1>
+  </div>
+</header>
+
+<main class="disposicion">
+  <section class="zona-mapa" aria-label="Mapa del jardín">
+    <div id="mapa" class="mapa" role="region" aria-label="Mapa en planta. Toca una zona o un árbol para abrir su ficha."></div>
+    <p id="sello-borde" class="sello-mapa"></p>
+    <p id="aviso-mapa" class="aviso-mapa" hidden></p>
+  </section>
+
+  <section id="panel" class="panel" tabindex="-1" aria-label="Panel">
+    <p class="pregunta">De cada planta del Jardín, ¿qué se sabe con certeza, desde cuándo y qué falta por saber?</p>
+
+    <div class="pestanas" role="tablist" aria-label="Secciones">
+      <button role="tab" id="tab-capas" aria-controls="sec-capas" aria-selected="true">Capas</button>
+      <button role="tab" id="tab-clima" aria-controls="sec-clima" aria-selected="false" tabindex="-1">Clima</button>
+      <button role="tab" id="tab-fuentes" aria-controls="sec-fuentes" aria-selected="false" tabindex="-1">Fuentes y método</button>
+    </div>
+
+    <div id="sec-capas" role="tabpanel" aria-labelledby="tab-capas" class="seccion">
+      <fieldset class="grupo">
+        <legend>Borde del jardín</legend>
+        <label class="interruptor"><input type="checkbox" id="ver-borde" checked> <span>Mostrar el borde</span></label>
+        <div class="segmentado" role="radiogroup" aria-label="Qué borde usar">
+          <label><input type="radio" name="borde" value="lote" checked> <span>Lote catastral</span></label>
+          <label><input type="radio" name="borde" value="idrd"> <span>Parque IDRD</span></label>
+        </div>
+        <p id="borde-detalle" class="detalle"></p>
+      </fieldset>
+
+      <fieldset class="grupo">
+        <legend>Lente sobre la colección viva</legend>
+        <div class="lentes" role="radiogroup" aria-label="Lente">
+          <label><input type="radio" name="lente" value="coleccion" checked> <span>Colección por zona</span></label>
+          <label><input type="radio" name="lente" value="conservacion"> <span>Conservación</span></label>
+          <label><input type="radio" name="lente" value="certeza"> <span>Certeza</span></label>
+          <label><input type="radio" name="lente" value="contexto"> <span>Contexto en el parque</span></label>
+          <label><input type="radio" name="lente" value="ninguna"> <span>Ninguna</span></label>
+        </div>
+        <div id="leyenda" class="leyenda" aria-live="polite"></div>
+        <div id="lente-texto" class="lente-texto"></div>
+      </fieldset>
+
+      <fieldset class="grupo">
+        <legend>Árboles del censo</legend>
+        <label class="interruptor"><input type="checkbox" id="ver-censo"> <span>Mostrar los árboles del censo</span></label>
+        <p id="censo-estado" class="detalle">Apagado. Pesa unos 90 KB comprimido y se baja al encenderlo.</p>
+      </fieldset>
+
+      <fieldset class="grupo">
+        <legend>Sol y sombra</legend>
+        <p class="detalle">Única vista en 3D. Se baja al pedirla (unos 280 KB comprimidos con los edificios).</p>
+        <button id="abrir-3d" class="boton">Abrir sol y sombra en 3D</button>
+      </fieldset>
+
+      <fieldset class="grupo">
+        <legend>Buscar</legend>
+        <label for="buscar" class="detalle">Número de accesión o nombre de planta</label>
+        <div class="buscar">
+          <input id="buscar" type="search" autocomplete="off" placeholder="Ej.: 30967 o Espeletia" enterkeyhint="search">
+        </div>
+        <ul id="resultados" class="resultados" aria-live="polite"></ul>
+      </fieldset>
+    </div>
+
+    <div id="sec-clima" role="tabpanel" aria-labelledby="tab-clima" class="seccion" hidden></div>
+    <div id="sec-fuentes" role="tabpanel" aria-labelledby="tab-fuentes" class="seccion" hidden></div>
+  </section>
+</main>
+
+<dialog id="ficha" class="ficha" aria-labelledby="ficha-titulo">
+  <div class="ficha-cabeza">
+    <p id="ficha-tipo" class="ficha-tipo"></p>
+    <button class="cerrar" id="ficha-cerrar" aria-label="Cerrar ficha">×</button>
+  </div>
+  <h2 id="ficha-titulo"></h2>
+  <div id="ficha-cuerpo"></div>
+</dialog>
+
+<dialog id="tres" class="tres" aria-labelledby="tres-titulo">
+  <div class="tres-cabeza">
+    <h2 id="tres-titulo">Sol y sombra</h2>
+    <button class="cerrar" id="tres-cerrar" aria-label="Cerrar la vista 3D">×</button>
+  </div>
+  <div class="tres-cuerpo">
+    <div id="tres-lienzo" class="tres-lienzo" aria-label="Escena 3D del jardín y su entorno"></div>
+    <div class="tres-controles">
+      <label>Fecha <input type="date" id="tres-fecha"></label>
+      <label class="hora">Hora <input type="range" id="tres-hora" min="6" max="18" step="0.25" value="10"> <output id="tres-hora-txt">10:00</output></label>
+      <label class="interruptor"><input type="checkbox" id="tres-copas" checked> <span>Copas supuestas</span></label>
+      <p id="tres-sol" class="detalle"></p>
+      <button id="tres-calcular" class="boton">Horas de sol por zona ese día</button>
+      <div id="tres-resultado" class="tres-resultado" aria-live="polite"></div>
+      <div id="tres-notas" class="detalle"></div>
+    </div>
+  </div>
+</dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

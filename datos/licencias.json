@@ -1,0 +1,169 @@
+{
+ "version": 1,
+ "nota": "Una entrada por fuente. 'archivos' son los archivos servidos en datos/ que salen de esa fuente; la build falla si un archivo servido no aparece en ninguna entrada o si una entrada nombra un archivo que no existe. No es asesoría legal.",
+ "fuentes": [
+  {
+   "id": "censo",
+   "fuente": "Censo del arbolado urbano (SIGAU), Jardín Botánico José Celestino Mutis",
+   "enlace": "https://datosabiertos.bogota.gov.co/dataset/censo-arbolado-urbano",
+   "licencia": "CC BY 4.0",
+   "licencia_texto": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+   "atribucion": "Censo del arbolado urbano, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0",
+   "uso": "Árboles del censo, altura registrada y fecha del registro.",
+   "archivos": ["censo.json", "arboles.bin.gz", "horas_sol.json", "cifras.json"],
+   "fecha_consulta": "2026-11-06"
+  },
+  {
+   "id": "colecciones",
+   "fuente": "Colecciones vivas, Jardín Botánico José Celestino Mutis",
+   "enlace": "https://datosabiertos.bogota.gov.co/dataset/colecciones-vivas-bogota-d-c",
+   "licencia": "CC BY 4.0",
+   "licencia_texto": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+   "atribucion": "Colecciones vivas, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0",
+   "uso": "Accesiones, zonas y categorías de amenaza. Las amenazadas van solo agregadas por zona.",
+   "archivos": ["accesiones.json", "escena.json", "horas_sol.json", "cifras.json"],
+   "fecha_consulta": "2026-11-06"
+  },
+  {
+   "id": "lotes",
+   "fuente": "Lotes, Catastro Bogotá (UAECD)",
+   "enlace": "https://datosabiertos.bogota.gov.co/dataset/lote",
+   "licencia": "CC BY 4.0",
+   "licencia_texto": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+   "atribucion": "Lotes, Catastro Bogotá (UAECD), CC BY 4.0",
+   "uso": "Borde oficial: lote 005506001044.",
+   "archivos": ["escena.json", "cifras.json"],
+   "fecha_consulta": "2026-11-06"
+  },
+  {
+   "id": "construcciones",
+   "fuente": "Construcciones, Catastro Bogotá (UAECD)",
+   "enlace": "https://datosabiertos.bogota.gov.co/dataset/construccion",
+   "licencia": "CC BY 4.0",
+   "licencia_texto": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+   "atribucion": "Construcciones, Catastro Bogotá (UAECD), CC BY 4.0",
+   "uso": "Huellas y pisos de los edificios, sombra en 3D y huella del Tropicario.",
+   "archivos": ["huellas.bin.gz", "escena.json", "horas_sol.json", "cifras.json"],
+   "fecha_consulta": "2026-11-06"
+  },
+  {
+   "id": "idrd",
+   "fuente": "Sistema Distrital de Parques, IDRD",
+   "enlace": "https://datosabiertos.bogota.gov.co/dataset/sistema-distrital-de-parques-y-escenarios-publicos-deportivos",
+   "licencia": "CC BY 4.0",
+   "licencia_texto": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+   "atribucion": "Parques de Bogotá, IDRD, Datos Abiertos Bogotá, CC BY 4.0",
+   "uso": "Borde alterno (parque 10-291) y los 19 sectores del Simón Bolívar.",
+   "archivos": ["escena.json", "cifras.json"],
+   "fecha_consulta": "2026-11-06"
+  },
+  {
+   "id": "mapa-referencia",
+   "fuente": "Mapa de Referencia IDECA, Catastro Bogotá",
+   "enlace": "https://datosabiertos.bogota.gov.co/dataset/mapa-de-referencia",
+   "licencia": "CC BY 4.0",
+   "licencia_texto": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+   "atribucion": "Mapa de Referencia IDECA (calzadas), Catastro Bogotá, CC BY 4.0",
+   "uso": "Calzadas alrededor del jardín, como contexto.",
+   "archivos": ["calzadas.json"],
+   "fecha_consulta": "2026-11-06"
+  },
+  {
+   "id": "dtm-2025",
+   "fuente": "Modelo Digital de Terreno 2025, IDECA",
+   "enlace": "https://serviciosgis.catastrobogota.gov.co/image/rest/services/Imagenes/modelodigitalterreno2025funcion/ImageServer",
+   "licencia": "CC BY 4.0",
+   "licencia_texto": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+   "atribucion": "Modelo Digital de Terreno 2025, IDECA, CC BY 4.0",
+   "uso": "Relieve del terreno en 3D, a 4 m, y altura del suelo bajo árboles, zonas, edificios y calzadas.",
+   "archivos": ["terreno.glb.gz", "arboles.bin.gz", "huellas.bin.gz", "escena.json", "calzadas.json", "horas_sol.json"],
+   "fecha_consulta": "2026-11-06"
+  },
+  {
+   "id": "metar-iem",
+   "fuente": "METAR SKBO vía Iowa Environmental Mesonet, Iowa State University",
+   "enlace": "https://mesonet.agron.iastate.edu/",
+   "licencia": "Dominio público, con crédito pedido",
+   "licencia_texto": "https://mesonet.agron.iastate.edu/disclaimer.php",
+   "atribucion": "METAR SKBO (El Dorado) vía Iowa Environmental Mesonet, Iowa State University",
+   "uso": "Último parte de El Dorado, consultado en vivo; la copia guardada sirve si no hay conexión.",
+   "archivos": ["clima.json", "cifras.json"],
+   "en_vivo": "https://mesonet.agron.iastate.edu/json/current.py?station=SKBO&network=CO__ASOS",
+   "fecha_consulta": "2026-11-06"
+  },
+  {
+   "id": "chirps",
+   "fuente": "CHIRPS v3, Climate Hazards Center, UC Santa Barbara",
+   "enlace": "https://www.chc.ucsb.edu/data/chirps3",
+   "licencia": "CC BY 4.0",
+   "licencia_texto": "https://creativecommons.org/licenses/by/4.0/legalcode.es",
+   "atribucion": "CHIRPS v3, Climate Hazards Center, UC Santa Barbara, CC BY 4.0",
+   "uso": "Lluvia mensual estimada. DOI 10.15780/G2JQ0P.",
+   "archivos": ["clima.json"],
+   "fecha_consulta": "2026-11-06"
+  },
+  {
+   "id": "nasa-power",
+   "fuente": "NASA POWER, NASA Langley Research Center",
+   "enlace": "https://power.larc.nasa.gov/",
+   "licencia": "Datos abiertos de la NASA, crédito exigido",
+   "licencia_texto": "https://power.larc.nasa.gov/docs/referencing/",
+   "atribucion": "Datos obtenidos del proyecto POWER del NASA Langley Research Center, financiado por el programa NASA Earth Science/Applied Science",
+   "uso": "Radiación y nubosidad modeladas.",
+   "archivos": ["clima.json", "cifras.json"],
+   "fecha_consulta": "2026-11-06"
+  },
+  {
+   "id": "nasa-gibs",
+   "fuente": "NASA GIBS (MODIS Terra)",
+   "enlace": "https://earthdata.nasa.gov/gibs",
+   "licencia": "Abierto, con frase de reconocimiento",
+   "licencia_texto": "https://nasa-gibs.github.io/gibs-api-docs/",
+   "atribucion": "Imágenes de NASA Global Imagery Browse Services (GIBS), parte de ESDIS",
+   "uso": "Imagen de nubes del día de la construcción.",
+   "archivos": ["gibs.jpg", "clima.json"],
+   "fecha_consulta": "2026-11-06"
+  },
+  {
+   "id": "inaturalist",
+   "fuente": "iNaturalist",
+   "enlace": "https://www.inaturalist.org/observations?place_id=170214",
+   "licencia": "Solo conteos; no se copia ninguna observación",
+   "licencia_texto": "https://www.inaturalist.org/pages/terms",
+   "atribucion": "iNaturalist",
+   "uso": "Cuántas observaciones tienen licencia apta.",
+   "archivos": ["cifras.json"],
+   "fecha_consulta": "2026-11-06"
+  },
+  {
+   "id": "noaa-sol",
+   "fuente": "Algoritmo solar de la NOAA",
+   "enlace": "https://gml.noaa.gov/grad/solcalc/calcdetails.html",
+   "licencia": "Dominio público",
+   "licencia_texto": "https://gml.noaa.gov/grad/solcalc/calcdetails.html",
+   "atribucion": "Algoritmo solar de la NOAA",
+   "uso": "Posición del sol para el 3D, las horas de sol y los días de sol cenital.",
+   "archivos": ["horas_sol.json", "cifras.json"],
+   "fecha_consulta": "2026-11-06"
+  },
+  {
+   "id": "equipo",
+   "fuente": "Elaboración del equipo del visor",
+   "enlace": "visor/build/arquetipos.csv",
+   "licencia": "Todos los derechos reservados, como el código del visor (ver LICENSE)",
+   "licencia_texto": "LICENSE",
+   "atribucion": "Tabla de tipos de árbol y formas por guion, visor 3D del jardín (borrador sin revisión humana)",
+   "uso": "Tipo de árbol por nombre común (arquetipos.csv, borrador sin revisión humana) y las formas geométricas de cada tipo.",
+   "archivos": ["arquetipos-tabla.json", "arquetipos.glb.gz", "arboles.bin.gz"],
+   "fecha_consulta": "2026-11-06"
+  }
+ ],
+ "no_usadas": [
+  { "fuente": "ERA5 y Open-Meteo", "motivo": "Fuera de esta demo por decisión de alcance y de licencia de uso." },
+  { "fuente": "Conjuntos del Jardín en GBIF con licencia no comercial", "motivo": "Esta demo deja fuera todo dato con licencia no comercial." },
+  { "fuente": "Observaciones de iNaturalist sin licencia", "motivo": "Se cuentan y se enlazan, no se copian." },
+  { "fuente": "OpenStreetMap", "motivo": "Ninguna geometría de OSM entra en los cálculos ni en el mapa." },
+  { "fuente": "Ortoimagen urbana 2025 de IDECA (CC BY 4.0)", "motivo": "No entra en esta versión: el 3D va sin fondo de imagen. Queda para calibrar las copas más adelante." },
+  { "fuente": "Modelo Digital de Superficie de IDECA", "motivo": "Fuera de esta versión. El relieve sale solo del modelo de terreno, sin árboles ni techos." }
+ ]
+}

@@ -1,0 +1,158 @@
+{
+ "generado": "2026-11-06",
+ "archivos": {
+  "accesiones.json": {
+   "fuente": [
+    "Colecciones vivas, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0"
+   ],
+   "guion": "visor3d/build/copia de visor/datos (columnas.py)",
+   "version": "1.0.0",
+   "sha256": "76241722fe9ce16e450145771f15a11a943ba77cf7d747c5a9d93c01021aada6",
+   "bytes": 792537,
+   "bytes_gzip": 152864
+  },
+  "arboles.bin.gz": {
+   "fuente": [
+    "Censo del arbolado urbano, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0",
+    "Modelo Digital de Terreno 2025, IDECA, CC BY 4.0",
+    "arquetipos.csv (botánico del equipo, borrador sin revisión humana)"
+   ],
+   "guion": "visor3d/build/columnas.py",
+   "version": "1.0.0+4df59f87102e",
+   "sha256": "76f9d2bfefa6a9f825dd449b42973d4d2c3699b094e7f318153a3975f27a9da7",
+   "bytes": 44623,
+   "bytes_gzip": 44623
+  },
+  "arquetipos-tabla.json": {
+   "fuente": [
+    "arquetipos.csv (botánico del equipo)"
+   ],
+   "guion": "visor3d/build/columnas.py",
+   "version": "1.0.0+4df59f87102e",
+   "sha256": "879da12bd654938d7360099908de8f5974c8683d8a94353b1f1c5ed3efb0ba18",
+   "bytes": 11575,
+   "bytes_gzip": 3962
+  },
+  "arquetipos.glb.gz": {
+   "fuente": [
+    "formas geométricas generadas por guion"
+   ],
+   "guion": "visor3d/build/arquetipos.mjs",
+   "version": "1.0.0+50ce460f0255",
+   "sha256": "f54aadbfc6e4df3937002ebac9d697f2a239840f371c1822e685d23a11283e72",
+   "bytes": 5457,
+   "bytes_gzip": 5457
+  },
+  "calzadas.json": {
+   "fuente": [
+    "calzadas de visor/datos/base.json (ver calzadas_fuente)",
+    "Modelo Digital de Terreno 2025, IDECA, CC BY 4.0"
+   ],
+   "guion": "visor3d/build/columnas.py",
+   "version": "1.0.0+4df59f87102e",
+   "sha256": "99b5f07d698e349e6a800cb1635f73168e2b736003db5203092e7a4224f001e6",
+   "bytes": 45489,
+   "bytes_gzip": 13561
+  },
+  "censo.json": {
+   "fuente": [
+    "Censo del arbolado urbano, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0"
+   ],
+   "guion": "visor3d/build/copia de visor/datos (columnas.py)",
+   "version": "1.0.0",
+   "sha256": "7f4fd714b7261de19d680ad53e42826dec060acb54a68d6020745226e8bc179f",
+   "bytes": 400581,
+   "bytes_gzip": 79201
+  },
+  "cifras.json": {
+   "fuente": [
+    "visor/datos/cifras.json del v0"
+   ],
+   "guion": "visor3d/build/copia de visor/datos (columnas.py)",
+   "version": "1.0.0",
+   "sha256": "07c14b20861e927ee7ebb891d9a72c23aea42d12ce86d6af31305807fe6747cf",
+   "bytes": 9462,
+   "bytes_gzip": 1961
+  },
+  "clima.json": {
+   "fuente": [
+    "visor/datos/clima.json del v0"
+   ],
+   "guion": "visor3d/build/copia de visor/datos (columnas.py)",
+   "version": "1.0.0",
+   "sha256": "ac3b2007ea654665f4eff7059da6ffc10fdd3d71a42bb769a373090d2c406718",
+   "bytes": 1503,
+   "bytes_gzip": 933
+  },
+  "escena.json": {
+   "fuente": [
+    "Construcciones y Lotes, Catastro Bogotá (UAECD), CC BY 4.0",
+    "Parques de Bogotá, IDRD, Datos Abiertos Bogotá, CC BY 4.0",
+    "Colecciones vivas, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 (zonas agregadas, sin puntos)",
+    "Modelo Digital de Terreno 2025, IDECA, CC BY 4.0",
+    "resumen de visor/datos/base.json"
+   ],
+   "guion": "visor3d/build/columnas.py",
+   "version": "1.0.0+4df59f87102e",
+   "sha256": "24ed08555a2dd8d16e05ae6de79096ef46fb017a6b907bc88885245b7d906667",
+   "bytes": 43556,
+   "bytes_gzip": 14807
+  },
+  "gibs.jpg": {
+   "fuente": [
+    "NASA GIBS, del v0"
+   ],
+   "guion": "visor3d/build/copia de visor/datos (columnas.py)",
+   "version": "1.0.0",
+   "sha256": "8167ed07254114c9e90225f2e7d5379078e420c2624678ca75c87369cbd174e9",
+   "bytes": 35359,
+   "bytes_gzip": 35359
+  },
+  "horas_sol.json": {
+   "fuente": [
+    "Algoritmo solar de la NOAA",
+    "Construcciones y Lotes, Catastro Bogotá (UAECD), CC BY 4.0",
+    "Censo del arbolado urbano, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0",
+    "Colecciones vivas, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 (puntos de muestra, no servidos)",
+    "Modelo Digital de Terreno 2025, IDECA, CC BY 4.0"
+   ],
+   "guion": "visor3d/build/horas_sol.py",
+   "version": "1.0.0+342bef3c15ab",
+   "sha256": "18b9ec6d5fbc583f694e2ee4bb2e7a5ecad26a909780a7698a502ad77c7e83c2",
+   "bytes": 3172,
+   "bytes_gzip": 1230
+  },
+  "huellas.bin.gz": {
+   "fuente": [
+    "Construcciones y Lotes, Catastro Bogotá (UAECD), CC BY 4.0",
+    "Modelo Digital de Terreno 2025, IDECA, CC BY 4.0",
+    "Tropicario: base.json del v0"
+   ],
+   "guion": "visor3d/build/columnas.py",
+   "version": "1.0.0+4df59f87102e",
+   "sha256": "0dfef08923c0c5b7e3a3753e25e3d82ddfd0b53106a55f69625acbfe7e51b573",
+   "bytes": 41441,
+   "bytes_gzip": 41441
+  },
+  "licencias.json": {
+   "fuente": [
+    "visor3d/licencias.json (fuentes, licencias y atribuciones)"
+   ],
+   "guion": "visor3d/build/licencias.mjs",
+   "version": "1.0.0+1ef44df9f426",
+   "sha256": "0254267f84746e7120c139899d90d1546278669f7d173b50d98bba1508d278dc",
+   "bytes": 9056,
+   "bytes_gzip": 2648
+  },
+  "terreno.glb.gz": {
+   "fuente": [
+    "Modelo Digital de Terreno 2025, IDECA, CC BY 4.0"
+   ],
+   "guion": "visor3d/build/terreno.mjs",
+   "version": "1.0.0+5ee60c523021",
+   "sha256": "281e475bffd92a435f4541d68d4b3724073b71a079b439f65052c7c34e928af8",
+   "bytes": 32228,
+   "bytes_gzip": 32228
+  }
+ }
+}

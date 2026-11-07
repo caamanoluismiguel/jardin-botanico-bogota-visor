@@ -1,0 +1,21 @@
+Copyright (c) 2026 Luis Miguel Caamaño y Raúl Alejandro González
+Todos los derechos reservados.
+
+El código y el diseño de este repositorio (HTML, CSS, JavaScript, guiones de Python,
+textos de la interfaz y la forma de presentar los datos) son obra de Luis Miguel Caamaño y Raúl Alejandro González y están
+protegidos por derechos de autor.
+
+Puedes ver este repositorio y correr el visor en tu computador para conocerlo.
+Cualquier otro uso, como copiar, modificar, redistribuir, publicar en otro sitio o
+usar con fines comerciales, necesita autorización escrita de Luis Miguel Caamaño y Raúl Alejandro González.
+
+Datos de terceros: los datos que sirve el visor y los que bajan los guiones vienen de
+fuentes abiertas de terceros. No son obra de Luis Miguel Caamaño y Raúl Alejandro González y no quedan cubiertos por esta
+reserva de derechos: cada uno conserva su propia licencia y su atribución, listadas en
+DATOS.md.
+
+Las librerías que el visor carga desde jsDelivr (MapLibre GL JS y three.js) tampoco
+forman parte de este repositorio y conservan sus propias licencias.
+
+Esta es una demo independiente. No es un sitio del Jardín Botánico José Celestino Mutis
+ni está avalada por él.
