@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Árboles altos, escenarios</title>
+  <script type="module" crossorigin src="../assets/proyecciones-BE5GtHep.js"></script>
+  <link rel="stylesheet" crossorigin href="../assets/proyecciones-BL0IMtPk.css">
+</head>
+<body class="pagina-proy">
+<a class="saltar" href="#controles">Saltar a los controles</a>
+
+<header class="cab-proy">
+  <a class="volver" href="../index.html">Volver al visor</a>
+  <p class="etiqueta-fija">Simulación de escenarios. No dice qué árbol cae ni cuándo.</p>
+</header>
+
+<main class="proy" id="contenido">
+  <section class="lectura" aria-labelledby="pregunta">
+    <h1 id="pregunta">¿Cuántos árboles de 15 m o más tendría el Jardín si siembra <span id="q-d1">100</span> al año <span id="q-d2">y logra perder menos árboles grandes</span>?</h1>
+    <p class="explica">Nadie sabe cuántos árboles se perderán al año ni qué tan rápido crecerán. Probamos 1.000 futuros posibles y contamos en cuántos pasa cada cosa.</p>
+  </section>
+
+  <div class="tablero">
+    <div class="columna-grafico">
+      <figure class="abanico" id="figura" aria-labelledby="titulo-abanico">
+        <figcaption id="titulo-abanico" class="titulo-abanico">Árboles de 15 m o más <span class="marca inferido" title="Sale del modelo de escenarios, con los supuestos de la nota de método">inferido</span></figcaption>
+        <div class="lienzo-abanico" id="lienzo" role="img" aria-labelledby="titulo-abanico" aria-describedby="resumen-abanico"></div>
+        <p class="linea-robustez" id="linea-robustez" aria-hidden="true"></p>
+        <p class="sr" id="resumen-abanico" aria-live="polite"></p>
+      </figure>
+
+      <ul class="leyenda-abanico" id="leyenda" aria-label="Cómo leer el abanico">
+        <li><span class="mu banda-ext" aria-hidden="true"></span>8 de cada 10 futuros probados</li>
+        <li><span class="mu banda-med" aria-hidden="true"></span>la mitad del medio</li>
+        <li><span class="mu mediana" aria-hidden="true"></span>línea del medio: la mitad de los futuros queda arriba</li>
+        <li class="ley-meta"><span class="mu meta" aria-hidden="true"></span>meta de ejemplo: 1.168, lo que hay hoy <span class="marca medido">medido</span></li>
+        <li id="ley-ref"><span class="mu ref" aria-hidden="true"></span>sin sembrar ni proteger (su línea del medio)</li>
+        <li id="ley-fantasma" hidden><span class="mu fantasma" aria-hidden="true"></span>antes de tu último cambio</li>
+      </ul>
+
+      <details class="plegable clave-marcas" id="clave-marcas">
+        <summary>Qué quiere decir cada marca</summary>
+        <ul class="nota">
+          <li><span class="marca medido">medido</span> lo contamos en el censo del Jardín.</li>
+          <li><span class="marca de-fuente">de fuente</span> viene de un estudio publicado.</li>
+          <li><span class="marca inferido">inferido</span> sale de la simulación.</li>
+          <li><span class="marca supuesto">supuesto</span> lo pusimos nosotros porque falta el dato.</li>
+          <li><span class="marca por-verificar">por verificar</span> la fuente existe y falta comprobarla.</li>
+        </ul>
+      </details>
+
+      <section class="notas angosta" id="nota-angosta" aria-label="Qué angosta el abanico">
+        <p>Buena parte del ancho a 20 años sale de no saber qué especie son <span id="n-nn">5.155</span> árboles del lote sin nombre (NN) o marcados «Otro» <span class="marca medido">medido</span>. Un inventario de especies lo angosta.</p>
+        <p>También lo angosta remedir la altura de una muestra de los <span id="n-10-15">934</span> árboles de 10 a 15 m <span class="marca medido">medido</span>, porque hoy no se sabe qué tan rápido crecen.</p>
+      </section>
+
+      <section class="robustez" aria-labelledby="titulo-robustez">
+        <h2 id="titulo-robustez">¿Qué tan seguido tiene 1.168 o más? <span class="marca inferido">inferido</span></h2>
+        <ol class="filas-robustez" id="robustez"></ol>
+        <p class="nota">Cuenta solo ese año, aunque antes haya bajado. Depende de los rangos que elegimos para lo que no se sabe, por eso no es la probabilidad de que pase.</p>
+      </section>
+    </div>
+
+    <div class="columna-controles" id="controles">
+      <section class="grupo palancas" aria-labelledby="titulo-palancas">
+        <h2 id="titulo-palancas">Lo que decide el Jardín</h2>
+        <fieldset class="segmentos verde" data-clave="d1" id="perilla-d1">
+          <legend>Árboles de porte alto que pide sembrar al año en el lote</legend>
+          <div class="opciones cinco">
+            <label><input type="radio" name="d1" value="0"><span>0</span></label>
+            <label><input type="radio" name="d1" value="50"><span>50</span></label>
+            <label><input type="radio" name="d1" value="100"><span>100</span></label>
+            <label><input type="radio" name="d1" value="200"><span>200</span></label>
+            <label><input type="radio" name="d1" value="300"><span>300</span></label>
+          </div>
+          <p class="nota" id="nota-d1"></p>
+        </fieldset>
+        <fieldset class="segmentos verde" data-clave="d2" id="perilla-d2">
+          <legend>Cuidar a los árboles grandes</legend>
+          <p class="nota nota-legend">De los grandes que se pierden, algunos se podrían salvar. ¿Cuántos de esos busca salvar el Jardín?</p>
+          <div class="opciones tres">
+            <label><input type="radio" name="d2" value="0"><span>Ninguno</span></label>
+            <label><input type="radio" name="d2" value="0.5"><span>La mitad</span></label>
+            <label><input type="radio" name="d2" value="1"><span>Todos</span></label>
+          </div>
+          <p class="lectura-d2" id="lectura-d2"></p>
+        </fieldset>
+      </section>
+
+      <section class="grupo inciertas" aria-labelledby="titulo-inciertas">
+        <h2 id="titulo-inciertas">Lo que nadie controla</h2>
+        <p class="nota">Mientras no se mida, lo honesto es «Todo el rango». Si eliges otra opción, das por hecho algo que hoy no se sabe.</p>
+        <fieldset class="segmentos gris" data-clave="mort">
+          <legend>Árboles que mueren o se talan al año <span class="marca de-fuente" title="Rangos de Hilbert 2019">de fuente</span></legend>
+          <div class="opciones cuatro">
+            <label><input type="radio" name="mort" value="todo"><span>Todo el rango<small>1,6 a 3,3 %</small></span></label>
+            <label><input type="radio" name="mort" value="baja"><span>Baja<small>1,6 %</small></span></label>
+            <label><input type="radio" name="mort" value="media"><span>Media<small>2,3 a 2,6 %</small></span></label>
+            <label><input type="radio" name="mort" value="alta"><span>Alta<small>3,0 a 3,3 %</small></span></label>
+          </div>
+          <p class="nota" id="nota-mort"></p>
+        </fieldset>
+        <fieldset class="segmentos gris" data-clave="crec">
+          <legend>Qué tan rápido crecen <span class="marca supuesto">supuesto</span></legend>
+          <div class="opciones cuatro">
+            <label><input type="radio" name="crec" value="todo"><span>Todo el rango</span></label>
+            <label><input type="radio" name="crec" value="lento"><span>Lento</span></label>
+            <label><input type="radio" name="crec" value="medio"><span>Medio</span></label>
+            <label><input type="radio" name="crec" value="rapido"><span>Rápido</span></label>
+          </div>
+          <p class="nota">Pesa tanto como cuántos árboles se pierden al año, y en el Jardín no se ha medido.</p>
+        </fieldset>
+      </section>
+    </div>
+  </div>
+
+  <section class="notas" aria-label="Nota sobre el relevo">
+    <p>Si se siembran especies de crecimiento medio que llegan a 20 m, un árbol sembrado hoy pasa de 15 m en unos 23 a 45 años. <span class="marca supuesto">supuesto</span></p>
+  </section>
+
+  <section class="quiebre" aria-labelledby="titulo-quiebre">
+    <h2 id="titulo-quiebre">¿Desde cuántos árboles que mueren o se talan al año ya no alcanza?</h2>
+    <p class="nota">Con todo el rango de crecimiento.</p>
+    <p class="aviso-crec" id="aviso-crec" hidden></p>
+    <p id="texto-quiebre"></p>
+    <p>A 20 años estos cortes son los mismos para cualquier siembra.</p>
+    <p id="quiebre-40"></p>
+    <p class="nota">Estas cifras dependen sobre todo del techo de cada especie, que es un supuesto.</p>
+    <details class="plegable">
+      <summary>Ver la ruta a 20 años según lo que se mida</summary>
+      <ol class="ruta" id="ruta"></ol>
+      <p class="nota">Tasa del Jardín: sin medir.</p>
+      <p class="nota">Para saber en qué parte de la ruta está el Jardín hay que medir cuántos árboles se pierden al año. Con copias fechadas del censo abierto eso pide varios años; con el registro de talas y muertes del propio Jardín, menos.</p>
+    </details>
+  </section>
+
+  <section class="tabla-datos">
+    <details class="plegable" id="det-tabla">
+      <summary>Ver las cifras del abanico en una tabla</summary>
+      <div class="tabla-scroll"><table id="tabla"></table></div>
+    </details>
+  </section>
+
+  <section class="ver-mas">
+    <details class="plegable" id="det-mas">
+      <summary>Ver más: carbono y lluvia</summary>
+      <div id="mas" class="mas" aria-live="polite"><p class="nota">Cargando…</p></div>
+    </details>
+  </section>
+
+  <section class="metodo" aria-labelledby="titulo-metodo">
+    <h2 id="titulo-metodo">Nota de método</h2>
+    <ul>
+      <li>Cada combinación de perillas se probó en 1.000 futuros. Las bandas muestran entre qué cifras queda la mayoría de ellos, y la meta de ejemplo es lo que hay hoy: 1.168 árboles de 15 m o más <span class="marca medido">medido</span>. La meta la elige el Jardín.</li>
+      <li>La página abre en la posición del medio de cada palanca. No es una recomendación.</li>
+      <li>Las cifras de cada 10 van redondeadas: con estos supuestos, una cifra más fina no se sostiene.</li>
+      <li>Buscar salvar la mitad o todos los grandes que se pueden salvar todavía no es un programa del Jardín. Qué se hace en cada caso se define con el área de arbolado.</li>
+      <li>La cifra a 40 años depende de suponer que los árboles sin nombre de menos de 5 m no llegan a 15 m. <span class="marca supuesto">supuesto</span></li>
+      <li>Quedan dentro del abanico, sin perilla: qué parte de los árboles sin nombre puede pasar de 15 m, cuántos de los recién sembrados mueren, qué tan bien funciona lo que se haga para cuidar a los grandes, cuántos de los grandes que se pierden se podían salvar, cuántos sitios libres hay para sembrar y los años malos.</li>
+      <li>Para ver un caso, la dirección de la página guarda las perillas, por ejemplo <code>?d1=100&amp;d2=0.5</code>.</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="pie-proy">
+  <p>Corrida del 8 nov 2026, v2. Semilla 20261107. Las cifras de entrada son provisionales.</p>
+</footer>
+
+</body>
+</html>
