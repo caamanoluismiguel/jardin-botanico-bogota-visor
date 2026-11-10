@@ -61,15 +61,15 @@ export async function abrirZona(z) {
   const max = Math.max(...orden.map((o) => cats[o]));
   const COL = { CR: "#a33f22", EN: "#cc6a3c", VU: "#e39a62", NT: "#c9b26b", LC: "#7aa36b", DD: "#9a9a9a", EW: "#3b2f2f", NE: "var(--ne)" };
   let html = `<ul class="cifras">
-    <li><span class="que">Accesiones</span><span class="valor">${num(p.n)} ${marca("medido")}</span></li>
-    <li><span class="que">Nombres de planta</span><span class="valor">${num(p.esp)} ${marca("medido")}</span></li>
-    <li><span class="que">Familias</span><span class="valor">${num(p.fam)} ${marca("medido")}</span></li>
-    <li><span class="que">Amenazadas (CR, EN, VU)</span><span class="valor">${num(p.amen)} ${marca("medido")}</span></li>
-    <li><span class="que">Sin evaluar (NE)</span><span class="valor">${num(p.ne)} ${marca("medido")}</span></li>
-    <li><span class="que">Dentro del lote catastral</span><span class="valor">${num(p.nlote)} ${marca("inferido")}</span></li>
-    <li><span class="que">Fecha del dato</span><span class="valor">${fecha(p.fmax)} ${marca("de fuente")}</span></li></ul>
+    <li><span class="que">Accesiones</span><span class="valor">${num(p.n)} ${marca("zona_n")}</span></li>
+    <li><span class="que">Nombres de planta</span><span class="valor">${num(p.esp)} ${marca("zona_nombres")}</span></li>
+    <li><span class="que">Familias</span><span class="valor">${num(p.fam)} ${marca("zona_familias")}</span></li>
+    <li><span class="que">Amenazadas (CR, EN, VU)</span><span class="valor">${num(p.amen)} ${marca("zona_amen")}</span></li>
+    <li><span class="que">Sin evaluar (NE)</span><span class="valor">${num(p.ne)} ${marca("zona_ne")}</span></li>
+    <li><span class="que">Dentro del lote catastral</span><span class="valor">${num(p.nlote)} ${marca("zona_lote")}</span></li>
+    <li><span class="que">Fecha del dato</span><span class="valor">${fecha(p.fmax)} ${marca("col_fecha")}</span></li></ul>
     <div class="barras" aria-label="Accesiones por categoría">${orden.map((o) => `<div class="b"><span>${o}</span><span class="pista"><span style="width:${(100 * cats[o] / max).toFixed(1)}%;background:${COL[o]}"></span></span><span class="n">${num(cats[o])}</span></div>`).join("")}</div>
-    <p class="detalle">${p.r != null ? `En el mapa, el círculo es la ubicación aproximada de la zona; el dato no trae su borde ${marca("inferido")}. Va en la mediana de las ${num(p.nvis)} plantas que se pueden mostrar y mide ${num(p.r, 0)} m de radio, según el número de accesiones. No usa ninguna planta amenazada.` : "Esta zona tiene menos de 3 plantas que se pueden mostrar, así que no lleva círculo en el mapa."} ${p.puntos_unicos < p.n ? `Hay ${num(p.n - p.puntos_unicos)} accesiones que comparten coordenada con otra.` : ""}</p>`;
+    <p class="detalle">${p.r != null ? `En el mapa, el punto es la ubicación aproximada de la zona; el dato no trae su borde ${marca("zona_punto")}. Va en la mediana de las ${num(p.nvis)} plantas que se pueden mostrar y no usa ninguna planta amenazada.` : "Esta zona tiene menos de 3 plantas que se pueden mostrar, así que no lleva punto en el mapa."} ${p.puntos_unicos < p.n ? `Hay ${num(p.n - p.puntos_unicos)} accesiones que comparten coordenada con otra.` : ""}</p>`;
   if (p.trop) html += rayado("Interior del Tropicario", "No hay datos abiertos de temperatura, humedad ni luz dentro del Tropicario. Lo que se sabe es la huella del edificio en Catastro.");
   html += `${p.r != null ? `<button class="boton secundario" id="zona-ver">Ver la zona en el mapa</button>` : ""}
     <h3>Accesiones de la zona</h3><div id="zona-lista" class="cargando">Bajando la lista…</div>
@@ -113,15 +113,15 @@ export async function abrirAccesion(id) {
   let ubic;
   if (oculta) ubic = `No se muestra. ${c === "EW" ? "Es una planta extinta en estado silvestre" : "Es una planta amenazada"}: el visor solo la cuenta en su zona.`;
   else if (vecina) ubic = "No se muestra su punto. Algunas plantas no se dibujan para proteger especies sensibles.";
-  else if (ll) ubic = `${num(ll[1], 6)} N, ${num(-ll[0], 6)} O ${marca("de fuente")} <button class="enlace-boton" id="acc-ver">Ver en el mapa</button>`;
+  else if (ll) ubic = `${num(ll[1], 6)} N, ${num(-ll[0], 6)} O ${marca("acc_coord")} <button class="enlace-boton" id="acc-ver">Ver en el mapa</button>`;
   else ubic = "No se muestra su punto. Algunas plantas no se dibujan para proteger especies sensibles; otras no traen coordenada en el dato.";
   const html = `<dl class="datos">
-    ${fila("Familia", esc(d.familias[d.cols.fa[i]] || "sin dato") + " " + marca("de fuente"))}
+    ${fila("Familia", esc(d.familias[d.cols.fa[i]] || "sin dato") + " " + marca("acc_familia"))}
     ${fila("Zona", `<button class="enlace-boton" id="acc-zona">${esc(d.zonas[z] || z)} (${esc(z)})</button>`)}
-    ${fila("Categoría", `${esc(c)} · ${esc(d.categorias[c] || "sin categoría")} ${marca("de fuente")}`)}
-    ${fila("Fecha en el dato", `${fechaDias(d.cols.f[i])} ${marca("de fuente")}<br><small>Es la fecha de carga del conjunto, igual para todas las accesiones. No dice desde cuándo está la planta.</small>`)}
+    ${fila("Categoría", `${esc(c)} · ${esc(d.categorias[c] || "sin categoría")} ${marca("acc_categoria")}`)}
+    ${fila("Fecha en el dato", `${fechaDias(d.cols.f[i])} ${marca("col_fecha")}<br><small>Es la fecha de carga del conjunto, igual para todas las accesiones. No dice desde cuándo está la planta.</small>`)}
     ${fila("Ubicación", ubic)}
-    ${fila("Dentro de", dentroTexto(d.cols.b[i]) + " " + marca("inferido"))}
+    ${fila("Dentro de", dentroTexto(d.cols.b[i]) + " " + marca("dentro"))}
   </dl>
   ${filas.length > 1 ? `<p class="detalle">Este número aparece ${filas.length} veces en el dato abierto; se muestra el primero.</p>` : ""}
   <h3>Lo que falta por saber</h3>
@@ -141,7 +141,7 @@ export async function abrirArbol(cod) {
   try { d = await cargar("censo.json"); } catch (e) { return mostrar("Árbol", "No se pudo abrir", `<p>${esc(e.message)}</p>`); }
   if (!cidx) { cidx = new Map(); d.cols.c.forEach((c, i) => cidx.set(c, i)); }
   const i = cidx.get(String(cod));
-  if (i === undefined) return mostrar("Árbol del censo", "No encontrado", `<p>No hay un árbol con el código ${esc(cod)} en el recorte del censo alrededor del jardín. Algunos árboles no se dibujan para proteger especies sensibles.</p>`);
+  if (i === undefined) return mostrar("Árbol del censo", "No encontrado", `<p>No hay un árbol con el código ${esc(cod)} en el recorte del censo alrededor del jardín. Algunos árboles no se dibujan para proteger especies sensibles, y los robles, especie amenazada, solo se cuentan.</p>`);
   ponerParam("arbol", cod);
   window.__resaltarZona?.(null);
   const ll = d.cols.x[i] === null ? null : [d.origen[0] + d.cols.x[i] * d.escala, d.origen[1] + d.cols.y[i] * d.escala];
@@ -151,11 +151,11 @@ export async function abrirArbol(cod) {
   const titulo = k === 1 ? "Sin identificar (NN)" : k === 2 ? "«Otro»: especie fuera de la lista" : nombre;
   const h = d.cols.h[i];
   const html = `<dl class="datos">
-    ${fila("Nombre en el censo", esc(nombre) + " " + marca("de fuente"))}
-    ${fila("Identificación", (k === 0 ? "Identificado" : k === 1 ? "NN: no se identificó" : "Otro: no está en la lista de especies") + " " + marca("de fuente"))}
-    ${fila("Altura registrada", (h === null ? "sin dato" : `${num(h / 10, 1)} m`) + " " + marca("de fuente"))}
-    ${fila("Fecha del registro", fechaDias(d.cols.f[i]) + " " + marca("de fuente") + "<br><small>Es la última actualización de este árbol en el censo. No hay histórico abierto de cambios.</small>")}
-    ${fila("Dentro de", dentroTexto(d.cols.b[i]) + " " + marca("inferido"))}
+    ${fila("Nombre en el censo", esc(nombre) + " " + marca("arbol_nombre"))}
+    ${fila("Identificación", (k === 0 ? "Identificado" : k === 1 ? "NN: no se identificó" : "Otro: no está en la lista de especies") + " " + marca("arbol_ident"))}
+    ${fila("Altura registrada", (h === null ? "sin dato" : `${num(h / 10, 1)} m`) + " " + marca("altura_censo"))}
+    ${fila("Fecha del registro", fechaDias(d.cols.f[i]) + " " + marca("arbol_fecha") + "<br><small>Es la última actualización de este árbol en el censo. No hay histórico abierto de cambios.</small>")}
+    ${fila("Dentro de", dentroTexto(d.cols.b[i]) + " " + marca("dentro"))}
     ${ll ? "" : fila("Ubicación", "No se muestra. Algunos árboles no se dibujan para proteger especies sensibles.")}
   </dl>
   <h3>Lo que falta por saber</h3>
@@ -166,6 +166,11 @@ export async function abrirArbol(cod) {
 }
 
 // ---------- búsqueda ----------
+const ROBLE = /^(robl(e|es)?|quercus( h[a-z]*)?)$/;
+// Los robles van solo como conteo (regla SOLO_CONTEO de visor/build/regla_sensibles.py): el buscador lo dice.
+function notaRoble(sc) {
+  return `<li class="detalle">Los robles (Quercus humboldtii) son una especie amenazada: no se dibujan ni se buscan uno a uno, solo se cuentan${sc ? `. En el lote hay ${num(sc.lote)}, ${num(sc.lote_15m)} de ellos de 15 m o más` : ""}.</li>`;
+}
 export async function buscar(q) {
   const ul = document.getElementById("resultados");
   q = (q || "").trim();
@@ -175,13 +180,19 @@ export async function buscar(q) {
   try { I = await accesiones(); } catch (e) { ul.innerHTML = `<li>${esc(e.message)}</li>`; return; }
   const { d, porId, normal } = I;
   const res = [];
+  let nota = "";
   if (/^\d+$/.test(q)) {
     for (const [id, filas] of porId) { if (id.startsWith(q)) res.push(filas[0]); if (res.length >= 12) break; }
   } else {
     const n = q.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
     for (let i = 0; i < d.cols.id.length && res.length < 12; i++) if (normal[d.cols.e[i]].includes(n)) res.push(i);
+    if (ROBLE.test(n)) {
+      let sc = null;
+      try { sc = (await cargar("censo.json")).solo_conteo?.[0] || null; } catch { /* la nota sin cifras */ }
+      nota = notaRoble(sc);
+    }
   }
-  ul.innerHTML = res.length ? res.map((i) => `<li><button data-acc="${esc(d.cols.id[i])}"><em>${esc(d.especies[d.cols.e[i]])}</em><br><small>Accesión ${esc(d.cols.id[i])} · zona ${esc(d.zonas[d.cols.z[i]] || d.cols.z[i])}</small></button></li>`).join("")
-    : `<li class="detalle">Nada con «${esc(q)}» en la colección viva.</li>`;
+  ul.innerHTML = nota + (res.length || nota ? res.map((i) => `<li><button data-acc="${esc(d.cols.id[i])}"><em>${esc(d.especies[d.cols.e[i]])}</em><br><small>Accesión ${esc(d.cols.id[i])} · zona ${esc(d.zonas[d.cols.z[i]] || d.cols.z[i])}</small></button></li>`).join("")
+    : `<li class="detalle">Nada con «${esc(q)}» en la colección viva.</li>`);
   ul.querySelectorAll("[data-acc]").forEach((b) => b.addEventListener("click", () => abrirAccesion(b.dataset.acc)));
 }

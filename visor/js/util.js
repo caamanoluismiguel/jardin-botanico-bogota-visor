@@ -1,4 +1,4 @@
-// Utilidades compartidas: carga de datos, números y fechas en español, marcas de procedencia.
+// Utilidades compartidas: carga de datos, números y fechas en español; las marcas vienen de marcas.js.
 
 const cache = new Map();
 export function cargar(nombre) {
@@ -33,24 +33,8 @@ export function fechaDias(dias) {
 }
 export function mesCorto(i) { return MESES[i]; }
 
-export const MARCAS = {
-  "medido": "medido",
-  "de fuente": "de fuente",
-  "inferido": "inferido",
-  "supuesto": "supuesto",
-};
-export function marca(m) {
-  const clase = m.replace(" ", "-");
-  return `<span class="marca ${clase}" title="${titulo(m)}">${m}</span>`;
-}
-function titulo(m) {
-  return {
-    "medido": "Lo calculamos con la geometría o el dato abierto",
-    "de fuente": "Lo dice la fuente tal cual",
-    "inferido": "Se deduce de cruzar fuentes",
-    "supuesto": "Es una hipótesis o un modelo, no una medida",
-  }[m] || m;
-}
+// Las marcas salen de la tabla única (marcas.js, copia exacta de visor3d/src/marcas.js): se piden por el id de la cifra.
+export { marca, marcaTipo, activarMarcas } from "./marcas.js";
 
 export function esc(t) {
   return String(t ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));

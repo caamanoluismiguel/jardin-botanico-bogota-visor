@@ -1,5 +1,5 @@
 // Visor demo: mapa en planta, lentes, censo a pedido, fichas con URL propia.
-import { cargar, num, fecha, marca, esc } from "./util.js";
+import { cargar, num, fecha, marca, activarMarcas, esc } from "./util.js";
 import { abrirZona, abrirAccesion, abrirArbol, iniciarFichas, buscar } from "./fichas.js";
 
 const estado = { borde: "lote", verBorde: true, lente: "coleccion", censo: false, base: null, zonas: null };
@@ -11,7 +11,11 @@ const CORTES_A = [10, 30, 80, 150];
 const SIN_AMEN = "#ecebe6";
 const COLORES_D = ["#e8eef4", "#bfd1e3", "#8eaecd", "#5a86b2", "#2f5d8c"];
 const CORTES_D = [25, 75, 125, 250];
-const K_COLOR = ["#2d6a3e", "#d9822b", "#8b5e34"];
+// Certeza con los mismos nombres y colores del 3D (visor3d/src/colores.js): con especie y sin especie (NN y Otro juntos).
+const CON_ESPECIE = "#6f9a77", SIN_ESPECIE = "#5f6360", ZONA_NEUTRA = "#c9d1c2";
+// Las tres zonas de la pregunta del sol, con el mismo nombre corto del 3D (CORTO_DEMO).
+const ZONAS_DEMO = { O4: "Rosaleda", M3: "Herbal de la Salud", O1: "Plantas ornamentales" };
+const PREGUNTA_SOL = "Entre la Rosaleda, el Herbal de la Salud y Plantas ornamentales, ¿cuál recibe más sol directo en el año y cuál cambia más entre junio y diciembre?";
 
 function paso(prop, cortes, colores, cero) {
   const e = ["step", ["get", prop], colores[0]];
@@ -36,22 +40,16 @@ function cajaGeom(g) {
   return a;
 }
 
-// Zona como círculo de ubicación aproximada: centro y radio vienen de la build (solo plantas visibles).
+// Zona como punto de tamaño fijo en su ubicación aproximada: el centro viene de la build (solo plantas visibles).
+// El tamaño no codifica nada; la cifra va escrita junto al punto y el color repite la escala.
 const ROTULO_ZONA = "ubicación aproximada de la zona; el dato no trae su borde";
-function circulosZonas(zonas) {
+function puntosZonas(zonas) {
   const fs = [];
   for (const f of zonas.features) {
     const p = f.properties;
     if (!f.geometry || p.r == null) continue;
-    const [lon, lat] = f.geometry.coordinates;
-    const kx = 111320 * Math.cos(lat * Math.PI / 180), ky = 110574, anillo = [];
-    for (let i = 0; i <= 64; i++) {
-      const a = (i % 64) / 64 * 2 * Math.PI;
-      anillo.push([lon + p.r * Math.cos(a) / kx, lat + p.r * Math.sin(a) / ky]);
-    }
-    fs.push({ type: "Feature", geometry: { type: "Polygon", coordinates: [anillo] }, properties: { ...p, cats: JSON.stringify(p.cats), m: undefined } });
+    fs.push({ type: "Feature", geometry: f.geometry, properties: { ...p, cats: JSON.stringify(p.cats), m: undefined } });
   }
-  fs.sort((a, b) => b.properties.r - a.properties.r); // las pequeñas encima
   return { type: "FeatureCollection", features: fs };
 }
 
@@ -62,6 +60,7 @@ function encuadrarJardin(animar = true) {
 
 async function iniciar() {
   iniciarPestanas();
+  activarMarcas(document);
   try {
     const [base, zonas] = await Promise.all([cargar("base.json"), cargar("zonas.json")]);
     estado.base = base;
@@ -102,12 +101,6 @@ function iniciarMapa() {
     customAttribution: "Catastro Bogotá (UAECD), IDRD y Jardín Botánico José Celestino Mutis vía Datos Abiertos Bogotá, CC BY 4.0. Sin mapa base.",
   }), "bottom-right");
 
-  if (!base.ortoimagen.ok) {
-    const av = document.getElementById("aviso-mapa");
-    av.hidden = false;
-    av.textContent = `Sin foto aérea de fondo: el servicio de la ortoimagen 2025 de IDECA respondió con error el ${fecha(base.ortoimagen.probado)}. Solo se dibujan vectores.`;
-  }
-
   mapa.on("load", () => {
     mapa.addImage("rayas", rayasImagen());
     mapa.addSource("calzadas", { type: "geojson", data: base.calzadas });
@@ -119,10 +112,11 @@ function iniciarMapa() {
     mapa.addLayer({ id: "sectores-linea", type: "line", source: "sectores", layout: { visibility: "none" },
       paint: { "line-color": ["case", ["get", "jardin"], "#1c2620", "#ffffff"], "line-width": ["case", ["get", "jardin"], 3, 1] } });
 
-    mapa.addSource("zonas", { type: "geojson", data: circulosZonas(estado.zonas), generateId: true });
-    mapa.addLayer({ id: "zonas", type: "fill", source: "zonas", paint: { "fill-color": "#cccccc", "fill-opacity": 0.8 } });
-    mapa.addLayer({ id: "zonas-linea", type: "line", source: "zonas", paint: { "line-color": "#ffffff", "line-width": 1 } });
-    mapa.addLayer({ id: "zonas-sel", type: "line", source: "zonas", filter: ["==", ["get", "z"], ""], paint: { "line-color": "#0b57d0", "line-width": 3 } });
+    mapa.addSource("zonas", { type: "geojson", data: puntosZonas(estado.zonas) });
+    mapa.addLayer({ id: "zonas", type: "circle", source: "zonas", paint: {
+      "circle-radius": RADIO_PUNTO, "circle-color": "#cccccc", "circle-stroke-color": "#ffffff", "circle-stroke-width": 1.5 } });
+    mapa.addLayer({ id: "zonas-sel", type: "circle", source: "zonas", filter: ["==", ["get", "z"], ""], paint: {
+      "circle-radius": RADIO_SEL, "circle-color": "rgba(0,0,0,0)", "circle-stroke-color": "#0b57d0", "circle-stroke-width": 3 } });
 
     mapa.addSource("tropicario", { type: "geojson", data: { type: "Feature", geometry: base.tropicario.geom, properties: {} } });
     mapa.addLayer({ id: "tropicario", type: "fill", source: "tropicario", paint: { "fill-pattern": "rayas", "fill-opacity": 0.9 } });
@@ -148,14 +142,20 @@ function iniciarMapa() {
     aplicarLente();
 
     mapa.on("click", (e) => {
-      const capas = ["censo", "zonas"].filter((l) => mapa.getLayoutProperty(l, "visibility") !== "none");
-      const fs = mapa.queryRenderedFeatures(e.point, { layers: capas });
-      const arbol = fs.find((f) => f.layer.id === "censo");
-      if (arbol) return abrirArbol(arbol.properties.c);
-      const zs = fs.filter((f) => f.layer.id === "zonas");
-      if (zs.length) {
-        zs.sort((a, b) => a.properties.r - b.properties.r);
-        return abrirZona(zs[0].properties.z);
+      const visible = (l) => mapa.getLayoutProperty(l, "visibility") !== "none";
+      if (visible("censo")) {
+        const arbol = mapa.queryRenderedFeatures(e.point, { layers: ["censo"] })[0];
+        if (arbol) return abrirArbol(arbol.properties.c);
+      }
+      if (visible("zonas")) {
+        // el punto es chico: se toma el más cercano dentro de un margen de dedo
+        const m = 14, caja = [[e.point.x - m, e.point.y - m], [e.point.x + m, e.point.y + m]];
+        const zs = mapa.queryRenderedFeatures(caja, { layers: ["zonas"] });
+        if (zs.length) {
+          const d = (f) => { const p = mapa.project(f.geometry.coordinates); return (p.x - e.point.x) ** 2 + (p.y - e.point.y) ** 2; };
+          zs.sort((a, b) => d(a) - d(b));
+          return abrirZona(zs[0].properties.z);
+        }
       }
       if (estado.lente === "contexto") {
         const s = mapa.queryRenderedFeatures(e.point, { layers: ["sectores"] })[0];
@@ -166,8 +166,60 @@ function iniciarMapa() {
       mapa.on("mouseenter", l, () => { mapa.getCanvas().style.cursor = "pointer"; });
       mapa.on("mouseleave", l, () => { mapa.getCanvas().style.cursor = ""; });
     }
+    crearRotulos();
+    mapa.on("moveend", acomodarRotulos);
     abrirDesdeUrl();
   });
+}
+
+// ---------- rótulos de las zonas ----------
+// El estilo del mapa no trae fuentes tipográficas, así que la cifra y el nombre van en marcadores HTML. Se esconden
+// los que chocan con otro ya puesto; las tres zonas de la pregunta del sol van primero y siempre se ven.
+const RADIO_PUNTO = ["interpolate", ["linear"], ["zoom"], 14, 4.5, 17, 7, 19, 9];
+// El anillo de la zona elegida, 5 px más que el punto. MapLibre no deja sumar a una expresión de zoom: va como su propia rampa.
+const RADIO_SEL = ["interpolate", ["linear"], ["zoom"], 14, 9.5, 17, 12, 19, 14];
+const rotulos = [];
+function crearRotulos() {
+  for (const f of puntosZonas(estado.zonas).features) {
+    const p = f.properties, el = document.createElement("div");
+    el.className = "rotulo-zona" + (ZONAS_DEMO[p.z] ? " demo" : "");
+    el.setAttribute("aria-hidden", "true");
+    const mk = new maplibregl.Marker({ element: el, anchor: "left", offset: [9, 0] }).setLngLat(f.geometry.coordinates).addTo(mapa);
+    rotulos.push({ p, el, mk });
+  }
+  pintarRotulos();
+}
+function pintarRotulos() {
+  const L = estado.lente;
+  for (const r of rotulos) {
+    const nombre = ZONAS_DEMO[r.p.z] && L !== "contexto" ? ZONAS_DEMO[r.p.z] : "";
+    const cifra = L === "coleccion" ? num(r.p.n) : L === "conservacion" ? num(r.p.amen) : "";
+    r.el.innerHTML = nombre ? `<strong>${esc(nombre)}</strong>${cifra ? ` ${cifra}` : ""}` : cifra;
+    r.vacio = !nombre && !cifra;
+  }
+  acomodarRotulos();
+}
+function acomodarRotulos() {
+  if (!mapa || !rotulos.length) return;
+  const puestas = [];
+  const orden = [...rotulos].sort((a, b) => (!!ZONAS_DEMO[b.p.z] - !!ZONAS_DEMO[a.p.z]) || (b.p.n - a.p.n));
+  for (const r of orden) {
+    if (r.vacio) { r.el.hidden = true; continue; }
+    r.el.hidden = false;
+    const medir = () => { const c = r.el.getBoundingClientRect(); return [c.left - 2, c.top - 1, c.right + 2, c.bottom + 1]; };
+    const pisa = (caja) => puestas.some((o) => caja[0] < o[2] && caja[2] > o[0] && caja[1] < o[3] && caja[3] > o[1]);
+    let caja = medir();
+    if (ZONAS_DEMO[r.p.z]) {
+      // Las tres de la pregunta siempre se ven: si pisan otra ya puesta, suben o bajan hasta dos líneas.
+      const alto = caja[3] - caja[1];
+      for (const dy of [0, -alto, alto, -2 * alto, 2 * alto]) { r.mk.setOffset([9, dy]); caja = medir(); if (!pisa(caja)) break; }
+      puestas.push(caja);
+      continue;
+    }
+    const choca = pisa(caja);
+    r.el.hidden = choca;
+    if (!choca) puestas.push(caja);
+  }
 }
 
 function abrirDesdeUrl() {
@@ -191,7 +243,7 @@ function pintarBordeTexto() {
   const b = estado.base.bordes[estado.borde];
   const area = estado.borde === "lote" ? `${num(b.area_m2)} m²` : `${num(b.area_m2 / 1e4, 2)} ha`;
   document.getElementById("borde-detalle").innerHTML =
-    `${esc(b.nombre)}. Área ${area} ${marca("medido")}. ${b.oficial ? "Es el borde que usa el visor para contar." : "Alternativa: cuenta con el polígono del parque."} Fuente: <a href="${b.enlace}" target="_blank" rel="noopener">${esc(b.fuente)}</a>.`;
+    `${esc(b.nombre)}. Área ${area} ${marca(estado.borde === "lote" ? "area_lote" : "area_idrd")}. ${b.oficial ? "Es el borde que usa el visor para contar." : "Alternativa: cuenta con el polígono del parque."} Fuente: <a href="${b.enlace}" target="_blank" rel="noopener">${esc(b.fuente)}</a>.`;
   document.getElementById("sello-borde").textContent = estado.verBorde
     ? `Borde: ${b.nombre}. ${b.fuente}.`
     : "Borde oculto. Las cifras siguen contando con el " + (estado.borde === "lote" ? "lote catastral." : "parque IDRD.");
@@ -215,53 +267,55 @@ function pintarLente() {
   const nombreBorde = k === "lote" ? "del lote" : "del parque IDRD";
   const ley = document.getElementById("leyenda"), txt = document.getElementById("lente-texto");
   const L = estado.lente;
+  const dosListas = `<p class="detalle">Hay dos listas: el censo de árboles de la ciudad y la colección del Jardín. La colección dice qué planta es cada accesión; el censo dice dónde está cada árbol, pero a muchos les falta la especie.</p>`;
   if (L === "coleccion") {
-    ley.innerHTML = `<p class="detalle">Accesiones por zona. Cada círculo es la ${ROTULO_ZONA} ${marca("inferido")}. Va en la mediana de las plantas que se pueden mostrar y su área crece con el número de accesiones.</p>`
+    ley.innerHTML = `<p class="detalle">Accesiones de la colección por zona. Cada punto es la ${ROTULO_ZONA} ${marca("zona_punto")}. El número junto al punto es cuántas accesiones tiene, y el color sigue la misma escala.</p>`
       + leyendaEscala(COLORES_N, ["menos de 50", "1.000 o más"]) + filaRayas;
     txt.innerHTML = `<ul class="cifras">
-      <li><span class="que">Accesiones dentro ${nombreBorde}</span><span class="valor">${num(pb.n)} ${marca("inferido")}</span></li>
-      <li><span class="que">Accesiones en todo el dato</span><span class="valor">${num(c.n)} ${marca("de fuente")}</span></li>
-      <li><span class="que">Nombres de planta</span><span class="valor">${num(c.nombres)} ${marca("medido")}</span></li>
-      <li><span class="que">Familias</span><span class="valor">${num(c.familias)} ${marca("medido")}</span></li>
-      <li><span class="que">Zonas con plantas</span><span class="valor">${num(c.zonas)} ${marca("medido")}</span></li>
-      <li><span class="que">Fecha del dato</span><span class="valor">${fecha(c.fecha_carga)} ${marca("de fuente")}</span></li></ul>
-      <p class="detalle">Todas las accesiones traen la misma fecha: es el día en que se cargó el dato, no el día en que alguien vio la planta. Toca un círculo para abrir la ficha de la zona.</p>`;
+      <li><span class="que">Accesiones dentro ${nombreBorde}</span><span class="valor">${num(pb.n)} ${marca("col_dentro")}</span></li>
+      <li><span class="que">Accesiones en todo el dato</span><span class="valor">${num(c.n)} ${marca("col_puntos")}</span></li>
+      <li><span class="que">Nombres de planta</span><span class="valor">${num(c.nombres)} ${marca("col_nombres")}</span></li>
+      <li><span class="que">Familias</span><span class="valor">${num(c.familias)} ${marca("col_familias")}</span></li>
+      <li><span class="que">Zonas con plantas</span><span class="valor">${num(c.zonas)} ${marca("col_zonas")}</span></li>
+      <li><span class="que">Fecha del dato</span><span class="valor">${fecha(c.fecha_carga)} ${marca("col_fecha")}</span></li></ul>
+      <p class="detalle">Todas las accesiones traen la misma fecha: es el día en que se cargó el dato, no el día en que alguien vio la planta. Toca un punto para abrir la ficha de la zona.</p>${dosListas}`;
   } else if (L === "conservacion") {
     const cats = c.cats, orden = ["CR", "EN", "VU", "NT", "LC", "DD", "EW", "NE"];
-    ley.innerHTML = `<p class="detalle">Accesiones amenazadas (CR, EN y VU) sumadas por zona. Cada círculo es la ${ROTULO_ZONA}. Nunca se muestra el punto exacto de una planta amenazada, y ninguna se usa para ubicar el círculo.</p>`
+    ley.innerHTML = `<p class="detalle">Accesiones amenazadas (CR, EN y VU) sumadas por zona; el número junto al punto es cuántas hay. Cada punto es la ${ROTULO_ZONA}. Nunca se muestra dónde está una planta amenazada, y ninguna se usa para ubicar el punto de la zona.</p>`
       + leyendaEscala(COLORES_A, ["1 a 9", "150 o más"]) + filaLeyenda(SIN_AMEN, "Ninguna amenazada")
-      + filaLeyenda("transparent", "Más de la mitad sin evaluar (NE)", `border:2.5px solid var(--ne)`) + filaRayas;
+      + filaLeyenda("transparent", "Más de la mitad sin evaluar (NE)", `border:2.5px solid var(--ne);border-radius:50%`) + filaRayas;
     const max = Math.max(...orden.map((o) => cats[o] || 0));
     const COL = { CR: "#a33f22", EN: "#cc6a3c", VU: "#e39a62", NT: "#c9b26b", LC: "#7aa36b", DD: "#9a9a9a", EW: "#3b2f2f", NE: "var(--ne)" };
     const NOM = { CR: "En peligro crítico", EN: "En peligro", VU: "Vulnerable", NT: "Casi amenazada", LC: "Preocupación menor", DD: "Datos insuficientes", EW: "Extinta en estado silvestre", NE: "No evaluada" };
     txt.innerHTML = `<ul class="cifras">
-      <li><span class="que">Amenazadas dentro ${nombreBorde}</span><span class="valor">${num(pb.amen)} ${marca("inferido")}</span></li>
-      <li><span class="que">Amenazadas en todo el dato</span><span class="valor">${num(c.amen)} ${marca("medido")}</span></li>
-      <li><span class="que">Sin evaluar (NE)</span><span class="valor">${num(c.ne)} ${marca("medido")}</span></li></ul>
+      <li><span class="que">Amenazadas dentro ${nombreBorde}</span><span class="valor">${num(pb.amen)} ${marca("col_amen_dentro")}</span></li>
+      <li><span class="que">Amenazadas en todo el dato</span><span class="valor">${num(c.amen)} ${marca("col_amen")}</span></li>
+      <li><span class="que">Sin evaluar (NE)</span><span class="valor">${num(c.ne)} ${marca("col_ne")}</span></li></ul>
       <div class="barras" aria-label="Accesiones por categoría">${orden.map((o) => `<div class="b"><span>${o} · ${NOM[o]}</span><span class="pista"><span style="width:${(100 * (cats[o] || 0) / max).toFixed(1)}%;background:${COL[o]}"></span></span><span class="n">${num(cats[o] || 0)}</span></div>`).join("")}</div>
       <p class="detalle">El ${num(100 * c.ne / c.n, 1)} % de la colección (${num(c.ne)}) no tiene categoría (NE). Va con su propio color porque nadie la ha evaluado. EW (${num(c.ew)}) se cuenta aparte de las amenazadas.</p>
       <div class="rayado" role="note"><strong>Escala por verificar</strong>El dato no dice si la categoría es la de la UICN o la de la Resolución 0126 de 2024. Por eso no se compara con otras listas.</div>`;
   } else if (L === "certeza") {
-    ley.innerHTML = `<p class="detalle">Árboles del censo según si tienen nombre. Los círculos de las zonas de la colección quedan en gris.</p>`
-      + filaLeyenda(K_COLOR[0], "Identificado") + filaLeyenda(K_COLOR[1], "NN: sin identificar") + filaLeyenda(K_COLOR[2], "«Otro»: sin especie en la lista");
+    ley.innerHTML = `<p class="detalle"><strong>¿De cuántos árboles se sabe la especie?</strong> Cada punto es un árbol del censo de la ciudad. Los puntos de las zonas de la colección quedan en gris.</p>`
+      + filaLeyenda(CON_ESPECIE, "Con especie") + filaLeyenda(SIN_ESPECIE, "Sin especie: NN (no se identificó) u Otro (no está en la lista)");
     txt.innerHTML = `<ul class="cifras">
-      <li><span class="que">Árboles del censo dentro ${nombreBorde}</span><span class="valor">${num(cen.n)} ${marca("inferido")}</span></li>
-      <li><span class="que">Sin identificar (NN y Otro)</span><span class="valor">${num(cen.sin_id)}, ${num(cen.pct_sin_id, 1)} % ${marca("inferido")}</span></li>
+      <li><span class="que">Árboles del censo dentro ${nombreBorde}</span><span class="valor">${num(cen.n)} ${marca(k === "lote" ? "cen_lote" : "cen_idrd")}</span></li>
+      <li><span class="que">Sin especie (NN y Otro)</span><span class="valor">${num(cen.sin_id)}, ${num(cen.pct_sin_id, 1)} % ${marca(k === "lote" ? "cen_sinid_lote" : "cen_sinid_idrd")}</span></li>
       <li><span class="que">NN / Otro</span><span class="valor">${num(cen.nn)} / ${num(cen.otro)}</span></li>
-      <li><span class="que">Registros del censo</span><span class="valor">${fecha(cen.fmin)} a ${fecha(cen.fmax)} ${marca("de fuente")}</span></li>
-      <li><span class="que">Colección viva</span><span class="valor">una sola fecha: ${fecha(c.fecha_carga)} ${marca("de fuente")}</span></li></ul>
-      <p class="detalle">El ${num(cen.pct_sin_id, 1)} % de los árboles del censo dentro ${nombreBorde} no tiene nombre de especie. La colección viva sí tiene nombre en cada accesión, pero su fecha es la de carga, así que no dice desde cuándo se sabe.</p>`;
+      <li><span class="que">Registros del censo</span><span class="valor">${fecha(cen.fmin)} a ${fecha(cen.fmax)} ${marca("cen_fechas")}</span></li>
+      <li><span class="que">Colección viva</span><span class="valor">una sola fecha: ${fecha(c.fecha_carga)} ${marca("col_fecha")}</span></li></ul>
+      <p class="detalle">El ${num(cen.pct_sin_id, 1)} % de los árboles del censo dentro ${nombreBorde} no tiene nombre de especie. La colección viva sí tiene nombre en cada accesión, pero su fecha es la de carga, así que no dice desde cuándo se sabe.</p>
+      <p class="detalle">No saber la especie de los árboles sin identificar es lo que más ensancha la proyección a 20 años, por poco. <a href="../proyecciones/proyecciones.html">Ver cómo</a></p>${dosListas}`;
   } else if (L === "contexto") {
     const s = r.sectores;
     ley.innerHTML = `<p class="detalle">Árboles del censo por hectárea en los ${num(s.n)} sectores del parque Simón Bolívar (IDRD). El jardín va con borde negro.</p>`
       + leyendaEscala(COLORES_D, ["menos de 25", "250 o más"]);
     txt.innerHTML = `<ul class="cifras">
-      <li><span class="que">Jardín Botánico</span><span class="valor">${num(s.densidad_jardin)} por ha ${marca("inferido")}</span></li>
-      <li><span class="que">Siguiente: ${esc(s.siguiente[0])}</span><span class="valor">${num(s.siguiente[1])} por ha ${marca("inferido")}</span></li>
-      <li><span class="que">Área de los ${num(s.n)} sectores</span><span class="valor">${num(s.area_ha, 2)} ha ${marca("medido")}</span></li></ul>
+      <li><span class="que">Jardín Botánico</span><span class="valor">${num(s.densidad_jardin)} por ha ${marca("dens")}</span></li>
+      <li><span class="que">Siguiente: ${esc(s.siguiente[0])}</span><span class="valor">${num(s.siguiente[1])} por ha ${marca("dens_sig")}</span></li>
+      <li><span class="que">Área de los ${num(s.n)} sectores</span><span class="valor">${num(s.area_ha, 2)} ha ${marca("sb_area")}</span></li></ul>
       <p class="detalle">El jardín es el sector con más árboles por hectárea del Simón Bolívar. Toca un sector para ver su cifra.</p><p id="sector-sel" class="detalle" aria-live="polite"></p>`;
   } else {
-    ley.innerHTML = `<p class="detalle">Sin lente. Se ven el borde, las zonas como círculos sin relleno (${ROTULO_ZONA}) y el Tropicario rayado.</p>` + filaRayas;
+    ley.innerHTML = `<p class="detalle">Sin lente. Se ven el borde, las zonas como puntos sin color (${ROTULO_ZONA}) y el Tropicario rayado.</p>` + filaRayas;
     txt.innerHTML = "";
   }
 }
@@ -276,28 +330,18 @@ async function aplicarLente() {
   const L = estado.lente;
   const vis = (id, v) => mapa.setLayoutProperty(id, "visibility", v ? "visible" : "none");
   vis("sectores", L === "contexto"); vis("sectores-linea", L === "contexto");
-  vis("zonas", L !== "contexto"); vis("zonas-linea", L !== "contexto");
-  if (L === "coleccion") {
-    mapa.setPaintProperty("zonas", "fill-color", paso("n", CORTES_N, COLORES_N));
-    mapa.setPaintProperty("zonas", "fill-opacity", 0.85);
-    mapa.setPaintProperty("zonas-linea", "line-color", "#ffffff");
-    mapa.setPaintProperty("zonas-linea", "line-width", 1);
-  } else if (L === "conservacion") {
-    mapa.setPaintProperty("zonas", "fill-color", paso("amen", CORTES_A, COLORES_A, SIN_AMEN));
-    mapa.setPaintProperty("zonas", "fill-opacity", 0.9);
-    mapa.setPaintProperty("zonas-linea", "line-color", ["case", [">", ["get", "ne"], ["/", ["get", "n"], 2]], "#5b5f97", "#ffffff"]);
-    mapa.setPaintProperty("zonas-linea", "line-width", ["case", [">", ["get", "ne"], ["/", ["get", "n"], 2]], 2.5, 1]);
-  } else if (L === "certeza") {
-    mapa.setPaintProperty("zonas", "fill-color", "#dcdcd6");
-    mapa.setPaintProperty("zonas", "fill-opacity", 0.6);
-    mapa.setPaintProperty("zonas-linea", "line-color", "#ffffff");
-    mapa.setPaintProperty("zonas-linea", "line-width", 1);
-  } else {
-    mapa.setPaintProperty("zonas", "fill-color", "#ffffff");
-    mapa.setPaintProperty("zonas", "fill-opacity", 0.01);
-    mapa.setPaintProperty("zonas-linea", "line-color", "#8a8f87");
-    mapa.setPaintProperty("zonas-linea", "line-width", 1);
-  }
+  vis("zonas", L !== "contexto"); vis("zonas-sel", L !== "contexto");
+  const pinta = (prop, v) => mapa.setPaintProperty("zonas", prop, v);
+  const muchosNE = [">", ["get", "ne"], ["/", ["get", "n"], 2]];
+  pinta("circle-stroke-color", "#ffffff"); pinta("circle-stroke-width", 1.5); pinta("circle-opacity", 1);
+  if (L === "coleccion") pinta("circle-color", paso("n", CORTES_N, COLORES_N));
+  else if (L === "conservacion") {
+    pinta("circle-color", paso("amen", CORTES_A, COLORES_A, SIN_AMEN));
+    pinta("circle-stroke-color", ["case", muchosNE, "#5b5f97", "#ffffff"]);
+    pinta("circle-stroke-width", ["case", muchosNE, 2.5, 1.5]);
+  } else if (L === "certeza") pinta("circle-color", ZONA_NEUTRA);
+  else { pinta("circle-color", "#ffffff"); pinta("circle-stroke-color", "#8a8f87"); }
+  pintarRotulos();
   if (L === "certeza" && !estado.censo) {
     document.getElementById("ver-censo").checked = true;
     await activarCenso(true);
@@ -320,7 +364,7 @@ async function aplicarLente() {
 function pintarColorCenso() {
   if (!mapa || !mapa.getLayer("censo")) return;
   mapa.setPaintProperty("censo", "circle-color", estado.lente === "certeza"
-    ? ["match", ["get", "k"], 1, K_COLOR[1], 2, K_COLOR[2], K_COLOR[0]] : "#2d6a3e");
+    ? ["match", ["get", "k"], 0, CON_ESPECIE, SIN_ESPECIE] : "#2d6a3e");
 }
 
 // ---------- censo a pedido ----------
@@ -329,7 +373,7 @@ export async function activarCenso(on) {
   estado.censo = on;
   const est = document.getElementById("censo-estado");
   if (on && !censoGeo) {
-    est.textContent = "Bajando el censo…";
+    est.textContent = "Cargando los árboles…";
     try {
       const d = await cargar("censo.json");
       const c = d.cols, [ox, oy] = d.origen, s = d.escala;
@@ -341,7 +385,7 @@ export async function activarCenso(on) {
       // árboles dibujados dentro de cada borde (bit 1 lote, bit 2 parque)
       dibujadosBorde = { lote: 0, idrd: 0 };
       c.b.forEach((b, i) => { if (c.x[i] === null) return; if (b & 1) dibujadosBorde.lote++; if (b & 2) dibujadosBorde.idrd++; });
-    } catch (e) { est.textContent = `No se pudo bajar el censo: ${e.message}`; estado.censo = false; document.getElementById("ver-censo").checked = false; return; }
+    } catch (e) { est.textContent = `No se pudieron cargar los árboles: ${e.message}`; estado.censo = false; document.getElementById("ver-censo").checked = false; return; }
   }
   if (mapa && mapa.getSource("censo")) {
     if (on) mapa.getSource("censo").setData(censoGeo);
@@ -350,8 +394,8 @@ export async function activarCenso(on) {
   pintarColorCenso();
   if (on) {
     const cen = estado.base.resumen.censo;
-    est.innerHTML = `Encendido: ${num(censoGeo.features.length)} árboles dibujados alrededor del jardín; dentro del borde, ${num(dibujadosBorde[estado.borde])} dibujados de ${num(cen.por_borde[estado.borde].n)} en el censo ${marca("medido")}. Algunos árboles no se dibujan para proteger especies sensibles. Censo del arbolado urbano (SIGAU), ficha del ${fecha(cen.ficha_modificada)}. Toca un árbol para su ficha.`;
-  } else est.textContent = "Apagado.";
+    est.innerHTML = `Encendido: ${num(censoGeo.features.length)} árboles dibujados alrededor del jardín; dentro del borde, ${num(dibujadosBorde[estado.borde])} dibujados de ${num(cen.por_borde[estado.borde].n)} en el censo ${marca("cen_dibujados_plano")}. Algunos árboles no se dibujan para proteger especies sensibles, y los robles, especie amenazada, solo se cuentan. Censo de árboles de la ciudad, actualizado en el portal de datos el ${fecha(cen.ficha_modificada)} ${marca("cen_ficha")}. Toca un árbol para ver su ficha.`;
+  } else est.textContent = "Apagado. Enciéndelo para ver cada árbol y abrir su ficha.";
 }
 
 // ---------- controles ----------
@@ -363,17 +407,44 @@ function enlazarControles() {
   }));
   document.querySelectorAll('input[name="lente"]').forEach((r) => r.addEventListener("change", (e) => { estado.lente = e.target.value; pintarLente(); aplicarLente(); }));
   document.getElementById("ver-censo").addEventListener("change", (e) => activarCenso(e.target.checked));
-  document.getElementById("abrir-3d").addEventListener("click", async (e) => {
-    const b = e.currentTarget; b.disabled = true; b.textContent = "Cargando la vista 3D…";
-    try { const m = await import("./tres.js"); await m.abrirTres(estado); }
-    catch (err) { alertaPanel(`No se pudo abrir el 3D: ${err.message}`); }
-    finally { b.disabled = false; b.textContent = "Abrir sol y sombra en 3D"; }
-  });
+  document.getElementById("ver-sol").addEventListener("click", verSol);
   let t;
   document.getElementById("buscar").addEventListener("input", (e) => { clearTimeout(t); t = setTimeout(() => buscar(e.target.value), 200); });
 }
 
-function alertaPanel(m) { document.getElementById("lente-texto").insertAdjacentHTML("afterbegin", `<p role="alert">${esc(m)}</p>`); }
+// ---------- sol en tres zonas: las mismas horas que calcula el 3D ----------
+// Lee ../datos/horas_sol.json, el archivo del 3D (en la publicación, el plano vive en visor/ junto a datos/).
+// Si no se puede leer, el plano no calcula nada propio: manda al 3D.
+async function verSol(e) {
+  const b = e.currentTarget, caja = document.getElementById("sol-respuesta");
+  const abierta = b.getAttribute("aria-expanded") === "true";
+  b.setAttribute("aria-expanded", String(!abierta));
+  b.textContent = abierta ? "Ver la respuesta" : "Ocultar la respuesta";
+  caja.hidden = abierta;
+  if (abierta || caja.dataset.lista) return;
+  caja.innerHTML = `<p class="cargando">Leyendo las horas de sol…</p>`;
+  try {
+    const r = await fetch("../datos/horas_sol.json");
+    if (!r.ok) throw new Error(String(r.status));
+    const h = await r.json();
+    const filas = Object.keys(ZONAS_DEMO).map((z) => {
+      const v = h.zonas?.[z];
+      if (!Array.isArray(v) || v.length !== 12) throw new Error(`sin horas para ${z}`);
+      return { z, nombre: ZONAS_DEMO[z], prom: v.reduce((a, x) => a + x, 0) / 12, jun: v[5], dic: v[11] };
+    });
+    const mas = [...filas].sort((a, b) => b.prom - a.prom)[0];
+    const cambia = [...filas].sort((a, b) => Math.abs(b.dic - b.jun) - Math.abs(a.dic - a.jun))[0];
+    const [bajo, alto] = cambia.jun < cambia.dic ? [["junio", cambia.jun], ["diciembre", cambia.dic]] : [["diciembre", cambia.dic], ["junio", cambia.jun]];
+    caja.innerHTML = `<p><strong>La ${esc(mas.nombre)} es la que más sol recibe</strong>: unas ${num(mas.prom, 1)} horas de sol directo al día en promedio. <strong>${esc(cambia.nombre)} es la que más cambia</strong>: de unas ${num(bajo[1], 1)} horas en ${bajo[0]} a ${num(alto[1], 1)} en ${alto[0]}. ${marca("horas_sol")}</p>
+      <table class="tabla-sol"><caption class="detalle">Horas de sol directo al día</caption>
+        <thead><tr><th scope="col">Zona</th><th scope="col">Promedio del año</th><th scope="col">Junio</th><th scope="col">Diciembre</th></tr></thead>
+        <tbody>${filas.map((f) => `<tr><th scope="row">${esc(f.nombre)}</th><td>${num(f.prom, 1)}</td><td>${num(f.jun, 1)}</td><td>${num(f.dic, 1)}</td></tr>`).join("")}</tbody></table>
+      <p class="detalle">Día 15 de cada mes, cielo despejado, suelo plano y copa de los árboles supuesta según su tipo. Son las mismas horas del visor 3D.</p>`;
+    caja.dataset.lista = "1";
+  } catch {
+    caja.innerHTML = `<p>No se pudieron leer las horas de sol. Míralas en el <a href="../">visor 3D</a>.</p>`;
+  }
+}
 
 // ---------- pestañas ----------
 function iniciarPestanas() {

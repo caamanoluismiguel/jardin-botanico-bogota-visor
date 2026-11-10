@@ -37,6 +37,14 @@ button, input, select { font: inherit; color: inherit; }
 
 .cabecera { padding: 10px 16px; background: var(--superficie); border-bottom: 1px solid var(--linea); }
 .cabecera h1 { font-size: 1.1rem; font-weight: 700; }
+.cabecera .pregunta { font-size: 1rem; font-weight: 600; margin: 4px 0 0; max-width: 60ch; }
+.rotulo-zona { font-size: .75rem; line-height: 1.2; padding: 1px 4px; background: rgba(255,255,255,.88); border-radius: 4px; color: var(--tinta); white-space: nowrap; pointer-events: none; font-variant-numeric: tabular-nums; }
+.rotulo-zona.demo strong { font-weight: 700; }
+.rotulo-zona[hidden] { display: none; }
+.tabla-sol { width: 100%; border-collapse: collapse; font-size: .875rem; margin: 6px 0; }
+.tabla-sol caption { text-align: left; }
+.tabla-sol th, .tabla-sol td { padding: 4px; border-bottom: 1px solid var(--linea); text-align: left; }
+.tabla-sol td { text-align: right; font-variant-numeric: tabular-nums; }
 .aviso-demo { font-size: .8rem; color: var(--tinta-suave); margin: 0 0 2px; }
 
 .disposicion { display: block; }
@@ -102,6 +110,21 @@ button, input, select { font: inherit; color: inherit; }
 .marca.de-fuente { color: var(--fuente); }
 .marca.inferido { color: var(--inferido); }
 .marca.supuesto { color: var(--supuesto); border-style: dashed; }
+/* Marcas que se tocan: copia del bloque button.marca de visor3d/css/visor3d.css (módulo js/marcas.js).
+   medido relleno, de fuente borde continuo, inferido punteado, supuesto rayado: un trazo por marca para no depender del color. */
+button.marca { font-family: inherit; line-height: 1.35; min-height: 24px; cursor: pointer; background: transparent; }
+button.marca:focus-visible { outline: 3px solid var(--foco); outline-offset: 2px; }
+.marca.medido { background: var(--medido); color: #fff; border-color: var(--medido); }
+.marca.de-fuente { border-style: solid; }
+.marca.inferido { border-style: dotted; border-width: 2px; }
+.marca.supuesto { border-style: solid; background-color: #fff; background-image: repeating-linear-gradient(135deg, rgba(140,47,57,.16) 0 2px, transparent 2px 6px); }
+button.marca[aria-expanded="true"] { box-shadow: 0 0 0 2px var(--superficie), 0 0 0 3.5px currentColor; }
+.marca.medido[aria-expanded="true"] { box-shadow: 0 0 0 2px var(--superficie), 0 0 0 3.5px var(--medido); }
+.marca-dice {
+  display: block; margin: 4px 0 6px; padding: 6px 8px; font-size: .8125rem; font-weight: 400; line-height: 1.4; text-align: left;
+  color: var(--tinta); background: var(--superficie); border: 1px solid var(--linea); border-radius: 6px; white-space: normal; letter-spacing: 0;
+}
+.marca-dice[hidden] { display: none; }
 
 .rayado {
   background-color: #f1f1ef;
@@ -166,21 +189,6 @@ dialog::backdrop { background: rgba(20, 28, 24, .35); }
 .fuentes-lista li { margin-bottom: 8px; }
 
 /* 3D */
-.tres { width: 100vw; max-width: 100vw; height: 100svh; max-height: 100svh; margin: 0; border-radius: 0; }
-.tres[open] { display: flex; flex-direction: column; }
-.tres-cabeza { display: flex; justify-content: space-between; align-items: center; padding: 8px 16px; border-bottom: 1px solid var(--linea); }
-.tres-cabeza h2 { font-size: 1.05rem; }
-.tres-cuerpo { flex: 1; display: flex; flex-direction: column; min-height: 0; }
-.tres-lienzo { position: relative; height: 46svh; min-height: 260px; background: #e9ece6; flex: none; }
-.tres-lienzo canvas { display: block; width: 100%; height: 100%; touch-action: none; }
-.tres-controles { padding: 10px 16px 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
-.tres-controles > label { display: flex; align-items: center; gap: 10px; min-height: 44px; }
-.tres-controles input[type="date"] { min-height: 44px; padding: 4px 8px; border: 1px solid #8f978f; border-radius: 8px; }
-.tres-controles .hora input { flex: 1; min-height: 44px; accent-color: var(--acento); }
-.tres-controles output { min-width: 3.2em; font-variant-numeric: tabular-nums; }
-.tres-resultado table { width: 100%; border-collapse: collapse; font-size: .85rem; }
-.tres-resultado td, .tres-resultado th { padding: 4px; border-bottom: 1px solid var(--linea); text-align: left; }
-.tres-resultado td.n { text-align: right; font-variant-numeric: tabular-nums; }
 .cargando { color: var(--tinta-suave); font-style: italic; }
 
 .maplibregl-ctrl-group button { width: 44px; height: 44px; }
@@ -189,13 +197,11 @@ dialog::backdrop { background: rgba(20, 28, 24, .35); }
 @media (min-width: 900px) {
   .cabecera { padding: 12px 24px; }
   .cabecera h1 { font-size: 1.25rem; }
-  .disposicion { display: grid; grid-template-columns: 410px 1fr; height: calc(100vh - 70px); }
+  body { display: flex; flex-direction: column; height: 100vh; }
+  .disposicion { display: grid; grid-template-columns: 410px 1fr; flex: 1; min-height: 0; }
   .zona-mapa { order: 2; height: auto; }
   .panel { order: 1; overflow-y: auto; border-right: 1px solid var(--linea); padding: 16px 20px 40px; }
   .ficha { width: 440px; max-width: 440px; max-height: calc(100vh - 32px); margin: 16px 16px 16px auto; border-radius: 14px; }
-  .tres-cuerpo { flex-direction: row; }
-  .tres-lienzo { flex: 1; height: auto; }
-  .tres-controles { width: 380px; border-left: 1px solid var(--linea); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -204,11 +210,6 @@ dialog::backdrop { background: rgba(20, 28, 24, .35); }
 .cargando { color: var(--tinta-suave); }
 .lista-fuentes { margin: 6px 0; padding-left: 18px; font-size: .9rem; }
 .lista-fuentes li { margin: 6px 0; }
-.leyenda-3d { list-style: none; padding: 0; margin: 6px 0; display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: .85rem; }
-.leyenda-3d .muestra { display: inline-block; width: 14px; height: 14px; border-radius: 3px; margin-right: 6px; vertical-align: -2px; border: 1px solid #8f978f; }
-.lista-zonas { margin: 6px 0; padding-left: 22px; font-size: .875rem; }
-.lista-zonas li { padding: 3px 0; }
-.lista-zonas li span { margin-right: 6px; }
 .cifras.marcas li { justify-content: flex-start; }
 .cifras.marcas .que { flex: 0 0 92px; }
 @media (max-width: 599px) {

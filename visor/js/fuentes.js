@@ -1,5 +1,5 @@
 // Fuentes y método: cada cifra con su marca, fuente y fecha; lo que no se usó y por qué; lo que falta.
-import { cargar, num, fecha, marca, esc, rayado } from "./util.js";
+import { cargar, num, fecha, marca, marcaTipo, esc, rayado } from "./util.js";
 
 const DA = "https://datosabiertos.bogota.gov.co/dataset/";
 const FUENTES = [
@@ -40,14 +40,14 @@ export async function pintarFuentes(el, estado) {
   const ina = estado.base?.resumen?.inaturalist;
   const filas = d.cifras.map((c) => `<tr>
       <td><strong>${esc(c.texto)}</strong><br><span class="detalle">${esc(c.fuente)}${c.nota ? ". " + esc(c.nota[0].toUpperCase() + c.nota.slice(1)) : ""}. Calculado el ${fecha(c.fecha)}.</span></td>
-      <td class="v">${esc(c.valor)}</td><td>${marca(c.marca)}</td></tr>`).join("");
+      <td class="v">${esc(c.valor)}</td><td>${marcaTipo(c.marca)}</td></tr>`).join("");
   el.innerHTML = `
   <fieldset class="grupo"><legend>Qué significa cada marca</legend>
     <ul class="cifras marcas">
-      <li><span class="que">${marca("medido")}</span><span>Lo calculamos con la geometría o el dato abierto.</span></li>
-      <li><span class="que">${marca("de fuente")}</span><span>Lo dice la fuente tal cual.</span></li>
-      <li><span class="que">${marca("inferido")}</span><span>Sale de cruzar dos fuentes.</span></li>
-      <li><span class="que">${marca("supuesto")}</span><span>Es un modelo o una hipótesis, no una medida.</span></li></ul>
+      <li><span class="que">${marcaTipo("medido")}</span><span>Lo calculamos con la geometría o el dato abierto.</span></li>
+      <li><span class="que">${marcaTipo("de fuente")}</span><span>Lo dice la fuente tal cual.</span></li>
+      <li><span class="que">${marcaTipo("inferido")}</span><span>Sale de cruzar dos fuentes.</span></li>
+      <li><span class="que">${marcaTipo("supuesto")}</span><span>Es un modelo o una hipótesis, no una medida.</span></li></ul>
   </fieldset>
 
   <fieldset class="grupo"><legend>Las cifras del visor</legend>
@@ -59,7 +59,7 @@ export async function pintarFuentes(el, estado) {
 
   <fieldset class="grupo"><legend>Fuentes usadas</legend>
     <ul class="lista-fuentes">${FUENTES.map(([n, l, u, para]) => `<li><a href="${u}" target="_blank" rel="noopener">${esc(n)}</a>, ${esc(l)}. ${esc(para)}</li>`).join("")}</ul>
-    ${ina ? `<p class="detalle">iNaturalist, ${fecha(ina.consultado)}: ${num(ina.apta)} observaciones con licencia apta (CC0 ${num(ina.cc0)}, CC BY ${num(ina.ccby)}) y ${num(ina.sin_licencia)} sin licencia ${marca("de fuente")}.</p>` : ""}
+    ${ina ? `<p class="detalle">iNaturalist, ${fecha(ina.consultado)}: ${num(ina.apta)} observaciones con licencia apta (CC0 ${num(ina.cc0)}, CC BY ${num(ina.ccby)}) y ${num(ina.sin_licencia)} sin licencia ${marcaTipo("de fuente")}.</p>` : ""}
   </fieldset>
 
   <fieldset class="grupo"><legend>Lo que no se usó y por qué</legend>

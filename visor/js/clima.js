@@ -28,12 +28,12 @@ export async function pintarClima(el) {
   el.innerHTML = `
   <fieldset class="grupo"><legend>Ahora en El Dorado (SKBO)</legend>
     <div id="metar" class="metar" aria-live="polite"><p class="cargando">Consultando el último parte…</p></div>
-    <p class="detalle">Aeropuerto a ${num(c.metar.distancia_km, 1)} km del centro del lote ${marca("medido")}. Es el dato medido en vivo más cercano, no el clima del jardín.</p>
+    <p class="detalle">Aeropuerto a ${num(c.metar.distancia_km, 1)} km del centro del lote ${marca("skbo")}. Es el dato medido en vivo más cercano, no el clima del jardín.</p>
     <p class="detalle">Fuente: <a href="https://mesonet.agron.iastate.edu/" target="_blank" rel="noopener">${esc(c.metar.fuente)}</a>.</p>
   </fieldset>
 
   <fieldset class="grupo"><legend>Lluvia por mes</legend>
-    <p class="detalle">Promedio ${esc(c.chirps.anios)} ${marca("de fuente")}. Estimación por satélite y estaciones en una ${esc(c.chirps.celda)}.</p>
+    <p class="detalle">Promedio ${esc(c.chirps.anios)} ${marca("chirps_mes")}. Estimación por satélite y estaciones en una ${esc(c.chirps.celda)}.</p>
     ${barras(c.chirps.climatologia, { etiquetas: meses, unidad: "mm", color: "#1f5f8b", dec: 0 })}
     <p class="detalle">Últimos 12 meses publicados, hasta ${MESES_LARGOS[+c.chirps.ultimo_mes.slice(5, 7) - 1]} de ${c.chirps.ultimo_mes.slice(0, 4)}:</p>
     ${barras(c.chirps.ultimos.map((x) => x[1]), { etiquetas: c.chirps.ultimos.map((x) => mesCorto(+x[0].slice(5) - 1)), unidad: "mm", color: "#5a86b2" })}
@@ -41,12 +41,12 @@ export async function pintarClima(el) {
   </fieldset>
 
   <fieldset class="grupo"><legend>Sol que llega, según un modelo</legend>
-    <p class="detalle">Radiación solar global de ${p.anio} por mes, en kWh/m² ${marca("supuesto")}. Es un modelo de satélite y reanálisis, no una medida en el jardín.</p>
+    <p class="detalle">Radiación solar global de ${p.anio} por mes, en kWh/m² ${marca("power_rad")}. Es un modelo de satélite y reanálisis, no una medida en el jardín.</p>
     ${barras(p.radiacion_mensual, { etiquetas: meses, unidad: "kWh/m²", color: "#8a5a00", dec: 1 })}
     <ul class="cifras">
-      <li><span class="que">Total del año</span><span class="valor">${num(p.radiacion_total, 1)} kWh/m² ${marca("supuesto")}</span></li>
-      <li><span class="que">Promedio por día</span><span class="valor">${num(p.radiacion_diaria, 2)} kWh/m² ${marca("supuesto")}</span></li>
-      <li><span class="que">Nubosidad media</span><span class="valor">${num(p.nubes_media, 1)} % ${marca("supuesto")}</span></li></ul>
+      <li><span class="que">Total del año</span><span class="valor">${num(p.radiacion_total, 1)} kWh/m² ${marca("power_rad")}</span></li>
+      <li><span class="que">Promedio por día</span><span class="valor">${num(p.radiacion_diaria, 2)} kWh/m² ${marca("power_rad")}</span></li>
+      <li><span class="que">Nubosidad media</span><span class="valor">${num(p.nubes_media, 1)} % ${marca("power_nub")}</span></li></ul>
     <p class="detalle">No se muestran la temperatura ni la lluvia de este modelo: su celda está a 1.790 m, unos 760 m más abajo que El Dorado (2.548 m). Punto: ${esc(p.punto)}.</p>
     <p class="detalle">Fuente: <a href="https://power.larc.nasa.gov/" target="_blank" rel="noopener">Datos obtenidos del proyecto POWER del NASA Langley Research Center, financiado por el programa NASA Earth Science/Applied Science</a>.</p>
   </fieldset>
@@ -57,7 +57,7 @@ export async function pintarClima(el) {
         alt="Imagen de satélite en color verdadero de la sabana de Bogotá el ${fecha(c.gibs.fecha)}; el jardín está en el centro, marcado con un círculo.">
       <span aria-hidden="true" style="position:absolute;left:50%;top:48%;width:18px;height:18px;margin:-9px 0 0 -9px;border:2.5px solid #fff;border-radius:50%;box-shadow:0 0 0 2px #1c2620"></span>
     </div>
-    <p class="detalle">MODIS Terra, ${fecha(c.gibs.fecha)}, ${esc(c.gibs.recuadro)} ${marca("de fuente")}. Es la imagen de ese día bajada al construir el visor, no una vista en vivo.</p>
+    <p class="detalle">MODIS Terra, ${fecha(c.gibs.fecha)}, ${esc(c.gibs.recuadro)} ${marca("nubes_imagen")}. Es la imagen de ese día bajada al construir el visor, no una vista en vivo.</p>
     <p class="detalle">Fuente: <a href="https://earthdata.nasa.gov/gibs" target="_blank" rel="noopener">${esc(c.gibs.fuente)}</a>.</p>
   </fieldset>
   ${rayado("Clima medido dentro del jardín", "No entra en esta demo. Lo medido más cercano es El Dorado; lo demás es estimación o modelo y así se marca.")}`;
@@ -71,8 +71,8 @@ async function pintarMetar(m) {
     const hr = humedad(t, td);
     const hora = new Date(o.utc).toLocaleString("es-CO", { timeZone: "America/Bogota", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", hour12: false });
     el.innerHTML = `<ul class="cifras">
-      <li><span class="que">Temperatura</span><span class="valor">${num(t, 0)} °C ${marca("medido")}</span></li>
-      <li><span class="que">Humedad relativa</span><span class="valor">${num(hr, 0)} % ${marca("inferido")}</span></li>
+      <li><span class="que">Temperatura</span><span class="valor">${num(t, 0)} °C ${marca("metar_temp")}</span></li>
+      <li><span class="que">Humedad relativa</span><span class="valor">${num(hr, 0)} % ${marca("humedad")}</span></li>
       <li><span class="que">Viento</span><span class="valor">${o.viento_kt == null ? "sin dato" : num(o.viento_kt * 1.852, 0) + " km/h"}</span></li>
       <li><span class="que">Parte</span><span class="valor">${esc(hora)}, hora de Bogotá</span></li></ul>
       <p class="detalle">${vivo ? "Consultado ahora." : `Sin conexión con el servicio: es la copia guardada al construir el visor.`} La humedad se calcula del punto de rocío.</p>

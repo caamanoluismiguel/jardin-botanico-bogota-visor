@@ -3,15 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Demo independiente con datos abiertos: qué se sabe de cada planta del Jardín Botánico de Bogotá, desde cuándo y qué falta por saber.">
+<meta name="description" content="Demo independiente con datos abiertos: qué se sabe de cada árbol y planta del Jardín Botánico de Bogotá, desde cuándo y qué falta.">
 <meta name="robots" content="noindex, nofollow">
-<title>Qué se sabe de cada planta · demo con datos abiertos</title>
+<title>Qué se sabe de cada árbol y planta · demo con datos abiertos</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <link rel="stylesheet" href="css/visor.css">
-<script type="importmap">
-{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js",
-               "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/" } }
-</script>
 </head>
 <body>
 <a class="saltar" href="#panel">Ir al panel</a>
@@ -20,7 +16,9 @@
     <p class="aviso-demo">Demo independiente con datos abiertos. No es un sitio del Jardín Botánico.</p>
     <!-- En la publicación el visor 3D vive en la carpeta de arriba, junto a visor/. -->
     <p class="aviso-demo enlaces-cabecera"><a href="../">Ver el jardín en 3D</a> <a href="../proyecciones/proyecciones.html">Ver las proyecciones a 40 años</a></p>
-    <h1>Jardín Botánico de Bogotá: qué se sabe de cada planta</h1>
+    <h1>Jardín Botánico de Bogotá</h1>
+    <!-- La misma pregunta en el 3D, el plano y las proyecciones (decisión de LM, 9 nov 2026). Va encima del mapa también en el teléfono. -->
+    <p class="pregunta">¿Qué se sabe de cada árbol y planta del Jardín, desde cuándo y qué falta?</p>
   </div>
 </header>
 
@@ -32,8 +30,6 @@
   </section>
 
   <section id="panel" class="panel" tabindex="-1" aria-label="Panel">
-    <p class="pregunta">De cada planta del Jardín, ¿qué se sabe con certeza, desde cuándo y qué falta por saber?</p>
-
     <div class="pestanas" role="tablist" aria-label="Secciones">
       <button role="tab" id="tab-capas" aria-controls="sec-capas" aria-selected="true">Capas</button>
       <button role="tab" id="tab-clima" aria-controls="sec-clima" aria-selected="false" tabindex="-1">Clima</button>
@@ -67,13 +63,15 @@
       <fieldset class="grupo">
         <legend>Árboles del censo</legend>
         <label class="interruptor"><input type="checkbox" id="ver-censo"> <span>Mostrar los árboles del censo</span></label>
-        <p id="censo-estado" class="detalle">Apagado. Pesa unos 90 KB comprimido y se baja al encenderlo.</p>
+        <p id="censo-estado" class="detalle">Apagado. Enciéndelo para ver cada árbol y abrir su ficha.</p>
       </fieldset>
 
       <fieldset class="grupo">
-        <legend>Sol y sombra</legend>
-        <p class="detalle">Única vista en 3D. Se baja al pedirla (unos 280 KB comprimidos con los edificios).</p>
-        <button id="abrir-3d" class="boton">Abrir sol y sombra en 3D</button>
+        <legend>Sol en tres zonas</legend>
+        <p class="detalle" id="sol-pregunta">Entre la Rosaleda, el Herbal de la Salud y Plantas ornamentales, ¿cuál recibe más sol directo en el año y cuál cambia más entre junio y diciembre?</p>
+        <button id="ver-sol" class="boton secundario" aria-controls="sol-respuesta" aria-expanded="false">Ver la respuesta</button>
+        <div id="sol-respuesta" class="sol-respuesta" aria-live="polite" hidden></div>
+        <p class="detalle"><a href="../">Ver el sol y la sombra en el 3D</a></p>
       </fieldset>
 
       <fieldset class="grupo">
@@ -100,24 +98,6 @@
   <div id="ficha-cuerpo"></div>
 </dialog>
 
-<dialog id="tres" class="tres" aria-labelledby="tres-titulo">
-  <div class="tres-cabeza">
-    <h2 id="tres-titulo">Sol y sombra</h2>
-    <button class="cerrar" id="tres-cerrar" aria-label="Cerrar la vista 3D">×</button>
-  </div>
-  <div class="tres-cuerpo">
-    <div id="tres-lienzo" class="tres-lienzo" aria-label="Escena 3D del jardín y su entorno"></div>
-    <div class="tres-controles">
-      <label>Fecha <input type="date" id="tres-fecha"></label>
-      <label class="hora">Hora <input type="range" id="tres-hora" min="6" max="18" step="0.25" value="10"> <output id="tres-hora-txt">10:00</output></label>
-      <label class="interruptor"><input type="checkbox" id="tres-copas" checked> <span>Copas supuestas</span></label>
-      <p id="tres-sol" class="detalle"></p>
-      <button id="tres-calcular" class="boton">Horas de sol por zona ese día</button>
-      <div id="tres-resultado" class="tres-resultado" aria-live="polite"></div>
-      <div id="tres-notas" class="detalle"></div>
-    </div>
-  </div>
-</dialog>
 
 <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script type="module" src="js/app.js"></script>

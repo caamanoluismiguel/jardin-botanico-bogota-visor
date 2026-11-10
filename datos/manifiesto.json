@@ -1,5 +1,5 @@
 {
- "generado": "2026-11-07",
+ "generado": "2026-11-10",
  "archivos": {
   "accesiones.json": {
    "fuente": [
@@ -18,20 +18,20 @@
     "arquetipos.csv (botánico del equipo, borrador sin revisión humana)"
    ],
    "guion": "visor3d/build/columnas.py",
-   "version": "1.0.0+0546e7a61b87",
-   "sha256": "eb726b25d3aacb798625c22278db0261a74db4f393623770abf1013797762973",
-   "bytes": 50632,
-   "bytes_gzip": 50632
+   "version": "1.0.0+788f55cf98cc",
+   "sha256": "1a75ecc666615bbe28f087235ad0f2c7b2b5caa3c1c8a1221cc7a65b50ed73e0",
+   "bytes": 49459,
+   "bytes_gzip": 49459
   },
   "arquetipos-tabla.json": {
    "fuente": [
     "arquetipos.csv (botánico del equipo)"
    ],
    "guion": "visor3d/build/columnas.py",
-   "version": "1.0.0+0546e7a61b87",
-   "sha256": "98dfb3c5ba407ac87a2e043e3a6b9981416f3db28258a2476c4f912de33246a8",
-   "bytes": 12603,
-   "bytes_gzip": 4247
+   "version": "1.0.0+788f55cf98cc",
+   "sha256": "f263739a6de03d36eb05474cb47ab46c354211f13a48b3b04a91c1d663f486dd",
+   "bytes": 12563,
+   "bytes_gzip": 4234
   },
   "arquetipos.glb.gz": {
    "fuente": [
@@ -59,20 +59,20 @@
     "Modelo Digital de Terreno 2025, IDECA, CC BY 4.0"
    ],
    "guion": "visor3d/build/columnas.py",
-   "version": "1.0.0+0546e7a61b87",
+   "version": "1.0.0+788f55cf98cc",
    "sha256": "99b5f07d698e349e6a800cb1635f73168e2b736003db5203092e7a4224f001e6",
    "bytes": 45489,
    "bytes_gzip": 13561
   },
   "censo.json": {
    "fuente": [
-    "Censo del arbolado urbano, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 (tal como se publica, regla C)"
+    "Censo del arbolado urbano, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 (tal como se publica, regla C, sin los robles: solo conteo)"
    ],
    "guion": "visor3d/build/columnas.py",
-   "version": "1.0.0+0546e7a61b87",
-   "sha256": "1f170243b1ab9ebae5fa88a43f0089b6ab65e1977ebc84ea65a837071961e8f2",
-   "bytes": 455925,
-   "bytes_gzip": 91261
+   "version": "1.0.0+788f55cf98cc",
+   "sha256": "12cee5fdd31789d4aef9ffa1caec6d21a2564039c59e1d5354260b80154ebf52",
+   "bytes": 445721,
+   "bytes_gzip": 89197
   },
   "cielo.json": {
    "fuente": [
@@ -92,10 +92,10 @@
     "ERA5 mensual 1991 a 2020, Copernicus C3S, CC BY 4.0, DOI 10.24381/cds.f17050d7"
    ],
    "guion": "visor3d/build/columnas.py",
-   "version": "1.0.0+0546e7a61b87",
-   "sha256": "401049a6c66b0f312b271455d4eebc4f7a48b16c82502d37374e206c69fd0096",
-   "bytes": 9441,
-   "bytes_gzip": 1941
+   "version": "1.0.0+788f55cf98cc",
+   "sha256": "92ed2944039b07f6156d2ffedcf4e6c3778c6e0d98f47b007f475dedae7283a3",
+   "bytes": 9506,
+   "bytes_gzip": 1989
   },
   "clima.json": {
    "fuente": [
@@ -103,7 +103,7 @@
     "ERA5 mensual 1991 a 2020, Copernicus C3S, CC BY 4.0, DOI 10.24381/cds.f17050d7"
    ],
    "guion": "visor3d/build/columnas.py",
-   "version": "1.0.0+0546e7a61b87",
+   "version": "1.0.0+788f55cf98cc",
    "sha256": "877e25330cd8421ef4a5e291ab4d75f1329ae108d256149eeaebe2591f3b7df6",
    "bytes": 1710,
    "bytes_gzip": 1039
@@ -128,10 +128,10 @@
     "resumen de visor/datos/base.json"
    ],
    "guion": "visor3d/build/columnas.py",
-   "version": "1.0.0+0546e7a61b87",
-   "sha256": "a49463fc371e72ace92cd650cf854f53d240dbf52237f40b8e44ef3d9c326229",
+   "version": "1.0.0+788f55cf98cc",
+   "sha256": "7702e73c1799797c72daf1cd3102fea37be2a4c117cfe524c4c2b5efbf4a9dca",
    "bytes": 43557,
-   "bytes_gzip": 14806
+   "bytes_gzip": 14807
   },
   "gibs.jpg": {
    "fuente": [
@@ -164,7 +164,7 @@
     "Tropicario: base.json del v0"
    ],
    "guion": "visor3d/build/columnas.py",
-   "version": "1.0.0+0546e7a61b87",
+   "version": "1.0.0+788f55cf98cc",
    "sha256": "0dfef08923c0c5b7e3a3753e25e3d82ddfd0b53106a55f69625acbfe7e51b573",
    "bytes": 41441,
    "bytes_gzip": 41441

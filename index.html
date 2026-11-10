@@ -7,9 +7,10 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#f7f6f2">
 <title>Jardín Botánico en 3D · demo con datos abiertos</title>
-  <script type="module" crossorigin src="./assets/index-DkadxhY7.js"></script>
+  <script type="module" crossorigin src="./assets/index-CfYNpdv4.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/rolldown-runtime-DK3Fl9T5.js">
-  <link rel="stylesheet" crossorigin href="./assets/index-npgz027T.css">
+  <link rel="modulepreload" crossorigin href="./assets/marcas-UV2IFjYQ.js">
+  <link rel="stylesheet" crossorigin href="./assets/index-CdfdX4FX.css">
 </head>
 <body>
 <a class="saltar" href="#lentes">Ir a los controles</a>
@@ -24,20 +25,33 @@
 <main class="app">
   <section id="lienzo" class="lienzo" aria-label="Escena 3D del jardín. Toca una zona o un árbol para abrir su ficha.">
     <div id="portada" class="portada" aria-live="polite">
-      <p class="pregunta">¿Qué se sabe de cada árbol, desde cuándo y qué falta?</p>
+      <p class="pregunta" tabindex="-1">¿Qué se sabe de cada árbol y planta del Jardín, desde cuándo y qué falta?</p>
       <ul id="conteos" class="cifras compactas"><li class="cargando">Cargando los conteos…</li></ul>
+      <details id="subpreguntas" class="plegable subpreguntas"><summary>Dos preguntas más</summary>
+        <p id="sub-sol" class="detalle"></p>
+        <p class="detalle">Con esto se proyecta cuántos árboles altos tendrá el Jardín según cuánto siembre y a cuáles grandes cuide. <a href="proyecciones/proyecciones.html">Proyecciones a 40 años</a></p>
+      </details>
+    </div>
+    <div id="pastilla" class="pastilla" hidden>
+      <button id="pastilla-abrir" class="pastilla-pregunta" aria-label="Volver a la pregunta: ¿Qué se sabe de cada árbol y planta del Jardín, desde cuándo y qué falta?">¿Qué se sabe de cada árbol y planta del Jardín, desde cuándo y qué falta?</button>
+      <button id="pastilla-recorrido" class="pastilla-recorrido">Recorrido de 1 minuto</button>
     </div>
     <div id="leyenda" class="leyenda" aria-live="polite" hidden></div>
     <button id="btn-leyenda" class="boton-leyenda" aria-controls="leyenda" aria-expanded="false" hidden>Leyenda</button>
     <p id="aviso" class="aviso" role="status" hidden></p>
-    <section id="recorrido" class="recorrido" aria-label="Recorrido guiado" aria-live="polite" hidden>
-      <p class="recorrido-cuenta"></p>
-      <p class="recorrido-texto"></p>
-      <div class="recorrido-botones">
-        <button class="boton-barra" data-anterior>Anterior</button>
-        <button class="boton-barra principal" data-siguiente>Siguiente</button>
-        <button class="boton-barra" data-salir>Salir</button>
+    <!-- recorrido guiado (pedagogía 1.5 y 2.1): título con foco, cuerpo por paso, seis puntos de 44 px; Escape sale -->
+    <section id="recorrido" class="recorrido" aria-labelledby="recorrido-titulo" hidden>
+      <div class="recorrido-cabeza">
+        <p class="recorrido-cuenta"></p>
+        <h2 id="recorrido-titulo" class="recorrido-titulo" tabindex="-1"></h2>
+        <button type="button" class="boton-barra recorrido-salir" data-salir aria-label="Salir del recorrido">Salir</button>
       </div>
+      <div class="recorrido-cuerpo"></div>
+      <nav class="recorrido-botones" aria-label="Pasos del recorrido">
+        <button type="button" class="boton-barra recorrido-flecha" data-anterior aria-label="Paso anterior"><span class="flecha" aria-hidden="true">‹</span><span class="texto">Anterior</span></button>
+        <div class="recorrido-puntos"></div>
+        <button type="button" class="boton-barra principal recorrido-flecha" data-siguiente aria-label="Siguiente paso"><span class="texto">Siguiente</span><span class="flecha" aria-hidden="true">›</span></button>
+      </nav>
     </section>
     <p id="chip-sombra" class="chip-sombra" hidden></p>
     <div id="escala" class="escala-mapa" aria-hidden="true"><span class="barra-escala"></span><span class="texto-escala"></span></div>
@@ -66,15 +80,15 @@
     <div class="acciones">
       <button id="abrir-capas" class="boton-barra" aria-haspopup="dialog">Capas</button>
       <button id="abrir-buscar" class="boton-barra" aria-haspopup="dialog">Buscar</button>
-      <a id="ir-proyecciones" class="boton-barra enlace-barra" href="proyecciones/proyecciones.html" aria-label="Proyecciones: árboles de 15 m o más y su carbono en 40 años">Proyecciones<svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 7 H11 M7.5 3.5 L11 7 L7.5 10.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a id="ir-proyecciones" class="boton-barra enlace-barra" href="proyecciones/proyecciones.html" aria-label="Proyecciones a 40 años: árboles de 15 m o más y su carbono"><span class="solo-escritorio">Proyecciones a 40 años</span><span class="solo-movil">A 40 años</span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 7 H11 M7.5 3.5 L11 7 L7.5 10.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
   </nav>
 </main>
 
 <dialog id="capas" class="hoja" aria-labelledby="capas-titulo">
   <div class="hoja-cabeza"><h2 id="capas-titulo">Capas</h2><button class="cerrar" data-cerrar aria-label="Cerrar capas">×</button></div>
+  <p class="detalle">Para quien quiere el detalle.</p>
   <label class="interruptor"><input type="checkbox" id="ver-arboles" checked> <span>Árboles del censo</span></label>
-  <label class="interruptor"><input type="checkbox" id="solo-fuente"> <span>Solo lo de fuente: quita las copas supuestas y deja la altura del censo</span></label>
   <label class="interruptor"><input type="checkbox" id="ver-zonas" checked> <span>Zonas de la colección viva</span></label>
   <label class="interruptor"><input type="checkbox" id="ver-edificios" checked> <span>Edificios</span></label>
   <label class="interruptor"><input type="checkbox" id="ver-calzadas" checked> <span>Calzadas alrededor</span></label>
@@ -98,7 +112,7 @@
 <dialog id="buscar" class="hoja" aria-labelledby="buscar-titulo">
   <div class="hoja-cabeza"><h2 id="buscar-titulo">Buscar</h2><button class="cerrar" data-cerrar aria-label="Cerrar la búsqueda">×</button></div>
   <label for="buscar-campo" class="detalle">Número de accesión, nombre de planta o código de árbol del censo</label>
-  <div class="campo-buscar"><input id="buscar-campo" type="search" autocomplete="off" placeholder="Ej.: 30967, Espeletia o Arrayán" enterkeyhint="search"></div>
+  <div class="campo-buscar"><input id="buscar-campo" type="search" autocomplete="off" placeholder="Ej.: 30967 o Espeletia" enterkeyhint="search"></div>
   <ul id="resultados" class="resultados" aria-live="polite"></ul>
 </dialog>
 
