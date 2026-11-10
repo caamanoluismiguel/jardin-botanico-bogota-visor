@@ -4,12 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow, noarchive">
-<title>Árboles altos, escenarios</title>
-  <script type="module" crossorigin src="../assets/proyecciones-DE3zJwpj.js"></script>
-  <link rel="stylesheet" crossorigin href="../assets/proyecciones-BdLlyMs8.css">
+<title>Árboles de 15 m o más: hoy y en 40 años</title>
+<link rel="alternate" type="text/markdown" href="../llms.txt" title="Resumen para lectura por IA">
+  <script type="module" crossorigin src="../assets/proyecciones-DRY-UvLW.js"></script>
+  <link rel="stylesheet" crossorigin href="../assets/proyecciones-DyPn_QCI.css">
 </head>
 <body class="pagina-proy">
-<a class="saltar" href="#caminos">Saltar a los caminos</a>
+<a class="saltar" href="#tarjetas">Saltar a los caminos</a>
 
 <header class="cab-proy">
   <a class="volver" href="../index.html">Volver al visor</a>
@@ -17,45 +18,71 @@
 </header>
 
 <main class="proy" id="contenido">
-  <section class="encabezado-caminos" aria-labelledby="pregunta">
-    <h1 id="pregunta">¿Cuántos árboles de 15 m o más tendrá el Jardín dentro de 20 y 40 años?</h1>
-    <p class="hoy">Hoy hay <strong>1.168</strong> <span class="marca medido" title="Contados en el censo del Jardín">medido</span></p>
-    <p class="explica">Probamos cada camino 1.000 veces, cambiando lo que nadie sabe: cuántos árboles se pierden al año y qué tan rápido crecen.</p>
+  <section class="encabezado-caminos hoy-primero" aria-labelledby="hoy-titulo">
+    <h1 id="hoy-titulo">Hoy el Jardín tiene <strong class="cifra-hoy">1.168</strong> árboles de 15 m o más <span class="marca medido" title="Contados en el censo del Jardín">medido</span></h1>
+    <p class="hoy-por-que" id="hoy-por-que">Son 1 de cada <span id="hoy-uno-de">8</span> de los <span id="hoy-lote">9.013</span> árboles del lote <span class="marca medido">medido</span> y guardan de 71 a 73 % del carbono que tienen hoy los árboles del Jardín. <span class="marca inferido">inferido</span></p>
   </section>
 
-  <section class="caminos" id="caminos" aria-labelledby="titulo-caminos">
-    <h2 id="titulo-caminos" class="sr">Cuatro caminos</h2>
-    <div class="lecciones">
-      <p class="leccion">Para tener dentro de 40 años tantos árboles grandes como hoy, el Jardín tiene que cuidar los que ya tiene y sembrar desde ahora.</p>
-      <p>Un árbol sembrado hoy tarda de 23 a 45 años en pasar de 15 m, por eso la siembra todavía no se nota a los 20 años. <span class="marca supuesto">supuesto</span></p>
+  <section class="caminos" id="caminos" aria-labelledby="pregunta">
+    <h2 id="pregunta" class="pregunta-caminos">¿Cuántos tendrá dentro de 20 y 40 años?</h2>
+    <div class="portada-caminos">
+      <figure class="grafica-caminos" id="grafica" aria-labelledby="pregunta" aria-describedby="grafica-resumen" data-fin="false">
+        <div class="lienzo-grafica" aria-hidden="true"></div>
+        <div class="mando-grafica">
+          <button type="button" class="boton-correr">Ver otra vez</button>
+          <label class="sr" for="grafica-anio">Año de la gráfica</label>
+          <input type="range" id="grafica-anio" min="0" max="40" step="2" value="0">
+        </div>
+        <p class="narra" aria-hidden="true">Hoy hay 1.168. Las cuatro líneas salen de ahí.</p>
+        <p class="leccion-final" aria-hidden="true"></p>
+        <ul class="leyenda-grafica" aria-label="Cómo leer la gráfica">
+          <li><svg width="28" height="10" aria-hidden="true"><rect class="banda-destacada" x="0" y="0" width="28" height="10"/></svg>8 de cada 10 futuros probados de «Los dos»</li>
+          <li><svg width="28" height="10" aria-hidden="true"><line class="meta" x1="0" x2="28" y1="5" y2="5"/></svg>1.168, lo que hay hoy</li>
+          <li>Cada línea deja la mitad de los futuros probados por encima <span class="marca inferido">inferido</span></li>
+        </ul>
+        <p class="sr" id="grafica-resumen"></p>
+        <details class="plegable cifras-grafica">
+          <summary>Ver las cifras de la gráfica</summary>
+          <div class="tabla-scroll"><table id="tabla-grafica"></table></div>
+        </details>
+      </figure>
+
+      <div class="lado-caminos">
+        <fieldset class="segmentos gris interruptor" id="interruptor">
+          <legend><span class="nadie">Lo que nadie controla.</span> Si al año se pierden <span class="marca de-fuente" title="Rangos de Hilbert 2019">de fuente</span></legend>
+          <div class="opciones tres" id="opciones-perdida"></div>
+        </fieldset>
+        <p class="renuncia">Si no sabes cuál elegir, deja «No se sabe»: el Jardín no ha medido cuántos árboles pierde al año. Cada camino dice qué pasaría si se cumple su supuesto; no calculamos cuál es más probable.</p>
+        <p class="clave-caminos" id="clave-caminos">La cifra grande dice en cuántos de cada 10 futuros probados el Jardín tiene 1.168 o más ese año. <span class="marca inferido" title="Sale del modelo de escenarios, con los supuestos de la nota de método">inferido</span></p>
+        <ul class="rejilla-caminos" id="tarjetas" aria-live="polite"><li class="camino cargando"><p class="nota">Cargando los caminos…</p></li></ul>
+      </div>
     </div>
-    <fieldset class="segmentos gris interruptor" id="interruptor">
-      <legend><span class="nadie">Lo que nadie controla.</span> Si al año se pierden <span class="marca de-fuente" title="Rangos de Hilbert 2019">de fuente</span></legend>
-      <div class="opciones tres" id="opciones-perdida"></div>
-    </fieldset>
-    <p class="nota no-se-sabe">Si no sabes cuál elegir, deja «No se sabe». Es lo honesto mientras el Jardín no mida cuántos árboles pierde al año.</p>
-    <p class="renuncia">Cada camino dice qué pasaría si se cumple su supuesto. No calculamos cuál es más probable.</p>
 
-    <p class="clave-caminos" id="clave-caminos">La cifra grande dice en cuántos de cada 10 futuros probados el Jardín tiene 1.168 o más ese año. <span class="marca inferido" title="Sale del modelo de escenarios, con los supuestos de la nota de método">inferido</span></p>
-    <ul class="rejilla-caminos" id="tarjetas" aria-live="polite"><li class="camino cargando"><p class="nota">Cargando los caminos…</p></li></ul>
+    <div class="lecciones sr">
+      <p class="leccion">Para tener dentro de 40 años tantos árboles grandes como hoy, el Jardín tiene que cuidar los que ya tiene y sembrar desde ahora.</p>
+      <p>Un árbol sembrado hoy tarda de 23 a 45 años en pasar de 15 m, por eso la siembra todavía no se nota a los 20 años.</p>
+    </div>
 
-    <ul class="leyenda-abanico leyenda-caminos" aria-label="Cómo leer cada abanico">
-      <li><span class="mu banda-ext" aria-hidden="true"></span>8 de cada 10 futuros probados</li>
-      <li><span class="mu banda-med" aria-hidden="true"></span>la mitad del medio</li>
-      <li><span class="mu mediana" aria-hidden="true"></span>línea del medio</li>
-      <li class="ley-meta"><span class="mu meta" aria-hidden="true"></span>1.168, lo que hay hoy</li>
-    </ul>
-
-    <ul class="notas-caminos">
-      <li><strong>Sin sembrar ni cuidar.</strong> El Jardín ya siembra y cuida; este camino es la vara para comparar.</li>
-      <li><strong>Cuidar a los grandes.</strong> Buscar salvar la mitad de los grandes que se pierden y se podrían salvar. Así el Jardín pierde unos <span id="baja-d2">18 % menos de sus árboles grandes (12 a 27 % según el futuro)</span>. <span class="marca inferido">inferido</span></li>
-      <li id="nota-perdida"><strong>Pocos y muchos.</strong> Pocos es 1,6 % de los árboles del lote al año; muchos, de 3,0 a 3,3 %. <span class="marca de-fuente">de fuente</span></li>
-      <li>La cifra a 40 años supone que los árboles sin nombre de menos de 5 m no llegan a 15 m, y el crecimiento va siempre en todo su rango. <span class="marca supuesto">supuesto</span></li>
-    </ul>
+    <details class="plegable puerta" id="det-leer">
+      <summary><span><b>Cómo leer los caminos</b><small>Qué supusimos y de dónde sale cada cifra</small></span></summary>
+      <p class="explica">Probamos cada camino 1.000 veces, cambiando lo que nadie sabe: cuántos árboles se pierden al año y qué tan rápido crecen. Un árbol sembrado hoy tarda de 23 a 45 años en pasar de 15 m. <span class="marca supuesto">supuesto</span></p>
+      <ul class="notas-caminos">
+        <li><strong>Sin sembrar ni cuidar.</strong> El Jardín ya siembra y cuida; este camino es la vara para comparar.</li>
+        <li><strong>Cuidar a los grandes.</strong> Buscar salvar la mitad de los grandes que se pierden y se podrían salvar. Así el Jardín pierde unos <span id="baja-d2">18 % menos de sus árboles grandes (12 a 27 % según el futuro)</span>. <span class="marca inferido">inferido</span></li>
+        <li id="nota-perdida"><strong>Pocos y muchos.</strong> Pocos es 1,6 % de los árboles del lote al año; muchos, de 3,0 a 3,3 %. <span class="marca de-fuente">de fuente</span></li>
+        <li>La cifra a 40 años supone que los árboles sin nombre de menos de 5 m no llegan a 15 m, y el crecimiento va siempre en todo su rango. <span class="marca supuesto">supuesto</span></li>
+      </ul>
+      <ul class="nota marcas-lista">
+        <li><span class="marca medido">medido</span> lo contamos en el censo del Jardín.</li>
+        <li><span class="marca de-fuente">de fuente</span> viene de un estudio publicado.</li>
+        <li><span class="marca inferido">inferido</span> sale de la simulación.</li>
+        <li><span class="marca supuesto">supuesto</span> lo pusimos nosotros porque falta el dato.</li>
+      </ul>
+    </details>
 
     <div class="probar">
       <button type="button" class="boton-probar" id="abrir-perillas" aria-expanded="false" aria-controls="explorar">Probar otra combinación</button>
-      <p class="nota">Los cuatro caminos no son los únicos. Con las perillas eliges cuánto sembrar, cuánto cuidar y qué pasa con lo que nadie controla.</p>
+      <p class="nota">Tú eliges cuánto sembrar, cuánto cuidar y qué pasa con lo que nadie controla.</p>
     </div>
   </section>
 
@@ -191,12 +218,23 @@
   </section>
 
   <section class="pulmon" id="pulmon" aria-labelledby="titulo-pulmon">
-    <h2 id="titulo-pulmon">Mientras lees esto</h2>
-    <div id="pulmon-cuerpo"><p class="nota">Lo que Bogotá emite mientras lees, junto a lo que el Jardín saca del aire en un año.</p></div>
+    <h2 id="titulo-pulmon">Lo que hacen hoy los árboles grandes</h2>
+    <details class="plegable puerta" id="det-arbol">
+      <summary><span><b>Cómo guarda carbono un árbol</b><small>Cinco pasos, con una pregunta para ti en el medio</small></span></summary>
+      <div id="pulmon-arbol"></div>
+    </details>
+    <details class="plegable puerta" id="det-reloj">
+      <summary><span><b>Cuánto tarda Bogotá en emitir lo que el Jardín saca del aire en un año</b><small>La respuesta se mide en minutos, con tu propio reloj</small></span></summary>
+      <div id="pulmon-reloj-cuerpo"></div>
+    </details>
+    <details class="plegable puerta" id="det-relevo">
+      <summary><span><b>Lo que se iría si los grandes no tienen reemplazo</b><small>Cuánto del carbono guardado está en los árboles grandes</small></span></summary>
+      <div id="pulmon-relevo"></div>
+    </details>
   </section>
 
-  <section class="metodo" aria-labelledby="titulo-metodo">
-    <h2 id="titulo-metodo">Nota de método</h2>
+  <details class="plegable puerta metodo" id="det-metodo">
+    <summary><span><b id="titulo-metodo">Nota de método</b><small>Cómo se hicieron las cuentas y qué queda por fuera</small></span></summary>
     <ul>
       <li>Cada camino y cada combinación de perillas se probó en 1.000 futuros. Las bandas muestran entre qué cifras queda la mayoría de ellos, y la meta de ejemplo es lo que hay hoy: 1.168 árboles de 15 m o más <span class="marca medido">medido</span>. La meta la elige el Jardín.</li>
       <li>Los cuatro caminos son una selección para comparar: siembran 0 o 100 al año y cuidan a ninguno o a la mitad de los grandes. Las perillas abren en la posición del medio de cada palanca. Nada de esto es una recomendación.</li>
@@ -206,11 +244,12 @@
       <li>Quedan dentro del abanico, sin perilla: qué parte de los árboles sin nombre puede pasar de 15 m, cuántos de los recién sembrados mueren, qué tan bien funciona lo que se haga para cuidar a los grandes, cuántos de los grandes que se pierden se podían salvar, cuántos sitios libres hay para sembrar y los años malos.</li>
       <li>Para ver un caso, la dirección de la página guarda las perillas, por ejemplo <code>?d1=100&amp;d2=0.5</code>.</li>
     </ul>
-  </section>
+  </details>
 </main>
 
 <footer class="pie-proy">
   <p>Corrida del 8 nov 2026, v2. Semilla 20261107. Las cifras de entrada son provisionales.</p>
+  <p><a href="../resumen.html">Resumen en texto</a></p>
 </footer>
 
 </body>

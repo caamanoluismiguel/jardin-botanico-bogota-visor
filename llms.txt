@@ -1,0 +1,189 @@
+# Jardín Botánico de Bogotá, demo con datos abiertos
+
+> Demo independiente con datos abiertos sobre el Jardín Botánico José Celestino Mutis de Bogotá. No es el sitio oficial del Jardín ni está avalada por él. Pregunta central: ¿Qué hay en el Jardín Botánico y qué hace por Bogotá?
+
+Cada cifra lleva su marca entre paréntesis: medido, de fuente, inferido o supuesto. Fecha de los datos: 10 de noviembre de 2026. Armado: 10 de noviembre de 2026. Versión 1.0.0, commit 27c4c3e.
+
+## Lo que el Jardín hace hoy por Bogotá
+
+El Jardín no solo cuida su predio de la calle 63. También siembra y cuida árboles en toda Bogotá y lleva el censo del arbolado de la ciudad.
+
+En 2024 el Jardín sembró 13.072 (de fuente) árboles en las calles de Bogotá y les hizo mantenimiento a 406.628 (de fuente). Fuente: [Alcaldía de Bogotá](https://bogota.gov.co/mi-ciudad/ambiente/jardin-botanico-bogota-avanza-en-plantacion-de-nuevos-arboles-urbanos), 18 de enero de 2025.
+
+La ciudad tiene unos 1,54 millones (de fuente) de árboles en espacio público y, según la Alcaldía, el Jardín lidera su siembra y su mantenimiento. Fuente: [Alcaldía de Bogotá](https://bogota.gov.co/mi-ciudad/ambiente/el-jardin-botanico-lidera-la-arborizacion-y-mantenimiento-en-bogota), 30 de enero de 2025. La copia abierta del censo del arbolado urbano, que publica el Jardín, trae 1.471.916 (de fuente) árboles.
+
+Lo fundó el padre Enrique Pérez Arbeláez en 1955 (de fuente). Fuente: [Alcaldía de Bogotá](https://bogota.gov.co/mi-ciudad/ambiente/el-jardin-botanico-de-bogota-jose-celestino-mutis-celebro-sus-70-anos), 7 de agosto de 2025.
+
+La Alcaldía describe sus años de trabajo como «dedicados a la investigación, conservación y divulgación del conocimiento» (de fuente). Fuente: [Alcaldía de Bogotá](https://bogota.gov.co/mi-ciudad/ambiente/cumpleanos-de-bogota-jardin-botanico-celebra-69-anos-de-existencia), 6 de agosto de 2024.
+
+## Lo que hay hoy en el Jardín
+
+La colección viva del Jardín tiene 15.575 (medido) registros, cada uno con su nombre científico: 2.328 (medido) nombres de planta distintos de 202 (medido) familias, en 53 (medido) zonas.
+
+El censo de arbolado de la ciudad mide 9.013 (medido) árboles dentro del lote del Jardín, que tiene 195.211 m² (medido). De ellos, 1.168 (medido) tienen 15 m o más.
+
+### Dos inventarios distintos
+
+Hay dos listas y el visor nunca las cruza. Una es el censo de árboles de la ciudad, que registra cada árbol de Bogotá con su punto, su altura y su nombre común cuando lo tiene. La otra es la colección viva, el inventario propio del Jardín, donde cada planta es un ingreso con su número y su nombre científico.
+
+De los 9.013 (medido) árboles del censo dentro del lote, 5.155 (medido) (57,2 %) están sin nombre en el censo de la ciudad: 4.459 marcados NN (no se identificó) y 696 marcados Otro (la especie no está en la lista del censo).
+
+Eso habla del censo de la ciudad, no de lo que sabe el Jardín. La colección viva trae nombre científico en cada registro; las dos listas no se pueden unir árbol por árbol con los datos abiertos.
+
+### Sol directo en tres zonas de la demo
+
+Horas de sol directo posible al día, a 1 m del suelo (inferido). Sale de la posición del sol y de la sombra de edificios y copas. Usa una copa supuesta por tipo de árbol, edificios de pisos × 3 m, cielo despejado y suelo plano.
+
+La zona que recibe más sol en el año es Rosaleda Lorencita Villegas de Santos; la que más cambia entre junio y diciembre es Plantas ornamentales.
+
+| Zona | Media del año (h al día) | 15 de junio | 15 de diciembre | Marca |
+|---|---|---|---|---|
+| Rosaleda Lorencita Villegas de Santos | 9,5 | 9,3 | 9,4 | inferido |
+| Herbal de la Salud | 4,6 | 4,2 | 4,5 | inferido |
+| Plantas ornamentales | 6,7 | 5,7 | 7,9 | inferido |
+
+### Lluvia
+
+Bogotá tiene dos temporadas de lluvia, abril y mayo, octubre y noviembre (inferido).
+
+En el aeropuerto El Dorado, a 6,4 km del Jardín, los reportes con lluvia suben en la tarde: el máximo es 5,1 (medido) de cada 100 reportes a las 16 h, contando 87.040 reportes de 2016 a 2025.
+
+Lluvia por mes en la celda del Jardín, promedio 2017 a 2025, en mm. Fuente: CHIRPS v3, Climate Hazards Center, UC Santa Barbara, CC BY 4.0.
+
+| Mes | Lluvia (mm) | Marca |
+|---|---|---|
+| Enero | 54,2 | de fuente |
+| Febrero | 71,5 | de fuente |
+| Marzo | 104,6 | de fuente |
+| Abril | 114,1 | de fuente |
+| Mayo | 117,0 | de fuente |
+| Junio | 76,9 | de fuente |
+| Julio | 45,9 | de fuente |
+| Agosto | 56,6 | de fuente |
+| Septiembre | 61,0 | de fuente |
+| Octubre | 141,4 | de fuente |
+| Noviembre | 148,5 | de fuente |
+| Diciembre | 56,7 | de fuente |
+
+## Y hacia adelante: árboles grandes en 20 y 40 años
+
+Hoy el lote tiene 1.168 (medido) árboles de 15 m o más. Un modelo con datos abiertos prueba miles de futuros para cuatro caminos (inferido). Para cada uno damos la mediana (redondeada a la decena) y en cuántos de 10 futuros probados el Jardín tiene 1.168 o más.
+
+«Si al año se pierden» es la mortalidad anual de los árboles del lote; el Jardín no ha medido cuántos pierde, por eso hay tres opciones: pocos, no se sabe y muchos (rangos de Hilbert y otros, 2019).
+
+Sin sembrar ni cuidar. Los grandes se van perdiendo y no hay árboles nuevos que tomen su lugar.
+
+Solo sembrar 100 al año. Lo sembrado tarda en crecer. A los 20 años casi no se nota y a los 40 ya cuenta.
+
+Solo cuidar a los grandes. Salvar grandes sostiene los próximos 20 años, pero sin árboles nuevos detrás no alcanza a los 40.
+
+Sembrar 100 y cuidar a los grandes. Cuidar sostiene los primeros 20 años y lo sembrado toma el relevo después.
+
+Corrida v2 del 8 de noviembre de 2026, 1.000 futuros por celda, crecimiento en todo su rango.
+
+| Camino | Si al año se pierden | 20 años: mediana | 20 años: futuros con 1.168 o más | 40 años: mediana | 40 años: futuros con 1.168 o más |
+|---|---|---|---|---|---|
+| Sin sembrar ni cuidar | Pocos (1,6 %) | unos 1.370 | 9 de 10 | unos 1.120 | 4 de 10 |
+| Solo sembrar 100 al año | Pocos (1,6 %) | unos 1.370 | 9 de 10 | unos 1.560 | 8 de 10 |
+| Solo cuidar a los grandes | Pocos (1,6 %) | unos 1.440 | más de 9 de 10 | unos 1.230 | 7 de 10 |
+| Sembrar 100 y cuidar a los grandes | Pocos (1,6 %) | unos 1.440 | más de 9 de 10 | unos 1.680 | 9 de 10 |
+| Sin sembrar ni cuidar | No se sabe (1,6 a 3,3 %) | unos 1.160 | 5 de 10 | unos 780 | menos de 1 de 10 |
+| Solo sembrar 100 al año | No se sabe (1,6 a 3,3 %) | unos 1.160 | 5 de 10 | unos 1.100 | 4 de 10 |
+| Solo cuidar a los grandes | No se sabe (1,6 a 3,3 %) | unos 1.240 | 7 de 10 | unos 910 | 1 de 10 |
+| Sembrar 100 y cuidar a los grandes | No se sabe (1,6 a 3,3 %) | unos 1.240 | 7 de 10 | unos 1.240 | 6 de 10 |
+| Sin sembrar ni cuidar | Muchos (3,0 a 3,3 %) | unos 990 | 2 de 10 | unos 590 | menos de 1 de 10 |
+| Solo sembrar 100 al año | Muchos (3,0 a 3,3 %) | unos 990 | 2 de 10 | unos 860 | 1 de 10 |
+| Solo cuidar a los grandes | Muchos (3,0 a 3,3 %) | unos 1.100 | 4 de 10 | unos 720 | menos de 1 de 10 |
+| Sembrar 100 y cuidar a los grandes | Muchos (3,0 a 3,3 %) | unos 1.100 | 4 de 10 | unos 1.000 | 3 de 10 |
+
+### Carbono, solo en rangos
+
+Las cifras de carbono llevan supuestos y por eso van siempre como rango (inferido).
+
+Carbono guardado hoy en los árboles del lote: entre 3.950 y 6.480 t de CO2; entre el 71 y 73 % está en los árboles de 15 m o más.
+
+Captura neta del Jardín: entre 7,4 y 128,7 t de CO2 al año.
+
+Sin árboles nuevos que tomen el relevo, en 20 años se perdería entre el 20 y 36 % de ese carbono, con una pérdida anual de árboles entre 1,6 y 3,3 %.
+
+## Lo que no mostramos y por qué
+
+Las especies amenazadas solo se cuentan; nunca se dice dónde están. La colección viva tiene 1.947 (medido) registros en categoría CR, EN o VU y 21 en EW. En el censo del lote hay 172 (medido) robles, especie amenazada, y 73 (medido) de ellos tienen 15 m o más. Se cuentan y no se dibujan.
+
+La ortoimagen 2025 de la ciudad se usó para calcar orillas, techos y piso, pero la foto no se muestra.
+
+El carbono no se da como una sola cifra, porque depende de supuestos.
+
+El visor no une el censo de la ciudad con la colección del Jardín: son dos listas distintas.
+
+## Qué significa cada marca
+
+Medido: lo contamos o calculamos directo sobre un dato abierto; nadie fue a medirlo al sitio.
+
+De fuente: lo dice un documento o una base que citamos.
+
+Inferido: sale de cruzar datos o de un modelo con datos.
+
+Supuesto: lo pusimos nosotros porque falta el dato.
+
+## Todas las cifras del visor
+
+Tabla completa de cifras.json, preparada el 10 de noviembre de 2026.
+
+| Cifra | Valor | Marca | Fuente |
+|---|---|---|---|
+| Área del lote catastral | 195.211 m² | medido | Lotes, Catastro Bogotá (UAECD), CC BY 4.0 |
+| Área del parque IDRD 10-291 | 19,54 ha | medido | Parques de Bogotá, IDRD, Datos Abiertos Bogotá, CC BY 4.0 |
+| Accesiones en la colección viva (puntos) | 15.575 | de fuente | Colecciones vivas, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 |
+| Identificadores de accesión distintos | 15.571 | medido | Colecciones vivas, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 |
+| Nombres de planta distintos | 2.328 | medido | Colecciones vivas, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 |
+| Familias | 202 | medido | Colecciones vivas, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 |
+| Zonas de accesión con plantas | 53 | medido | Colecciones vivas, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 |
+| Fecha de carga de la colección | 31 jul 2026 | de fuente | Colecciones vivas, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 |
+| Accesiones amenazadas (CR, EN, VU) | 1.947 | medido | Colecciones vivas, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 |
+| Accesiones no evaluadas (NE) | 7.608 | medido | Colecciones vivas, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 |
+| Accesiones dentro del lote | 15.574 | medido | Colecciones vivas, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0; Lotes, Catastro Bogotá (UAECD) |
+| Amenazadas dentro del lote | 1.946 | medido | Colecciones vivas, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 |
+| Accesiones dentro del IDRD 10-291 | 15.554 | medido | Colecciones vivas, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 |
+| Árboles del censo dentro del lote | 9.013 | medido | Censo del arbolado urbano, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 |
+| Árboles del censo dentro del IDRD 10-291 | 9.005 | medido | Censo del arbolado urbano, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 |
+| Árboles del censo dibujados en el plano dentro del lote | 7.802 de 9.013 | medido | Censo del arbolado urbano, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 |
+| Sin identificar (NN y Otro), IDRD | 4.461 y 699; 5.160; 57,3 % | medido | Censo del arbolado urbano, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 |
+| Sin identificar (NN y Otro), lote | 4.459 y 696; 5.155; 57,2 % | medido | Censo del arbolado urbano, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 |
+| Altura media del censo, IDRD | 7,05 m | medido | Censo del arbolado urbano, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 |
+| Fechas de los registros del censo, IDRD | 25 may 2007 a 29 nov 2024 | de fuente | Censo del arbolado urbano, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 |
+| Árboles del censo en toda Bogotá | 1.471.916 | de fuente | Censo del arbolado urbano, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 |
+| Última modificación de la ficha del censo | 27 oct 2026 | de fuente | Datos Abiertos Bogotá |
+| Árboles por hectárea, sector Jardín Botánico | 461 por ha | medido | Censo del arbolado urbano, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0; Parques de Bogotá, IDRD, Datos Abiertos Bogotá, CC BY 4.0 |
+| Sector siguiente en densidad | Novios II, 273 por ha | medido | Censo del arbolado urbano, Jardín Botánico José Celestino Mutis, Datos Abiertos Bogotá, CC BY 4.0 |
+| Área de los 19 sectores del Simón Bolívar | 332,48 ha | medido | Parques de Bogotá, IDRD, Datos Abiertos Bogotá, CC BY 4.0 |
+| Construcciones de Catastro dentro del lote | 24, 6.777 m² | medido | Construcciones, Catastro Bogotá (UAECD), CC BY 4.0 |
+| Huella del Tropicario en Catastro | 2.755 m² bruto, 1.995 m² neto | medido | Construcciones, Catastro Bogotá (UAECD), CC BY 4.0 |
+| Distancia del centro del lote a SKBO | 6,4 km | medido | Coordenada de SKBO, Iowa Environmental Mesonet |
+| Días de sol cenital | 1 abr y 10 sep | inferido | Algoritmo solar de la NOAA (siglos julianos), mediodía de Bogotá, año 2026 |
+| Radiación solar global, promedio 1991 a 2020 | 4,70 kWh/m² al día | inferido | ERA5, Copernicus (CDS), celda de 0,25° |
+| Nubosidad media, 1991 a 2020 | 87 % | inferido | ERA5, Copernicus (CDS), celda de 0,25° |
+| Observaciones de iNaturalist con licencia apta | 770 (CC0 420, CC BY 350) | de fuente | iNaturalist |
+
+## Fecha de los datos y versión
+
+| Qué | Fecha |
+|---|---|
+| Datos del visor preparados | 10 de noviembre de 2026 |
+| Colección viva, fecha de carga en el portal | 31 de julio de 2026 |
+| Colección viva y censo, consultados | 6 de noviembre de 2026 |
+| Censo del arbolado, última modificación de la ficha | 27 de octubre de 2026 |
+| Censo del arbolado, registros del lote | 25 de mayo de 2007 a 29 de noviembre de 2024 |
+| Corrida de los caminos | 8 de noviembre de 2026 (v2) |
+| Esta página se armó | 10 de noviembre de 2026 |
+| Versión | 1.0.0, commit 27c4c3e |
+
+## Páginas
+
+- [Visor 3D](https://caamanoluismiguel.github.io/jardin-botanico-bogota-visor/): el Jardín en 3D con fichas, sol, lluvia y plantas (necesita JavaScript)
+- [Proyecciones: los cuatro caminos](https://caamanoluismiguel.github.io/jardin-botanico-bogota-visor/proyecciones/proyecciones.html): árboles de 15 m o más en 20 y 40 años, con perillas
+- [Plano en 2D](https://caamanoluismiguel.github.io/jardin-botanico-bogota-visor/visor/): las mismas fichas, el clima y las cifras en un plano
+- [Resumen en texto](https://caamanoluismiguel.github.io/jardin-botanico-bogota-visor/resumen.html): esta información como página sin JavaScript
+- [llms.txt](https://caamanoluismiguel.github.io/jardin-botanico-bogota-visor/llms.txt): esta información en Markdown
+- [Fuentes y licencias de los datos](https://github.com/caamanoluismiguel/jardin-botanico-bogota-visor/blob/main/DATOS.md): cada fuente con su licencia y su atribución
+- [Licencia del código](https://github.com/caamanoluismiguel/jardin-botanico-bogota-visor/blob/main/LICENSE): todos los derechos reservados; los datos conservan su propia licencia
