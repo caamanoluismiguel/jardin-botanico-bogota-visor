@@ -7,17 +7,16 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#f7f6f2">
 <title>Jardín Botánico en 3D · demo con datos abiertos</title>
-  <script type="module" crossorigin src="./assets/index-CfYNpdv4.js"></script>
+  <script type="module" crossorigin src="./assets/index-DbXBbM-1.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/rolldown-runtime-DK3Fl9T5.js">
-  <link rel="modulepreload" crossorigin href="./assets/marcas-UV2IFjYQ.js">
-  <link rel="stylesheet" crossorigin href="./assets/index-CdfdX4FX.css">
+  <link rel="modulepreload" crossorigin href="./assets/marcas-ffQ6Sn29.js">
+  <link rel="stylesheet" crossorigin href="./assets/index-U9MqIdLG.css">
 </head>
 <body>
 <a class="saltar" href="#lentes">Ir a los controles</a>
 <header class="cabecera">
-  <p class="titulo"><span class="aviso-demo">Demo independiente</span> Jardín Botánico<span class="ciudad"> de Bogotá</span></p>
+  <p class="titulo">Jardín Botánico<span class="ciudad"> de Bogotá</span></p>
   <div class="cabecera-acciones">
-    <button id="btn-recorrido" class="boton-barra" aria-controls="recorrido">Recorrido</button>
     <button id="abrir-mas" class="boton-barra" aria-haspopup="dialog">Más</button>
   </div>
 </header>
@@ -25,20 +24,26 @@
 <main class="app">
   <section id="lienzo" class="lienzo" aria-label="Escena 3D del jardín. Toca una zona o un árbol para abrir su ficha.">
     <div id="portada" class="portada" aria-live="polite">
-      <p class="pregunta" tabindex="-1">¿Qué se sabe de cada árbol y planta del Jardín, desde cuándo y qué falta?</p>
+      <p class="pregunta" tabindex="-1">¿Qué hay en el Jardín Botánico y qué hace por Bogotá?</p>
+      <p class="bienvenida">Este es el Jardín Botánico de Bogotá visto desde arriba. Toca lo que quieras.</p>
       <ul id="conteos" class="cifras compactas"><li class="cargando">Cargando los conteos…</li></ul>
       <details id="subpreguntas" class="plegable subpreguntas"><summary>Dos preguntas más</summary>
         <p id="sub-sol" class="detalle"></p>
-        <p class="detalle">Con esto se proyecta cuántos árboles altos tendrá el Jardín según cuánto siembre y a cuáles grandes cuide. <a href="proyecciones/proyecciones.html">Proyecciones a 40 años</a></p>
+        <p class="detalle">Con esto se proyecta cuántos árboles altos tendrá el Jardín según cuánto siembre y a cuáles grandes cuide. <a href="proyecciones/proyecciones.html">En 20 y 40 años</a></p>
       </details>
     </div>
     <div id="pastilla" class="pastilla" hidden>
-      <button id="pastilla-abrir" class="pastilla-pregunta" aria-label="Volver a la pregunta: ¿Qué se sabe de cada árbol y planta del Jardín, desde cuándo y qué falta?">¿Qué se sabe de cada árbol y planta del Jardín, desde cuándo y qué falta?</button>
+      <button id="pastilla-abrir" class="pastilla-pregunta" aria-label="Volver a la pregunta: ¿Qué hay en el Jardín Botánico y qué hace por Bogotá?">¿Qué hay en el Jardín Botánico y qué hace por Bogotá?</button>
       <button id="pastilla-recorrido" class="pastilla-recorrido">Recorrido de 1 minuto</button>
     </div>
     <div id="leyenda" class="leyenda" aria-live="polite" hidden></div>
-    <button id="btn-leyenda" class="boton-leyenda" aria-controls="leyenda" aria-expanded="false" hidden>Leyenda</button>
+    <button id="btn-leyenda" class="boton-leyenda" aria-controls="leyenda" aria-expanded="false" aria-label="Leyenda" title="Leyenda" hidden>?</button>
     <p id="aviso" class="aviso" role="status" hidden></p>
+    <section id="invitacion" class="invitacion" aria-label="Recorrido de un minuto" hidden>
+      <p>¿Te damos una vuelta de un minuto?</p>
+      <button type="button" id="invitacion-si" class="boton-barra principal">Sí</button>
+      <button type="button" id="invitacion-no" class="boton-barra">Ahora no</button>
+    </section>
     <!-- recorrido guiado (pedagogía 1.5 y 2.1): título con foco, cuerpo por paso, seis puntos de 44 px; Escape sale -->
     <section id="recorrido" class="recorrido" aria-labelledby="recorrido-titulo" hidden>
       <div class="recorrido-cabeza">
@@ -55,11 +60,6 @@
     </section>
     <p id="chip-sombra" class="chip-sombra" hidden></p>
     <div id="escala" class="escala-mapa" aria-hidden="true"><span class="barra-escala"></span><span class="texto-escala"></span></div>
-    <div id="botones-lienzo" class="botones-lienzo">
-      <button id="btn-general" class="boton-redondo" title="Vista general" aria-label="Vista general"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 7 V2 H7 M13 2 H18 V7 M18 13 V18 H13 M7 18 H2 V13" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
-      <button id="btn-planta" class="boton-redondo" aria-pressed="false" title="Ver en planta">Planta</button>
-      <button id="btn-norte" class="boton-redondo" title="Poner el norte arriba" aria-label="Norte arriba"><svg width="18" height="22" viewBox="0 0 18 22" aria-hidden="true"><path d="M9 1 L16 20 L9 15 L2 20 Z" fill="currentColor"/></svg></button>
-    </div>
     <p id="aviso-osm" class="aviso-osm" hidden>© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">Colaboradores de OpenStreetMap</a>, ODbL</p>
     <p id="credito" class="credito"><span class="credito-orto">Calcado y medido sobre la Ortoimagen 2025 de la Secretaría Distrital de Planeación, publicada por IDECA en Datos Abiertos Bogotá, CC BY 4.0. La foto no se muestra.</span> <button id="btn-creditos" class="enlace-credito" aria-label="Fuentes y créditos: datos abiertos con licencia CC BY 4.0">CC BY 4.0</button></p>
   </section>
@@ -70,17 +70,15 @@
   </div>
 
   <nav class="barra" aria-label="Controles del visor">
-    <div id="lentes" class="lentes" role="radiogroup" aria-label="Lente">
-      <label><input type="radio" name="lente" value="lugar" checked><span>Lugar</span></label>
+    <div id="lentes" class="lentes" role="radiogroup" aria-label="Vista">
+      <label><input type="radio" name="lente" value="lugar" checked><span>Jardín</span></label>
       <label><input type="radio" name="lente" value="sol"><span>Sol</span></label>
       <label><input type="radio" name="lente" value="lluvia"><span>Lluvia</span></label>
-      <label><input type="radio" name="lente" value="coleccion"><span>Colección</span></label>
-      <label><input type="radio" name="lente" value="certeza"><span>Certeza</span></label>
+      <label><input type="radio" name="lente" value="coleccion"><span>Plantas</span></label>
     </div>
     <div class="acciones">
-      <button id="abrir-capas" class="boton-barra" aria-haspopup="dialog">Capas</button>
       <button id="abrir-buscar" class="boton-barra" aria-haspopup="dialog">Buscar</button>
-      <a id="ir-proyecciones" class="boton-barra enlace-barra" href="proyecciones/proyecciones.html" aria-label="Proyecciones a 40 años: árboles de 15 m o más y su carbono"><span class="solo-escritorio">Proyecciones a 40 años</span><span class="solo-movil">A 40 años</span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 7 H11 M7.5 3.5 L11 7 L7.5 10.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a id="ir-proyecciones" class="boton-barra enlace-barra" href="proyecciones/proyecciones.html" aria-label="Proyecciones: árboles de 15 m o más dentro de 20 y 40 años"><span class="solo-escritorio">En 20 y 40 años</span><span class="solo-movil">En 20 y 40 años</span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 7 H11 M7.5 3.5 L11 7 L7.5 10.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
   </nav>
 </main>
@@ -93,9 +91,9 @@
   <label class="interruptor"><input type="checkbox" id="ver-edificios" checked> <span>Edificios</span></label>
   <label class="interruptor"><input type="checkbox" id="ver-calzadas" checked> <span>Calzadas alrededor</span></label>
   <label class="interruptor"><input type="checkbox" id="ver-curvas"> <span>Curvas cada 1 m</span></label>
-  <p class="detalle"><span id="curvas-detalle">Del Modelo Digital de Terreno 2025 de IDECA.</span> <button id="ir-monticulo" class="enlace-credito">Ir al montículo</button></p>
-  <label class="interruptor"><input type="checkbox" id="realce"> <span>Realce: cielo despejado</span></label>
-  <p id="realce-detalle" class="detalle">Sin realce, la sombra usa la luz de un día medio del mes (ERA5). Con realce, sol de cielo despejado: se ve más, pero no es el día típico.</p>
+  <p class="detalle"><span id="curvas-detalle">Del Modelo Digital de Terreno 2025 de Bogotá.</span> <button id="ir-monticulo" class="enlace-credito">Ir al montículo</button></p>
+  <label class="interruptor"><input type="checkbox" id="realce"> <span>Día despejado</span></label>
+  <p id="realce-detalle" class="detalle">Día despejado: así se ven las sombras con el cielo limpio. Apágalo para ver un día normal de este mes.</p>
   <label class="interruptor"><input type="checkbox" id="ver-osm"> <span>Senderos y puntos de OpenStreetMap</span></label>
   <p id="osm-detalle" class="detalle">Capa aparte, ODbL. Solo se dibuja; no se cruza con nada del visor.</p>
   <fieldset class="grupo">
@@ -111,7 +109,7 @@
 
 <dialog id="buscar" class="hoja" aria-labelledby="buscar-titulo">
   <div class="hoja-cabeza"><h2 id="buscar-titulo">Buscar</h2><button class="cerrar" data-cerrar aria-label="Cerrar la búsqueda">×</button></div>
-  <label for="buscar-campo" class="detalle">Número de accesión, nombre de planta o código de árbol del censo</label>
+  <label for="buscar-campo" class="detalle">Número de planta de la colección, nombre de planta o código de árbol del censo</label>
   <div class="campo-buscar"><input id="buscar-campo" type="search" autocomplete="off" placeholder="Ej.: 30967 o Espeletia" enterkeyhint="search"></div>
   <ul id="resultados" class="resultados" aria-live="polite"></ul>
 </dialog>
@@ -119,7 +117,22 @@
 <dialog id="mas" class="hoja ancha" aria-labelledby="mas-titulo">
   <div class="hoja-cabeza"><h2 id="mas-titulo">Más</h2><button class="cerrar" data-cerrar aria-label="Cerrar">×</button></div>
   <!-- En la publicación el plano 2D (v0) vive en visor/ junto a este index.html. -->
-  <p class="detalle">Proyecciones: <a href="proyecciones/proyecciones.html">árboles de 15 m o más y su carbono en 40 años</a>. También está en la barra de abajo.</p>
+  <p class="detalle"><span class="aviso-demo">Demo independiente</span> Hecha con datos abiertos. No es un sitio del Jardín Botánico ni habla por él.</p>
+  <p class="detalle"><a href="proyecciones/proyecciones.html">Proyecciones: cuántos árboles grandes tendría el Jardín dentro de 20 y 40 años.</a> También está en la barra de abajo.</p>
+  <div class="mas-acciones">
+    <button id="btn-recorrido" class="boton-barra" aria-controls="recorrido">Recorrido de un minuto</button>
+    <button id="btn-certeza" class="boton-barra">Dos inventarios</button>
+    <button id="abrir-capas" class="boton-barra" aria-haspopup="dialog">Capas</button>
+    <div id="botones-lienzo" class="botones-lienzo">
+      <button id="btn-general" class="boton-barra" title="Vista general"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 7 V2 H7 M13 2 H18 V7 M18 13 V18 H13 M7 18 H2 V13" fill="none" stroke="currentColor" stroke-width="2"/></svg> Vista general</button>
+      <button id="btn-planta" class="boton-barra" aria-pressed="false" title="Ver en planta">Planta</button>
+      <button id="btn-norte" class="boton-barra" title="Poner el norte arriba"><svg width="18" height="22" viewBox="0 0 18 22" aria-hidden="true"><path d="M9 1 L16 20 L9 15 L2 20 Z" fill="currentColor"/></svg> Norte arriba</button>
+    </div>
+  </div>
+  <section id="mas-cierre" class="mas-cierre" aria-labelledby="mas-cierre-titulo">
+    <h3 id="mas-cierre-titulo">Lo que el Jardín hace por Bogotá</h3>
+    <div id="mas-cierre-cuerpo"></div>
+  </section>
   <p class="detalle enlace-plano">También está el <a href="visor/">plano del jardín en 2D</a>, con las mismas fichas, el clima y las cifras.</p>
   <div class="pestanas" role="tablist" aria-label="Secciones">
     <button role="tab" id="tab-fuentes" aria-controls="sec-fuentes" aria-selected="true">Fuentes y método</button>

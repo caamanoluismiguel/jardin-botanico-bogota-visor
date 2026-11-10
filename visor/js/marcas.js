@@ -61,6 +61,7 @@ export const CIFRAS = {
 
   // ---------- colección viva del Jardín ----------
   col_puntos: m("de fuente", "Es el total de registros que trae la colección viva que publica el Jardín."),
+  col_registros: m("medido", "Contamos los registros de la colección viva que publica el Jardín; cada uno trae su nombre científico."),
   col_ids: m("medido", "Contamos los números de accesión distintos; cuatro se repiten."),
   col_nombres: m("medido", "Contamos los nombres de planta distintos en la colección viva."),
   col_familias: m("medido", "Contamos las familias distintas; dos aparecen escritas de dos maneras y se cuentan una vez."),
@@ -147,26 +148,38 @@ export const CIFRAS = {
   tropicario_altura: m("de fuente", "Sale de los planos de diseño de 2015, no de una medida del edificio construido."),
   tropicario_altura_dibujo: m("inferido", "Los planos no traen la cota con su nombre: la leemos en el dibujo."),
   tropicario_forma: m("supuesto", "Dibujamos cada cúpula como un casquete; los planos no dan la forma completa."),
+  // ---------- lo que el Jardín hace por Bogotá (tarjeta de cierre) ----------
+  jbb_siembra_2024: m("de fuente", "Lo publicó la Alcaldía de Bogotá el 18 de enero de 2025: árboles que sembró el Jardín en 2024."),
+  jbb_mantenimiento_2024: m("de fuente", "Lo publicó la Alcaldía de Bogotá el 18 de enero de 2025: árboles a los que el Jardín les hizo mantenimiento en 2024."),
+  arboles_ciudad_2025: m("de fuente", "Lo publicó la Alcaldía de Bogotá el 30 de enero de 2025: árboles en el espacio público de la ciudad."),
+  jbb_fundacion: m("de fuente", "Lo publicó la Alcaldía de Bogotá el 7 de agosto de 2025, en los 70 años del Jardín."),
   tropicario_nombres: m("de fuente", "Los nombres de las salas salen de los planos de diseño."),
 };
 
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const clase = (tipo) => tipo.replace(" ", "-");
-const boton = (tipo, id, texto, dice) =>
-  `<button type="button" class="marca ${clase(tipo)}" data-marca="${tipo}"${id ? ` data-cifra="${id}"` : ""}${dice ? ` data-dice="${esc(dice)}"` : ""} aria-expanded="false">${esc(texto)}</button>`;
+// Modo compacto (DECISION-UX 8): «medido» se ve con su nombre; las otras tres marcas se vuelven un «?» que se
+// abre como «¿Cómo lo sabemos?». La clave de las marcas (marcaTipo) siempre muestra el nombre completo.
+let compacto = false;
+export function marcasCompactas(si = true) { compacto = si; }
+const COMO = "¿Cómo lo sabemos?";
+const boton = (tipo, id, texto, dice, completa = false) => {
+  const corta = compacto && !completa && tipo !== "medido";
+  return `<button type="button" class="marca ${clase(tipo)}${corta ? " como" : ""}" data-marca="${tipo}"${id ? ` data-cifra="${id}"` : ""}${dice ? ` data-dice="${esc(dice)}"` : ""}${corta ? ` aria-label="${COMO}" title="${COMO}"` : ""} aria-expanded="false">${corta ? "?" : esc(texto)}</button>`;
+};
 
 /** El botón de la marca de una cifra. `id` es una clave de CIFRAS; si no está, avisa en consola y no pinta nada. */
-export function marca(id, { texto } = {}) {
+export function marca(id, { texto, completa } = {}) {
   const c = CIFRAS[id];
   if (!c) { console.error(`marca: la cifra «${id}» no está en la tabla de marcas`); return ""; }
-  return boton(c.marca, id, texto ?? c.marca);
+  return boton(c.marca, id, texto ?? c.marca, undefined, completa);
 }
 
 /** La marca sola, sin cifra: para la clave que explica las cuatro marcas y, mientras sus cifras no estén en la
  *  tabla, para el árbol de las proyecciones. `dice` cambia la explicación general por una propia (la fuente exacta). */
 export function marcaTipo(tipo, { texto, dice } = {}) {
   if (!TIPOS.includes(tipo)) { console.error(`marcaTipo: «${tipo}» no es una marca`); return ""; }
-  return boton(tipo, null, texto ?? tipo, dice);
+  return boton(tipo, null, texto ?? tipo, dice, true);
 }
 
 /** Tipo de marca de una cifra, o null. */
@@ -197,6 +210,7 @@ export function activarMarcas(raiz = document) {
       dice.className = "marca-dice";
       dice.id = `marca-dice-${Math.random().toString(36).slice(2, 9)}`;
       if (b.dataset.dice) dice.textContent = b.dataset.dice; else dice.innerHTML = explicacion(b.dataset.marca, b.dataset.cifra);
+      if (b.classList.contains("como")) dice.insertAdjacentHTML("afterbegin", `<strong>${COMO}</strong> `);
       b.setAttribute("aria-controls", dice.id);
       b.after(dice);
     }
