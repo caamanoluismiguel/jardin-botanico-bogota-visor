@@ -149,8 +149,8 @@ export const CIFRAS = {
   tropicario_altura_dibujo: m("inferido", "Los planos no traen la cota con su nombre: la leemos en el dibujo."),
   tropicario_forma: m("supuesto", "Dibujamos cada cúpula como un casquete; los planos no dan la forma completa."),
   // ---------- lo que el Jardín hace por Bogotá (tarjeta de cierre) ----------
-  jbb_siembra_2024: m("de fuente", "Lo publicó la Alcaldía de Bogotá el 18 de enero de 2025: árboles que sembró el Jardín en 2024."),
-  jbb_mantenimiento_2024: m("de fuente", "Lo publicó la Alcaldía de Bogotá el 18 de enero de 2025: árboles a los que el Jardín les hizo mantenimiento en 2024."),
+  jbb_siembra_2025: m("de fuente", "Lo publicó el Jardín en su informe de indicadores PMR 2025, el 30 de marzo de 2026: árboles y arbustos que plantó en 2025."),
+  jbb_mantenimiento_2025: m("de fuente", "Lo publicó el Jardín en su informe de indicadores PMR 2025, el 30 de marzo de 2026. El informe da 495.364, 501.529 y 505.438 árboles en distintas secciones; por eso decimos cerca de 500.000."),
   arboles_ciudad_2025: m("de fuente", "Lo publicó la Alcaldía de Bogotá el 30 de enero de 2025: árboles en el espacio público de la ciudad."),
   jbb_fundacion: m("de fuente", "Lo publicó la Alcaldía de Bogotá el 7 de agosto de 2025, en los 70 años del Jardín."),
   tropicario_nombres: m("de fuente", "Los nombres de las salas salen de los planos de diseño."),
